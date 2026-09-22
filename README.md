@@ -45,6 +45,7 @@ Același nucleu metodologic, dar **scenarii, riscuri, active și obligații dife
 | `docs/methodology.md` | Explicația nucleului metodologic și a succesiunii etapelor | Pentru a înțelege sau a modifica prompturile |
 | `docs/quality-checklist.md` | Checklist de validare a output-ului generat | După fiecare rulare, înainte de livrare |
 | `docs/sources.md` | Surse oficiale prioritare și reguli de citare | Pentru verificarea legislației și a statisticilor |
+| `platform/index.html` | **Platforma construită** — demo funcțional pentru sectorul sănătate | Ca să vezi ce produce brieful, nu doar cum se cere |
 
 ---
 
