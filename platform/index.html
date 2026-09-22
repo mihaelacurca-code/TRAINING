@@ -1,139 +1,116 @@
-<title>Redută Cyber Range</title>
+<title>Cyber-Bridge Range</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
   --bg-deep:#05070D; --bg-base:#0A0E17; --bg-raised:#111726; --bg-overlay:#161E30;
-  --glass:rgba(17,23,38,.72);
+  --glass:rgba(11,15,25,.78);
   --bd:rgba(145,175,220,.14); --bd-strong:rgba(145,175,220,.30);
   --tx:#E8EEF9; --tx2:#A9B6CC; --tx3:#7C8AA3; --tx-inv:#05070D;
   --info:#38E1FF; --ok:#2EE6C4; --sim:#9B6BFF; --warn:#FFB547; --crit:#FF6B4A; --idle:#7C8AA3;
-  --m0:#3A4356; --m1:#4E5C7A; --m2:#3E7FA8; --m3:#2E9FB5; --m4:#2EC5A8; --m5:#2EE6C4;
+  --amb:#38E1FF;
   --disp:"Chakra Petch",-apple-system,"Segoe UI",sans-serif;
   --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  --r-sm:6px; --r-md:12px; --r-lg:20px;
-  --rail:248px;
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --rail:252px;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0;background:var(--bg-base);color:var(--tx);
-  font-family:var(--body);font-size:15px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  background-image:
-    radial-gradient(1100px 620px at 78% -8%,rgba(56,225,255,.10),transparent 62%),
-    radial-gradient(900px 540px at 6% 104%,rgba(155,107,255,.10),transparent 60%);
-  background-attachment:fixed;
-}
+body{margin:0;background:var(--bg-base);color:var(--tx);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:.01em}
-a{color:var(--info)}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--info);outline-offset:2px;border-radius:4px}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--tx3)}
+.spacer{flex:1 1 auto}
 
-/* ---------- shell ---------- */
-.app{display:grid;grid-template-columns:var(--rail) 1fr;min-height:100%}
+/* ambient atmosphere layer */
+#amb{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
+#veil{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(1200px 700px at 78% -10%,rgba(56,225,255,.07),transparent 60%),
+             radial-gradient(900px 600px at 4% 108%,rgba(155,107,255,.07),transparent 58%);
+  transition:background .9s ease}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:var(--rail) 1fr;min-height:100%}
 .app.focus{grid-template-columns:1fr}
 .app.focus .rail{display:none}
 
-.rail{
-  border-right:1px solid var(--bd);background:var(--bg-deep);
-  padding:20px 14px;display:flex;flex-direction:column;gap:22px;
-  position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow-y:auto;
-}
+.rail{border-right:1px solid var(--bd);background:rgba(5,7,13,.72);backdrop-filter:blur(14px);
+  padding:20px 14px;display:flex;flex-direction:column;gap:20px;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow-y:auto}
 .brand{display:flex;align-items:center;gap:10px;padding:0 6px}
-.brand-mk{width:26px;height:26px;flex:none}
-.brand b{font-family:var(--disp);font-size:17px;font-weight:700;letter-spacing:.06em}
-.brand span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase}
+.brand svg{width:28px;height:28px;flex:none}
+.brand b{font-family:var(--disp);font-size:16px;font-weight:700;letter-spacing:.04em;display:block;line-height:1.15}
+.brand span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--tx3);text-transform:uppercase}
 .nav{display:flex;flex-direction:column;gap:2px}
-.nav button{
-  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-  padding:9px 10px;border-radius:var(--r-sm);color:var(--tx2);font-size:14px;
-  border:1px solid transparent;transition:background .12s,color .12s;
-}
+.nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:var(--r-sm);
+  color:var(--tx2);font-size:13.5px;border:1px solid transparent;transition:background .12s,color .12s}
 .nav button:hover{background:rgba(145,175,220,.06);color:var(--tx)}
-.nav button[aria-current="true"]{background:rgba(56,225,255,.10);border-color:rgba(56,225,255,.28);color:var(--tx)}
+.nav button[aria-current="true"]{background:color-mix(in srgb,var(--amb) 12%,transparent);border-color:color-mix(in srgb,var(--amb) 30%,transparent);color:var(--tx)}
 .nav .dot{width:6px;height:6px;border-radius:50%;background:var(--idle);flex:none}
-.nav button[aria-current="true"] .dot{background:var(--info);box-shadow:0 0 10px var(--info)}
+.nav button[aria-current="true"] .dot{background:var(--amb);box-shadow:0 0 10px var(--amb)}
 .rail-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--bd)}
 
-.topbar{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:12px 24px;border-bottom:1px solid var(--bd);
-  background:var(--glass);backdrop-filter:blur(18px);
-  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
-}
-.crumb{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--tx3);text-transform:uppercase}
-.crumb b{color:var(--tx2);font-weight:500}
-.spacer{flex:1 1 auto}
-.roles{display:flex;gap:3px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:rgba(5,7,13,.5)}
-.roles button{padding:5px 12px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
-.roles button[aria-pressed="true"]{background:rgba(56,225,255,.13);color:var(--tx)}
-.chip{
-  display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;
-  border:1px solid var(--bd);background:rgba(5,7,13,.5);font-size:12.5px;color:var(--tx2);
-}
+.topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 22px;border-bottom:1px solid var(--bd);
+  background:var(--glass);backdrop-filter:blur(18px);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.sel{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border:1px solid var(--bd);border-radius:999px;background:rgba(5,7,13,.6)}
+.sel select{background:none;border:none;color:var(--tx);font:inherit;font-size:13px;padding:1px 2px;cursor:pointer;max-width:200px}
+.sel select option{background:#111726;color:#E8EEF9}
+.roles{display:flex;gap:3px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:rgba(5,7,13,.6)}
+.roles button{padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
+.roles button[aria-pressed="true"]{background:color-mix(in srgb,var(--amb) 15%,transparent);color:var(--tx)}
+.lang{display:flex;gap:2px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:rgba(5,7,13,.6)}
+.lang button{padding:4px 9px;border-radius:999px;font-family:var(--mono);font-size:11.5px;color:var(--tx3);letter-spacing:.04em}
+.lang button[aria-pressed="true"]{background:rgba(232,238,249,.12);color:var(--tx)}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--bd);background:rgba(5,7,13,.6);font-size:12.5px;color:var(--tx2)}
 .chip .val{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--tx);font-weight:600}
 
-main{padding:26px 24px 64px;max-width:1440px;width:100%}
-.view{display:flex;flex-direction:column;gap:22px}
+main{padding:26px 22px 64px;max-width:1460px;width:100%}
+.view{display:flex;flex-direction:column;gap:20px}
 .head h1{font-size:27px;font-weight:600}
-.head p{margin:6px 0 0;color:var(--tx2);max-width:68ch}
+.head p{margin:6px 0 0;color:var(--tx2);max-width:70ch}
 
-/* ---------- surfaces ---------- */
-.panel{background:var(--bg-raised);border:1px solid var(--bd);border-radius:var(--r-lg);padding:20px}
+.panel{background:rgba(17,23,38,.80);border:1px solid var(--bd);border-radius:var(--r-lg);padding:20px;backdrop-filter:blur(10px)}
 .panel.flush{padding:0;overflow:hidden}
 .panel h3{font-size:15px;font-weight:600;margin-bottom:3px}
 .panel .sub{color:var(--tx3);font-size:12.5px;margin-bottom:14px}
 .grid{display:grid;gap:16px}
-.g-2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
-.g-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 
-/* status marks: shape + colour, never colour alone */
 .mark{display:inline-block;width:9px;height:9px;flex:none;background:currentColor}
 .mark.info{border-radius:50%;color:var(--info)}
-.mark.ok{border-radius:50%;color:var(--ok);clip-path:polygon(14% 46%,0 60%,40% 100%,100% 22%,86% 8%,38% 70%)}
+.mark.ok{color:var(--ok);clip-path:polygon(14% 46%,0 60%,40% 100%,100% 22%,86% 8%,38% 70%)}
 .mark.sim{color:var(--sim);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
 .mark.warn{color:var(--warn);clip-path:polygon(50% 4%,100% 96%,0 96%)}
 .mark.crit{color:var(--crit);clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
 .mark.idle{color:var(--idle);height:3px;align-self:center}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-family:var(--mono);letter-spacing:.03em;border:1px solid var(--bd);color:var(--tx2);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-family:var(--mono);border:1px solid var(--bd);color:var(--tx2);white-space:nowrap}
 .pill.crit{border-color:rgba(255,107,74,.42);color:#FFC2B1}
 .pill.warn{border-color:rgba(255,181,71,.42);color:#FFD79B}
 .pill.ok{border-color:rgba(46,230,196,.40);color:#A8F2E3}
 .pill.info{border-color:rgba(56,225,255,.40);color:#B3EEFB}
 .pill.sim{border-color:rgba(155,107,255,.44);color:#D2BCFF}
+.pill.idle{color:var(--tx3)}
 
-/* ---------- mission control ---------- */
-.mc{display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:16px;align-items:start}
-.ring-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
-.ring{width:190px;height:190px}
+.mc{display:grid;grid-template-columns:minmax(258px,318px) 1fr;gap:16px;align-items:start}
+.ring{width:190px;height:190px;display:block;margin:0 auto}
 .ring .track{fill:none;stroke:rgba(145,175,220,.13);stroke-width:12}
-.ring .prog{fill:none;stroke:var(--info);stroke-width:12;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(56,225,255,.55));transition:stroke-dasharray .8s cubic-bezier(.16,1,.3,1)}
+.ring .prog{fill:none;stroke:var(--amb);stroke-width:12;stroke-linecap:round;transition:stroke-dasharray .9s cubic-bezier(.16,1,.3,1)}
 .ring-val{font-family:var(--disp);font-size:42px;font-weight:700;fill:var(--tx);font-variant-numeric:tabular-nums}
 .ring-lab{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;fill:var(--tx3)}
-.delta{font-family:var(--mono);font-size:12px;color:var(--ok)}
-.segs{display:flex;flex-direction:column;gap:9px;width:100%;margin-top:14px}
+.segs{display:flex;flex-direction:column;gap:9px;margin-top:16px}
 .seg{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:12.5px}
 .seg .bar{grid-column:1/-1;height:4px;border-radius:999px;background:rgba(145,175,220,.13);overflow:hidden}
-.seg .bar i{display:block;height:100%;border-radius:999px;background:var(--info)}
+.seg .bar i{display:block;height:100%;border-radius:999px;background:var(--amb)}
 .seg .n{font-family:var(--mono);color:var(--tx3);font-variant-numeric:tabular-nums}
 
-.nba{border:1px solid rgba(56,225,255,.30);background:linear-gradient(135deg,rgba(56,225,255,.09),rgba(155,107,255,.06));border-radius:var(--r-lg);padding:20px}
+.nba{border:1px solid color-mix(in srgb,var(--amb) 32%,transparent);border-radius:var(--r-lg);padding:20px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--amb) 10%,transparent),rgba(155,107,255,.06))}
 .nba h3{font-size:19px;margin:8px 0 6px}
-.nba p{margin:0 0 16px;color:var(--tx2);max-width:60ch}
-.btn{
-  display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:var(--r-sm);
-  background:var(--info);color:var(--tx-inv);font-weight:600;font-size:14px;
-  transition:transform .12s,box-shadow .12s;
-}
-.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(56,225,255,.26)}
+.nba p{margin:0 0 16px;color:var(--tx2);max-width:62ch}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:var(--r-sm);background:var(--amb);color:var(--tx-inv);font-weight:600;font-size:14px;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px color-mix(in srgb,var(--amb) 30%,transparent)}
 .btn.ghost{background:none;color:var(--tx);border:1px solid var(--bd-strong)}
 .btn.ghost:hover{background:rgba(145,175,220,.07);box-shadow:none}
 .btn.sim{background:var(--sim);color:#fff}
-.btn.sim:hover{box-shadow:0 8px 24px rgba(155,107,255,.30)}
 
 .alerts{display:flex;flex-direction:column}
 .alert{display:flex;gap:12px;align-items:flex-start;padding:13px 18px;border-top:1px solid var(--bd)}
@@ -142,18 +119,14 @@ main{padding:26px 24px 64px;max-width:1440px;width:100%}
 .alert p{margin:0;font-size:13.5px}
 .alert .meta{font-family:var(--mono);font-size:11px;color:var(--tx3);margin-top:3px}
 
-.missions{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.mission{
-  display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:var(--r-md);
-  border:1px solid var(--bd);background:var(--bg-overlay);text-align:left;width:100%;
-  transition:border-color .14s,transform .14s;
-}
-.mission:hover{border-color:var(--bd-strong);transform:translateY(-2px)}
-.mission h4{font-size:14.5px;font-weight:600}
-.mission .why{font-size:12.5px;color:var(--tx3);margin:0;flex:1}
-.mission .foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.card{display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:rgba(22,30,48,.78);text-align:left;width:100%;transition:border-color .14s,transform .14s}
+.card:hover{border-color:var(--bd-strong);transform:translateY(-2px)}
+.card h4{font-size:14.5px;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--tx3);flex:1}
+.card .foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-/* ---------- tables ---------- */
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 table{border-collapse:collapse;width:100%;min-width:580px;font-size:13px}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--bd);vertical-align:top}
@@ -161,58 +134,47 @@ th{font-family:var(--mono);font-size:10.5px;letter-spacing:.10em;text-transform:
 tbody tr:hover{background:rgba(145,175,220,.04)}
 td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 
-/* ---------- threat map ---------- */
-.tmap{display:grid;grid-template-columns:1fr minmax(240px,300px);gap:16px}
+.tmap{display:grid;grid-template-columns:1fr minmax(240px,306px);gap:16px}
 .plot{width:100%;height:auto;display:block}
 .plot text{font-family:var(--mono);font-size:9px;fill:var(--tx3)}
-.plot .axis{stroke:rgba(145,175,220,.16);stroke-width:1}
-.plot .gl{stroke:rgba(145,175,220,.07);stroke-width:1}
+.plot .axis{stroke:rgba(145,175,220,.16)}
+.plot .gl{stroke:rgba(145,175,220,.07)}
 .node{cursor:pointer}
-.node circle{transition:r .16s,opacity .16s}
-.node:hover circle{opacity:1}
 .node text{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.tlegend{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.tlegend{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(236px,1fr))}
 .tlegend button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:6px 8px;border-radius:var(--r-sm);font-size:12.5px;color:var(--tx2);border:1px solid transparent}
 .tlegend button:hover{background:rgba(145,175,220,.06);color:var(--tx)}
-.tlegend button[aria-pressed="true"]{background:rgba(56,225,255,.09);border-color:rgba(56,225,255,.26);color:var(--tx)}
-.tlegend .tn{width:17px;flex:none;text-align:center;font-size:11px;color:var(--tx3)}
-.tlegend button[aria-pressed="true"] .tn{color:var(--info)}
+.tlegend button[aria-pressed="true"]{background:color-mix(in srgb,var(--amb) 10%,transparent);border-color:color-mix(in srgb,var(--amb) 28%,transparent);color:var(--tx)}
+.tlegend .tn{width:17px;flex:none;text-align:center;font-size:11px;color:var(--tx3);font-family:var(--mono)}
 .tlegend .tl{overflow-wrap:anywhere}
 
-/* ---------- simulation ---------- */
 .sim-stage{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-.sim-bar{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 18px;
-  border:1px solid rgba(155,107,255,.32);border-radius:var(--r-md);
-  background:linear-gradient(90deg,rgba(155,107,255,.11),rgba(17,23,38,.6));
-}
-.clock{font-family:var(--mono);font-size:25px;font-weight:600;letter-spacing:.03em;font-variant-numeric:tabular-nums}
+.sim-bar{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:12px 18px;border:1px solid rgba(155,107,255,.32);border-radius:var(--r-md);
+  background:linear-gradient(90deg,rgba(155,107,255,.12),rgba(17,23,38,.66))}
+.clock{font-family:var(--mono);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
 .tplus{font-family:var(--mono);font-size:12px;color:var(--sim);letter-spacing:.08em}
 .timer{font-family:var(--mono);font-size:13px;color:var(--warn);font-variant-numeric:tabular-nums}
 .timer.off{color:var(--tx3)}
+.rt{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+.rt i{width:24px;height:3px;border-radius:2px;background:rgba(145,175,220,.18);display:block}
+.rt i.done{background:var(--sim)}
+.rt i.now{background:var(--tx);box-shadow:0 0 8px var(--tx)}
 
-.rail-time{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
-.rail-time i{width:26px;height:3px;border-radius:2px;background:rgba(145,175,220,.18);display:block}
-.rail-time i.done{background:var(--sim)}
-.rail-time i.now{background:var(--tx);box-shadow:0 0 8px var(--tx)}
-
-.inject{border:1px solid var(--bd);border-radius:var(--r-lg);background:var(--bg-raised);overflow:hidden}
-.inject-h{display:flex;gap:10px;align-items:center;padding:13px 20px;border-bottom:1px solid var(--bd);background:rgba(5,7,13,.45);flex-wrap:wrap}
+.inject{border:1px solid var(--bd);border-radius:var(--r-lg);background:rgba(17,23,38,.86);overflow:hidden}
+.inject-h{display:flex;gap:10px;align-items:center;padding:13px 20px;border-bottom:1px solid var(--bd);background:rgba(5,7,13,.5);flex-wrap:wrap}
 .inject-b{padding:20px}
-.inject-b .msg{font-size:16px;line-height:1.65;margin:0 0 4px}
-.inject-b .q{font-family:var(--disp);font-size:17px;font-weight:600;margin:18px 0 4px}
+.inject-b .msg{font-size:16px;line-height:1.65;margin:0}
+.inject-b .q{font-family:var(--disp);font-size:17px;font-weight:600;margin:18px 0 0}
 .opts{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.opt{
-  display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-md);
-  border:1px solid var(--bd);background:var(--bg-overlay);text-align:left;width:100%;
-  transition:border-color .13s,background .13s;
-}
-.opt:hover:not(:disabled){border-color:var(--sim);background:rgba(155,107,255,.08)}
-.opt:disabled{opacity:.42;cursor:default}
-.opt .k{font-family:var(--mono);font-size:12px;color:var(--tx3);padding-top:1px}
-.opt .t{font-size:14px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:rgba(22,30,48,.8);text-align:left;width:100%;transition:border-color .13s,background .13s}
+.opt:hover:not(:disabled){border-color:var(--sim);background:rgba(155,107,255,.09)}
+.opt:disabled{opacity:.38;cursor:default}
+.opt.chosen{opacity:1;border-color:var(--sim);background:rgba(155,107,255,.14)}
+.opt.chosen .k{color:var(--sim)}
+.opt .k{font-family:var(--mono);font-size:12px;color:var(--tx3);padding-top:1px;display:flex;align-items:center;gap:5px}
 
-.consq{border:1px solid var(--bd-strong);border-radius:var(--r-lg);background:var(--bg-overlay);padding:20px;display:flex;flex-direction:column;gap:14px}
+.consq{border:1px solid var(--bd-strong);border-radius:var(--r-lg);background:rgba(22,30,48,.86);padding:20px;display:flex;flex-direction:column;gap:14px}
 .consq .lead{font-size:15.5px;margin:0;line-height:1.65}
 .consq .alt{font-size:13.5px;color:var(--tx2);margin:0;padding-left:14px;border-left:2px solid var(--bd-strong)}
 .deltas{display:flex;gap:8px;flex-wrap:wrap}
@@ -220,827 +182,621 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .dlt.up{color:#A8F2E3;border-color:rgba(46,230,196,.40)}
 .dlt.dn{color:#FFC2B1;border-color:rgba(255,107,74,.40)}
 .dlt.z{color:var(--tx3)}
-
 .axes{display:grid;gap:11px}
 .ax{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:13px}
 .ax .bar{grid-column:1/-1;height:6px;border-radius:999px;background:rgba(145,175,220,.13);overflow:hidden}
-.ax .bar i{display:block;height:100%;border-radius:999px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.ax .bar i{display:block;height:100%;border-radius:999px;transition:width .7s cubic-bezier(.16,1,.3,1)}
 .ax .n{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--tx2)}
 
-/* ---------- maturity ---------- */
-.mx{overflow-x:auto}
-.mx table{min-width:620px}
+.mx table{min-width:640px}
 .cell{display:flex;gap:3px}
 .lv{width:22px;height:22px;border-radius:4px;background:rgba(145,175,220,.09);border:1px solid transparent;position:relative}
 .lv.on{border-color:rgba(232,238,249,.22)}
 .lv.cur{outline:2px solid var(--tx);outline-offset:1px}
 .lv.tgt::after{content:"";position:absolute;inset:4px;border:1.5px dashed rgba(232,238,249,.7);border-radius:2px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--tx3);margin-top:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--tx3);padding:0 20px 18px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 
-/* ---------- toolkit ---------- */
-.kits{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(258px,1fr))}
-.kit{display:flex;flex-direction:column;gap:8px;padding:15px;border-radius:var(--r-md);border:1px solid var(--bd);background:var(--bg-overlay);text-align:left;transition:border-color .13s}
-.kit:hover{border-color:var(--bd-strong)}
-.kit h4{font-size:13.5px;font-weight:600}
-.kit p{margin:0;font-size:12px;color:var(--tx3);flex:1}
-.kit .foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
-
 .note{font-size:12.5px;color:var(--tx3);border-left:2px solid var(--bd-strong);padding-left:12px;margin:0}
-.empty{padding:28px;text-align:center;color:var(--tx3);font-size:13.5px}
+.sgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
+.scard{display:flex;flex-direction:column;gap:10px;padding:17px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:rgba(22,30,48,.74);text-align:left;transition:border-color .14s,transform .14s;position:relative;overflow:hidden}
+.scard:hover{transform:translateY(-2px)}
+.scard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sc)}
+.scard[aria-current="true"]{border-color:var(--sc)}
+.scard h4{font-size:15px;font-weight:600}
+.scard p{margin:0;font-size:12.5px;color:var(--tx3);flex:1}
+.scard .rd{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--sc)}
 
-@media (max-width:920px){
-  :root{--rail:100%}
+@media (max-width:940px){
   .app{grid-template-columns:1fr}
   .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;overflow-x:auto;padding:12px 16px}
   .rail .brand{flex:none}
   .nav{flex-direction:row;gap:4px}
   .nav button{white-space:nowrap;padding:7px 11px;font-size:13px}
-  .nav button span.lbl{display:inline}
   .rail-foot{display:none}
   .mc,.tmap{grid-template-columns:1fr}
   main{padding:20px 16px 56px}
   .topbar{padding:10px 16px}
+  .sel select{max-width:150px}
 }
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition-duration:.01ms!important}
-}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
+
+<canvas id="amb" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
 
 <div class="app" id="app">
   <aside class="rail">
     <div class="brand">
-      <svg class="brand-mk" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2 3 6v6c0 5 3.8 9 9 10 5.2-1 9-5 9-10V6z" fill="none" stroke="#38E1FF" stroke-width="1.4"/>
-        <path d="M12 7v10M8 10.5h8" stroke="#9B6BFF" stroke-width="1.4" stroke-linecap="round"/>
+      <svg viewBox="0 0 28 28" aria-hidden="true">
+        <path d="M14 2 4 6.5v7c0 6 4.4 10.4 10 11.5 5.6-1.1 10-5.5 10-11.5v-7z" fill="none" stroke="#38E1FF" stroke-width="1.3"/>
+        <path d="M7.5 13.5h13M10.5 13.5V9M17.5 13.5V9M14 13.5v7" stroke="#9B6BFF" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
-      <div><b>REDUTĂ</b><span>Cyber Range</span></div>
+      <div><b>CYBER-BRIDGE</b><span>Range</span></div>
     </div>
-    <nav class="nav" id="nav" aria-label="Secțiuni"></nav>
+    <nav class="nav" id="nav"></nav>
     <div class="rail-foot">
-      <p class="eyebrow" style="margin:0 0 6px">Sesiune demo</p>
-      <p style="margin:0;font-size:12px;color:var(--tx3);line-height:1.5">Date de exemplu pentru o clinică de 90 de angajați. Progresul se păstrează doar în acest browser.</p>
+      <p class="eyebrow" id="demoT" style="margin:0 0 6px"></p>
+      <p id="demoB" style="margin:0;font-size:12px;color:var(--tx3);line-height:1.5"></p>
     </div>
   </aside>
-
   <div>
     <header class="topbar">
-      <span class="crumb">Sector <b>Sănătate</b> · Furnizori privați &lt;250 angajați</span>
+      <span class="sel">
+        <span class="mark info" aria-hidden="true"></span>
+        <select id="secSel" aria-label="Sector"></select>
+      </span>
       <span class="spacer"></span>
-      <div class="roles" id="roles" role="group" aria-label="Traseu">
-        <button data-role="mgmt" aria-pressed="true">Management</button>
-        <button data-role="tech" aria-pressed="false">Tehnic</button>
-        <button data-role="hyg" aria-pressed="false">Igienă</button>
+      <div class="roles" id="roles" role="group"></div>
+      <div class="lang" role="group">
+        <button data-lang="ro" aria-pressed="true">RO</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
       </div>
-      <span class="chip"><span class="mark info"></span>Readiness <span class="val mono" id="topScore">—</span></span>
+      <span class="chip"><span class="mark info"></span><span id="rdLab"></span> <span class="val" id="topScore">—</span></span>
     </header>
     <main id="main"></main>
   </div>
 </div>
 
+<script src="data/sectors.js"></script>
+<script src="data/sectors-b.js"></script>
+<script src="data/scenarios.js"></script>
+<script src="data/scenarios-b.js"></script>
 <script>
 "use strict";
+const t=(ro,en)=>({ro:ro,en:en});
 
-/* ============ conținut sectorial: Sănătate ============ */
-
-const ASSETS = [
-  {id:"his", n:"HIS / EHR", imp:"Critică", threats:"Ransomware, exfiltrare", vuln:"Acces de la distanță al furnizorului fără MFA, conturi partajate pe secții", impact:"Oprirea activității clinice, breșă masivă de date de sănătate"},
-  {id:"pacs", n:"PACS / imagistică", imp:"Critică", threats:"Ransomware, expunere pe internet", vuln:"Servere PACS expuse, DICOM fără autentificare, SO neactualizat pe modalități", impact:"Pierderea accesului la imagini, diagnostic întârziat"},
-  {id:"dev", n:"Dispozitive medicale conectate", imp:"Critică", threats:"Compromitere, mișcare laterală", vuln:"Sisteme nesuportate, actualizare blocată de producător, parole implicite", impact:"Risc clinic direct pentru pacient"},
-  {id:"idp", n:"Identități și conturi clinice", imp:"Critică", threats:"Credential theft, phishing", vuln:"Conturi partajate pe post, sesiuni deschise, MFA absent pe acces extern", impact:"Acces necontrolat la dosare, imposibilitatea atribuirii"},
-  {id:"bkp", n:"Backup", imp:"Critică", threats:"Criptare, ștergere", vuln:"Backup pe același domeniu, fără copie offline, restaurare netestată", impact:"Imposibilitatea reluării activității"},
-  {id:"lis", n:"Laborator (LIS)", imp:"Ridicată", threats:"Ransomware, alterarea datelor", vuln:"Integrare directă cu analizoare, conturi de serviciu privilegiate", impact:"Rezultate indisponibile sau nesigure"},
-  {id:"tel", n:"Telemedicină / programare online", imp:"Ridicată", threats:"Compromitere web, DDoS", vuln:"Platformă administrată extern, fără limitare de rată", impact:"Expunere de date, oprirea programărilor"},
-  {id:"bms", n:"Sisteme de facilitate (gaze, temperatură)", imp:"Ridicată", threats:"Compromitere OT/BMS", vuln:"Rețea comună cu IT-ul administrativ, acces de la distanță al instalatorului", impact:"Risc pentru pacienți, pierderea stocurilor termosensibile"}
-];
-
-const THREATS = [
-  {id:"rw", n:"Ransomware cu dublă extorcare", actor:"Grupuri criminale organizate", vec:"Phishing, VPN/RDP expus, vulnerabilitate de perimetru",
-   asset:"HIS, PACS, backup", mitre:["Initial Access","Credential Access","Lateral Movement","Exfiltration","Impact"],
-   lk:5, im:5, ind:"Conturi de administrator noi, dezactivarea antivirusului, trafic ieșit masiv noaptea, ștergerea copiilor umbră"},
-  {id:"exf", n:"Exfiltrarea dosarelor de pacient", actor:"Criminalitate cibernetică, insider", vec:"Credential theft, acces excesiv, dispozitiv pierdut",
-   asset:"EHR, arhive", mitre:["Collection","Exfiltration"],
-   lk:5, im:4, ind:"Interogări în masă, acces în afara programului, export neobișnuit de rapoarte"},
-  {id:"sup", n:"Compromiterea furnizorului HIS", actor:"Grupuri avansate, criminalitate", vec:"Acces de la distanță al furnizorului, actualizare compromisă",
-   asset:"Toate sistemele clinice", mitre:["Supply Chain Compromise","Persistence"],
-   lk:4, im:5, ind:"Conexiuni de mentenanță în afara ferestrelor agreate, modificări neanunțate"},
-  {id:"med", n:"Compromiterea dispozitivelor medicale", actor:"Oportunist, uneori nedirijat", vec:"Rețea plată, sisteme nesuportate",
-   asset:"Monitoare, pompe, ventilatoare", mitre:["Lateral Movement","Impact"],
-   lk:3, im:5, ind:"Trafic neașteptat dinspre segmentul medical, reporniri inexplicabile"},
-  {id:"bec", n:"BEC și fraudă pe achiziții", actor:"Criminalitate financiară", vec:"Email compromis, spoofing",
-   asset:"Financiar, aprovizionare", mitre:["Initial Access","Impact"],
-   lk:5, im:3, ind:"Schimbare de IBAN prin email, reguli noi de redirecționare în cutia poștală"},
-  {id:"ddos", n:"Indisponibilitate prin DDoS", actor:"Hacktivism, extorcare", vec:"Expunere publică a serviciilor",
-   asset:"Site, programare online, telemedicină", mitre:["Impact"],
-   lk:3, im:2, ind:"Creșteri bruște de trafic, degradare a timpului de răspuns"},
-  {id:"ins", n:"Insider neintenționat", actor:"Personal propriu", vec:"Partajarea conturilor, trimiterea de date pe canale personale",
-   asset:"Date de pacient", mitre:[],
-   lk:5, im:2, ind:"Trimiteri către domenii personale, printuri masive"}
-];
-
-const DOMAINS = ["Governance","Asset management","Risk management","Identity","Access control","Patch management","Endpoint security","Network security","Cloud security","Backup","Monitoring","Incident response","Business continuity","Supply chain","Security awareness","Compliance"];
-const MATURITY = [1,1,1,2,2,1,2,1,2,2,0,1,1,0,2,2];
-const TARGET   = [3,3,3,4,3,3,3,3,3,4,3,3,3,3,3,3];
-
-const TOOLKIT = [
-  {n:"Registrul activelor clinice critice", p:"Ce se oprește primul dacă pică fiecare sistem. Baza pentru tot restul.", min:20, key:"reg", state:"todo"},
-  {n:"Procedura de lucru degradat", p:"Ce face recepția, laboratorul și blocul operator în primele 8 ore pe hârtie.", min:45, key:"deg", state:"todo"},
-  {n:"Plan de răspuns la incident — o pagină", p:"Cine declară, cine izolează, cine sună autoritatea, cine vorbește public.", min:30, key:"ir", state:"todo"},
-  {n:"Checklist ransomware", p:"Primele 60 de minute, în ordine, fără să distrugi dovezile.", min:15, key:"rw", state:"done"},
-  {n:"Checklist backup și test de restaurare", p:"3-2-1, o copie imuabilă, test trimestrial documentat.", min:20, key:"bk", state:"prog"},
-  {n:"Control al accesului furnizorului", p:"Ce ceri contractual firmei care administrează HIS-ul și cum verifici.", min:35, key:"vnd", state:"todo"},
-  {n:"Inventarul dispozitivelor medicale conectate", p:"Ce e în rețea, pe ce VLAN, cine îl poate actualiza.", min:60, key:"dev", state:"todo"},
-  {n:"Checklist phishing și BEC", p:"Verificarea pe canal secundar a oricărei schimbări de IBAN.", min:10, key:"ph", state:"done"},
-  {n:"Registrul de riscuri", p:"Riscurile reale ale clinicii, nu o listă generică de amenințări.", min:40, key:"risk", state:"todo"},
-  {n:"Template de notificare a incidentului", p:"Ce transmiți către DNSC și ANSPDCP, cu termenele fiecăruia.", min:25, key:"not", state:"todo"},
-  {n:"Checklist control acces și conturi", p:"Conturi nominale, dezactivare la plecare, revizuire semestrială.", min:20, key:"acl", state:"prog"},
-  {n:"Checklist patch management", p:"Ce se poate actualiza, ce nu, și ce compensezi acolo unde nu poți.", min:25, key:"pat", state:"todo"},
-  {n:"Politica de securitate — model scurt", p:"Patru pagini pe care le citește cineva, nu patruzeci pe care nu le citește nimeni.", min:50, key:"pol", state:"todo"},
-  {n:"Checklist continuitate clinică", p:"Ce servicii se mențin, în ce ordine se restaurează, cu ce resurse.", min:40, key:"bc", state:"todo"},
-  {n:"Template de comunicare în criză", p:"Ce spui pacienților, presei și angajaților, pregătit dinainte.", min:30, key:"com", state:"todo"},
-  {n:"Template lecții învățate", p:"Ce a mers, ce nu, ce se schimbă și cine răspunde de schimbare.", min:20, key:"ll", state:"todo"}
-];
-
-const COMPLIANCE = [
-  {act:"NIS2 / Legea nr. 58/2024", kind:"legal", scope:"Condiționat de încadrare", note:"Sănătatea figurează în Anexa I. Încadrarea concretă depinde de activitate și de praguri — se stabilește juridic, nu dintr-un tabel.", mods:["Guvernanță","Răspuns la incident","Lanț de aprovizionare"]},
-  {act:"GDPR, art. 9 și art. 33–34", kind:"legal", scope:"Practic universal", note:"Datele privind sănătatea sunt categorie specială. Notificare către ANSPDCP fără întârzieri nejustificate, în general în cel mult 72 de ore.", mods:["Protecția datelor","Răspuns la incident","Igienă cibernetică"]},
-  {act:"MDR / IVDR (2017/745, 2017/746)", kind:"legal", scope:"Producători; indirect utilizatori", note:"Securitatea dispozitivelor medicale și a software-ului ca dispozitiv medical. Ajunge la clinică prin condițiile de menținere a conformității.", mods:["Dispozitive medicale"]},
-  {act:"Cyber Resilience Act (2024/2847)", kind:"legal", scope:"Producători / distribuitori", note:"Produse cu elemente digitale. Calendar de aplicare etapizat — verifică datele exacte în vigoare.", mods:["Lanț de aprovizionare"]},
-  {act:"ISO 27001 / ISO 27799", kind:"standard", scope:"Voluntar, dacă nu e contractual", note:"Sistem de management al securității informației, cu ghid specific pentru sănătate.", mods:["Guvernanță","Managementul riscului"]},
-  {act:"IEC 80001", kind:"practice", scope:"Recomandat", note:"Managementul riscului pentru rețelele IT care încorporează dispozitive medicale.", mods:["Dispozitive medicale","Securitatea rețelei"]}
-];
-
-const KPIS = [
-  {n:"MFA pe accesul extern la sisteme clinice", f:"conturi externe cu MFA / total conturi externe × 100", now:"62%", tgt:"100%", st:"warn"},
-  {n:"Dispozitive medicale inventariate și segmentate", f:"dispozitive în VLAN dedicat / total conectate × 100", now:"18%", tgt:"> 90%", st:"crit"},
-  {n:"Test de restaurare HIS/PACS", f:"teste reușite documentate în ultimele 12 luni", now:"1", tgt:"≥ 4", st:"crit"},
-  {n:"Timp până la lucru degradat", f:"minute de la declararea indisponibilității la trecerea pe hârtie", now:"nedefinit", tgt:"< 30 min", st:"crit"},
-  {n:"Conturi partajate pe secții", f:"conturi cu mai mulți utilizatori declarați", now:"7", tgt:"0", st:"crit"},
-  {n:"Revizuirea accesului furnizorilor", f:"furnizori revizuiți în ultimele 6 luni / total × 100", now:"40%", tgt:"100%", st:"warn"},
-  {n:"Rata de raportare a phishingului", f:"mesaje raportate / mesaje de test trimise × 100", now:"31%", tgt:"> 40% și în creștere", st:"warn"}
-];
-
-/* ============ scenariul de simulare ============ */
-
-const AXES = [
-  {k:"clin", n:"Continuitate clinică", c:"var(--ok)"},
-  {k:"data", n:"Protecția datelor", c:"var(--info)"},
-  {k:"legal", n:"Conformitate și notificare", c:"var(--sim)"},
-  {k:"eviq", n:"Dovezi și investigație", c:"var(--warn)"}
-];
-
-const SCENARIO = {
-  title:"Ransomware în noaptea de sâmbătă spre duminică",
-  org:"Clinică privată · 90 de angajați · 2 locații · HIS administrat extern",
-  brief:"Criptarea a început la 02:10. Este 06:40. Asistenta de la recepție nu poate deschide programările. Blocul operator are 4 intervenții la ora 08:00.",
-  steps:[
-    {
-      tplus:"T+0", clock:"06:40", src:"Recepție, locația centrală",
-      msg:"„Nu se deschide nimic. Nici programările, nici dosarele. Pe ecran scrie ceva în engleză și e un fișier pe desktop care nu era ieri.”",
-      q:"Care este primul lucru pe care îl faci?",
-      opts:[
-        {t:"Deconectezi de la rețea stația de la recepție și suni persoana de gardă IT. Nu oprești nimic altceva până nu știi amploarea.",
-         d:{clin:1,data:1,legal:0,eviq:2},
-         c:"Corect ca reflex inițial. Izolarea unei stații oprește propagarea de pe ea fără să distrugă probe și fără să scoată din funcțiune sisteme de care s-ar putea să mai ai nevoie. Ceasul însă curge: ai 80 de minute până la primul pacient.",
-         alt:null},
-        {t:"Oprești imediat toate serverele, ca să nu se cripteze mai mult.",
-         d:{clin:-2,data:0,legal:0,eviq:-3},
-         c:"Ai oprit propagarea, dar ai pierdut memoria volatilă a sistemelor — adesea singurul loc unde se vede ce a rulat și de unde a venit. Ai pierdut și accesul la rezultatele de laborator de care blocul operator are nevoie la 08:00.",
-         alt:"Izolarea de rețea oprește propagarea fără să distrugă probele. Oprirea brutală se rezervă cazurilor în care criptarea e vizibil în desfășurare pe sisteme critice."},
-        {t:"Ceri recepției să repornească și să încerce din nou, poate e o eroare de rețea.",
-         d:{clin:-1,data:-1,legal:0,eviq:-2},
-         c:"Repornirea nu rezolvă nimic și poate declanșa etape ale malware-ului programate la boot. S-au pierdut 12 minute și starea sistemului.",
-         alt:"Un mesaj de răscumpărare pe desktop nu este o eroare de rețea. Tratarea ca incident începe din primul minut."}
-      ]
-    },
-    {
-      tplus:"T+25 min", clock:"07:05", src:"ATI, asistenta-șefă",
-      msg:"„Monitoarele de pe ATI afișează erori de conectare la rețea. Pacienții sunt stabili, dar nu văd centralizat valorile.”",
-      q:"Izolezi segmentul de rețea al dispozitivelor medicale?",
-      opts:[
-        {t:"Da, dar mai întâi confirmi cu personalul clinic că fiecare pacient poate fi monitorizat local, la patul lui.",
-         d:{clin:2,data:1,legal:0,eviq:1},
-         c:"Aceasta este decizia care distinge un plan de continuitate clinică de unul informatic. Izolarea protejează dispozitivele, iar verificarea prealabilă garantează că nimeni nu rămâne nesupravegheat.",
-         alt:null},
-        {t:"Da, imediat. Riscul de propagare către dispozitive este prea mare pentru a mai aștepta.",
-         d:{clin:-1,data:1,legal:0,eviq:1},
-         c:"Ai protejat dispozitivele, dar ai tăiat monitorizarea centralizată fără ca secția să fie pregătită. Timp de 9 minute, doi pacienți au fost urmăriți doar prin verificare directă.",
-         alt:"Aceeași acțiune, precedată de 60 de secunde de confirmare cu asistenta-șefă, ar fi avut același efect de securitate fără riscul clinic."},
-        {t:"Nu. Dispozitivele medicale sunt prea sensibile ca să intervii asupra lor în timpul unui incident.",
-         d:{clin:0,data:-2,legal:0,eviq:0},
-         c:"Neintervenția nu este neutră. Segmentul medical a rămas conectat la o rețea despre care nu știi ce conține, încă patru ore.",
-         alt:"Sensibilitatea dispozitivelor este un argument pentru segmentare pregătită dinainte, nu pentru a nu face nimic în incident."}
-      ]
-    },
-    {
-      tplus:"T+50 min", clock:"07:30", src:"Medic de gardă",
-      msg:"„Pot să fotografiez rezultatele de laborator cu telefonul meu și să i le trimit colegului pe WhatsApp? Altfel nu putem opera la opt.”",
-      q:"Ce răspunzi?",
-      opts:[
-        {t:"Nu, dar activezi imediat procedura de transmitere pe hârtie: laboratorul printează, un brancardier duce fizic rezultatele în bloc.",
-         d:{clin:2,data:2,legal:1,eviq:0},
-         c:"Ai rezolvat nevoia clinică fără să creezi un al doilea incident de date. Aceasta este exact situația pentru care există procedura de lucru degradat — dacă există.",
-         alt:null},
-        {t:"Da, temporar. Viața pacientului trece înaintea protecției datelor.",
-         d:{clin:1,data:-3,legal:-2,eviq:-1},
-         c:"Ai rezolvat operația și ai creat o breșă: date privind sănătatea, pe două telefoane personale, într-un serviciu pe care nu îl controlezi, fără evidență a cine le-a mai văzut. Vei avea de explicat acest lucru separat de incidentul principal.",
-         alt:"Falsa dilemă e capcana. Printarea și transportul fizic rezolvă aceeași nevoie clinică în același interval de timp."},
-        {t:"Nu, și amâni operațiile până se restaurează sistemele.",
-         d:{clin:-3,data:2,legal:0,eviq:0},
-         c:"Ai protejat datele perfect și ai amânat patru intervenții pentru o problemă care se rezolva cu o imprimantă. Doi pacienți erau pregătiți preoperator.",
-         alt:"Amânarea este o decizie clinică legitimă, dar numai după ce ai epuizat alternativele de lucru degradat."}
-      ]
-    },
-    {
-      tplus:"T+1h 30", clock:"08:10", src:"Furnizorul HIS, la telefon",
-      msg:"„Ca să investigăm mai repede, avem nevoie de un cont de administrator de domeniu. Dați-ne acces complet și rezolvăm până la prânz.”",
-      q:"Acorzi accesul?",
-      opts:[
-        {t:"Da, dar cu un cont creat acum, temporar, cu sesiune înregistrată și dezactivare automată după 4 ore.",
-         d:{clin:1,data:1,legal:1,eviq:2},
-         c:"Ai primit ajutorul de care ai nevoie fără să renunți la control. Sesiunea înregistrată îți va folosi și în reconstituirea de mai târziu.",
-         alt:null},
-        {t:"Da, imediat. Nu e momentul pentru birocrație, ei cunosc sistemul.",
-         d:{clin:1,data:-1,legal:-1,eviq:-2},
-         c:"Furnizorul lucrează acum cu drepturi nelimitate, netrasabil. Dacă vectorul inițial a fost chiar conexiunea lui de mentenanță — ipoteză pe care nu ai exclus-o — tocmai ai extins compromiterea.",
-         alt:"Un cont temporar cu sesiune înregistrată se creează în trei minute și nu întârzie cu nimic intervenția."},
-        {t:"Nu, până nu confirmi că furnizorul nu este el însuși compromis.",
-         d:{clin:-2,data:1,legal:0,eviq:0},
-         c:"Prudență justificată, dar nu ai mijloacele să confirmi asta singur, iar HIS-ul rămâne inoperabil. La ora 11:00 încă nu ai avansat.",
-         alt:"Accesul controlat și limitat în timp permite avansul fără a-ți asuma riscul accesului nelimitat."}
-      ]
-    },
-    {
-      tplus:"T+5h", clock:"11:40", src:"Forum public, semnalat de un angajat",
-      msg:"A apărut o postare cu 40 de nume de pacienți și CNP-uri, prezentate ca „mostră”. Autorul anunță că are „întreaga bază”.",
-      q:"Declanșezi notificarea către ANSPDCP?",
-      opts:[
-        {t:"Da. Începi procedura de notificare acum, cu informațiile disponibile, și o completezi pe măsură ce afli mai mult.",
-         d:{clin:0,data:1,legal:3,eviq:1},
-         c:"Termenul curge de la momentul în care ai luat cunoștință, nu de la momentul în care ai aflat totul. O notificare inițială incompletă, urmată de completări, este exact ce prevede procedura.",
-         alt:null},
-        {t:"Aștepți să confirmi amploarea reală înainte de a notifica ceva.",
-         d:{clin:0,data:0,legal:-3,eviq:0},
-         c:"Ai ales să notifici când vei ști tot. Investigația va dura 11 zile. Termenul va fi depășit cu mult, iar întârzierea va fi ea însăși o problemă separată de incidentul propriu-zis.",
-         alt:"Notificarea etapizată există tocmai pentru că amploarea nu se cunoaște în primele zile."},
-        {t:"Notifici, dar prezinți incidentul ca indisponibilitate tehnică, fără a menționa expunerea de date.",
-         d:{clin:0,data:-1,legal:-4,eviq:-1},
-         c:"O notificare care omite expunerea datelor nu este o notificare. Când eșantionul public va fi corelat cu raportarea ta, problema devine una de credibilitate, nu de securitate.",
-         alt:"Un ransomware poate fi simultan indisponibilitate și breșă. Obligațiile diferă și se cumulează."}
-      ]
-    },
-    {
-      tplus:"T+30h", clock:"Luni, 12:40", src:"Echipa IT",
-      msg:"Backup-ul se restaurează. Lipsesc însă 11 zile de imagistică: o eroare de configurare, descoperită abia acum, oprise copierea din PACS.",
-      q:"Ce faci cu pacienții din acele 11 zile?",
-      opts:[
-        {t:"Identifici pacienții afectați, îi rechemi pentru reinvestigare și informezi medicii care au emis diagnostice pe baza acelor imagini.",
-         d:{clin:2,data:1,legal:2,eviq:1},
-         c:"Costisitor, incomod și corect. Un diagnostic emis pe imagini care nu mai pot fi verificate rămâne o problemă clinică deschisă, indiferent dacă cineva o ridică sau nu.",
-         alt:null},
-        {t:"Aștepți să vezi dacă imaginile pot fi recuperate de pe modalități înainte de a alarma pe cineva.",
-         d:{clin:0,data:0,legal:0,eviq:1},
-         c:"Rezonabil ca pas tehnic, dar au trecut încă două zile. Trei pacienți au avut între timp consultații de control bazate pe imagini care nu mai există.",
-         alt:"Verificarea tehnică și informarea medicilor curanți se puteau face în paralel."},
-        {t:"Consideri incidentul încheiat din punct de vedere clinic. Imagistica se poate reface la nevoie, la cerere.",
-         d:{clin:-3,data:0,legal:-1,eviq:0},
-         c:"Ai mutat costul incidentului asupra pacienților, fără ca ei să știe. Este decizia cu cea mai mare probabilitate de a deveni, peste șase luni, altceva decât un incident de securitate.",
-         alt:"Consecința clinică a unui incident IT rămâne responsabilitatea unității, chiar când nimeni nu o reclamă."}
-      ]
-    }
-  ]
+/* ---------- i18n ---------- */
+const UI={
+ mc:t("Mission Control","Mission Control"), sectors:t("Sectoare","Sectors"),
+ thr:t("Peisajul amenințărilor","Threat Landscape"), sim:t("Laborator de simulare","Simulation Lab"),
+ mat:t("Pregătire","Readiness"), kit:t("Seif de instrumente","Toolkit Vault"), cmp:t("Conformitate","Compliance"),
+ mgmt:t("Management","Management"), tech:t("Tehnic","Technical"), hyg:t("Igienă","Hygiene"),
+ readiness:t("Pregătire","Readiness"),
+ demoT:t("Sesiune demo","Demo session"),
+ demoB:t("Date de exemplu pentru profilul afișat. Progresul se păstrează doar în acest browser.","Example data for the displayed profile. Progress is kept in this browser only."),
+ mcH:t("Starea de pregătire","State of readiness"),
+ nextStep:t("Următorul pas recomandat","Recommended next step"),
+ runScn:t("Rulează scenariul sectorial","Run the sector scenario"),
+ runScnP:t("Decizii sub ceas, cu consecințe. La final primești un debrief pe patru axe și instrumentele care acoperă lacunele găsite.","Decisions against the clock, with consequences. At the end you get a four-axis debrief and the instruments that close the gaps found."),
+ enterScn:t("Intră în scenariu","Enter the scenario"),
+ doneH:t("Închide lacunele pe care le-a scos exercițiul","Close the gaps the exercise exposed"),
+ doneP:t("Simularea a arătat unde se rupe lanțul de decizie. Seiful conține instrumentele care transformă constatările în proceduri scrise.","The simulation showed where the decision chain breaks. The vault holds the instruments that turn findings into written procedures."),
+ openKit:t("Deschide seiful","Open the vault"),
+ signals:t("Semnale active","Active signals"),
+ signalsS:t("Din evaluarea de maturitate și din indicatorii colectați","From the maturity assessment and the collected indicators"),
+ missions:t("Misiuni pentru traseul","Missions for the"), missionsB:t("","track"),
+ missionsS:t("Ordonate după reducerea de risc pe unitatea de efort","Ordered by risk reduction per unit of effort"),
+ gapTo:t("niv.","lvl"),
+ secH:t("Zece sectoare, același nucleu metodologic","Ten sectors, one methodological core"),
+ secP:t("Scenariile, activele, amenințările și obligațiile diferă complet de la un sector la altul. Metoda rămâne aceeași. Selectează un sector pentru a încărca profilul lui.","Scenarios, assets, threats and obligations differ completely between sectors. The method stays the same. Select a sector to load its profile."),
+ nis2:t("NIS2 (orientativ)","NIS2 (indicative)"),
+ thrH:t("Ce ne atacă, de fapt","What actually attacks us"),
+ thrP:t("Amenințări derivate din activele concrete ale sectorului, nu dintr-o listă universală. Poziția combină probabilitatea cu impactul.","Threats derived from the sector's actual assets, not from a universal list. Position combines likelihood with impact."),
+ plotT:t("Probabilitate × impact","Likelihood × impact"),
+ plotS:t("Selectează o amenințare pentru detalii. Dimensiunea marcajului redă impactul.","Select a threat for detail. Marker size encodes impact."),
+ lk:t("PROBABILITATE","LIKELIHOOD"), im:t("IMPACT","IMPACT"),
+ impact:t("Impact","Impact"), likeli:t("Probabilitate","Likelihood"),
+ actor:t("Actor","Actor"), vector:t("Vector","Vector"), affected:t("Activ afectat","Asset affected"),
+ early:t("Indicatori timpurii","Early indicators"),
+ noMitre:t("Nu se încadrează în matricea ATT&CK — comportament neintenționat, nu tehnică de atac.","Does not map to the ATT&CK matrix — unintentional behaviour, not an attack technique."),
+ assetsH:t("Active critice și ce le amenință","Critical assets and what threatens them"),
+ assetsS:t("Amenințările de mai sus derivă din aceste active. Ordinea inversă produce conținut generic.","The threats above derive from these assets. The reverse order produces generic content."),
+ asset:t("Activ","Asset"), importance:t("Importanță","Importance"), vuln:t("Vulnerabilități tipice","Typical weaknesses"), potImp:t("Impact potențial","Potential impact"),
+ critical:t("Critică","Critical"), high:t("Ridicată","High"),
+ scn:t("Scenariu sectorial","Sector scenario"),
+ duration:t("Durată","Duration"), decisions:t("Decizii","Decisions"), evalAx:t("Evaluare","Evaluation"),
+ points:t("puncte","points"), axesW:t("axe","axes"), mins:t("minute","minutes"),
+ noSol:t("Nu primești soluția înainte de a decide. După fiecare alegere vezi consecința ei — inclusiv atunci când alegerea a fost greșită. Ceasul poate fi oprit oricând; presiunea de timp nu trebuie să devină o barieră.","You do not get the answer before you decide. After each choice you see its consequence — including when the choice was wrong. The clock can be stopped at any time; time pressure must not become a barrier."),
+ start:t("Începe exercițiul","Start the exercise"),
+ stopClock:t("Oprește ceasul","Stop the clock"), startClock:t("Pornește ceasul","Start the clock"),
+ whatEval:t("Ce se evaluează","What is evaluated"),
+ whatEvalS:t("Fiecare decizie mișcă patru axe simultan. Cele mai multe alegeri bune într-o axă costă în alta.","Each decision moves four axes at once. Most choices that are good on one axis cost you on another."),
+ inject:t("Inject","Inject"), source:t("Sursa","Source"),
+ exit:t("Ieși din exercițiu","Exit the exercise"),
+ decide:t("Decide înainte de a continua. Nu există opțiune neutră — și neintervenția este o decizie cu consecințe.","Decide before continuing. There is no neutral option — inaction is also a decision with consequences."),
+ consq:t("Consecința","The consequence"), altern:t("Alternativa","The alternative"),
+ nextInj:t("Următorul inject","Next inject"), seeDeb:t("Vezi debriefingul","See the debrief"),
+ decided:t("decis","decided"), clockOff:t("ceas oprit","clock off"), expired:t("timpul a expirat","time expired"),
+ debrief:t("Debrief","Debrief"),
+ debH:t("Ce a arătat exercițiul","What the exercise showed"),
+ debP:t("Scorul nu este o notă. Este harta lacunelor care s-au văzut sub presiune și care există și în afara exercițiului.","The score is not a grade. It is a map of the gaps that showed under pressure and that exist outside the exercise too."),
+ fourAx:t("Rezultat pe patru axe","Result across four axes"),
+ startedAt:t("Punctul de plecare a fost 50 pe fiecare axă","The starting point was 50 on every axis"),
+ weakest:t("Axa cea mai slabă","Weakest axis"),
+ weakP:t("Lacuna se închide cu proceduri scrise înainte de incident, nu cu vigilență în timpul lui. Instrumente care acoperă direct această axă:","The gap closes with procedures written before the incident, not with vigilance during it. Instruments that address this axis directly:"),
+ log:t("Jurnalul deciziilor","Decision log"),
+ logS:t("Documentarea pe parcurs, nu retroactiv — exact ce îți va cere autoritatea","Documented as you go, not retroactively — exactly what the authority will ask for"),
+ moment:t("Moment","Moment"), decision:t("Decizia luată","Decision taken"), conseq:t("Consecința","Consequence"),
+ again:t("Reia exercițiul","Run it again"), backMc:t("Înapoi la Mission Control","Back to Mission Control"),
+ matH:t("Maturitate pe 16 domenii","Maturity across 16 domains"),
+ matP:t("Nivelurile au criterii observabile, nu impresii. Conturul continuu marchează nivelul actual, cel punctat marchează ținta pentru următoarele 12 luni.","Levels have observable criteria, not impressions. The solid outline marks the current level, the dashed one the target for the next 12 months."),
+ domain:t("Domeniu","Domain"), current:t("Actual","Current"), target:t("Țintă","Target"), gap:t("Decalaj","Gap"),
+ lvlNames:t("0 Absent · 1 Inițial · 2 De bază · 3 Gestionat · 4 Avansat · 5 Rezilient","0 Absent · 1 Initial · 2 Basic · 3 Managed · 4 Advanced · 5 Resilient"),
+ curLvl:t("nivel actual","current level"), tgtLvl:t("nivel țintă","target level"),
+ kpiH:t("Indicatori","Indicators"),
+ kpiS:t("Fiecare cu formula lui. Un indicator fără formulă nu se poate contesta și nici verifica.","Each with its formula. An indicator without a formula can be neither challenged nor verified."),
+ indicator:t("Indicator","Indicator"), formula:t("Formulă","Formula"), now:t("Acum","Now"),
+ kitH:t("Ce rămâne organizației după training","What the organisation keeps after the training"),
+ kitP1:t("instrumente completabile.","completable instruments."),
+ kitP2:t("finalizate. Fiecare are un timp estimat realist pentru o organizație fără personal IT dedicat.","completed. Each carries a realistic time estimate for an organisation without dedicated IT staff."),
+ todo:t("Necompletat","Not started"), prog:t("În lucru","In progress"), done:t("Finalizat","Completed"),
+ kitNote:t("Starea instrumentelor intră în scorul de pregătire. În platforma completă, fiecare element se completează în interfață și se exportă ca document; aici se poate doar marca, pentru a arăta bucla.","Instrument status feeds the readiness score. In the full platform each item is completed in the interface and exported as a document; here it can only be marked, to show the loop."),
+ cmpH:t("Ce ni se aplică, de fapt","What actually applies to us"),
+ cmpP:t("Separarea dintre cerință legală, cerință de standard și bună practică este ținută strict. Transformarea unei recomandări în obligație este eroarea care compromite un întreg program de conformitate.","The separation between legal requirement, standard requirement and good practice is kept strict. Turning a recommendation into an obligation is the error that compromises an entire compliance programme."),
+ act:t("Act / referință","Instrument / reference"), nature:t("Natura","Nature"), scope:t("Domeniu","Scope"), obs:t("Observație","Note"),
+ legal:t("Cerință legală","Legal requirement"), standard:t("Cerință de standard","Standard requirement"), practice:t("Bună practică","Good practice"),
+ verifyT:t("De verificat înainte de livrare","Verify before delivery"),
+ verifyH:t("Încadrarea se stabilește juridic, nu dintr-un tabel","Scoping is a legal determination, not a table lookup"),
+ verifyP:t("Aplicabilitatea reală depinde de activitatea concretă, de praguri și de legea națională de transpunere. Verifică textul în vigoare în EUR-Lex și la autoritatea națională competentă pentru fiecare organizație în parte.","Actual applicability depends on the concrete activity, on thresholds and on the national transposing law. Verify the text in force in EUR-Lex and with the competent national authority for each organisation.")
 };
 
-/* ============ stare ============ */
-
-const STORE="reduta.health.v1";
-let S = {
-  role:"mgmt", view:"mc", threat:"rw", timerOn:true,
-  simStep:-1, simAxes:{clin:50,data:50,legal:50,eviq:50}, simLog:[], simDone:false,
-  kits:Object.fromEntries(TOOLKIT.map(k=>[k.key,k.state]))
+/* ---------- stare ---------- */
+const AXK={
+ clin:t("Continuitate clinică","Clinical continuity"), cont:t("Continuitate operațională","Operational continuity"),
+ rev:t("Protejarea veniturilor","Revenue protection"), cli:t("Încrederea clienților","Client trust"),
+ guest:t("Protecția oaspeților","Guest protection"), serv:t("Serviciul public","Public service"),
+ data:t("Protecția datelor","Data protection"), legal:t("Conformitate și notificare","Compliance and notification"),
+ evi:t("Dovezi și investigație","Evidence and investigation")
 };
-try{ const raw=localStorage.getItem(STORE); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
-function save(){ try{ localStorage.setItem(STORE,JSON.stringify(S)); }catch(e){} }
-
+const AXC={clin:"var(--ok)",cont:"var(--ok)",rev:"var(--ok)",cli:"var(--ok)",guest:"var(--ok)",serv:"var(--ok)",
+           data:"var(--info)",legal:"var(--sim)",evi:"var(--warn)"};
 const VIEWS=[
-  {id:"mc",   n:"Mission Control",    roles:["mgmt","tech","hyg"]},
-  {id:"thr",  n:"Threat Landscape",   roles:["mgmt","tech"]},
-  {id:"sim",  n:"Simulation Lab",     roles:["mgmt","tech","hyg"]},
-  {id:"mat",  n:"Readiness",          roles:["mgmt","tech"]},
-  {id:"kit",  n:"Toolkit Vault",      roles:["mgmt","tech","hyg"]},
-  {id:"cmp",  n:"Compliance",         roles:["mgmt"]}
+ {id:"mc",k:"mc",roles:["mgmt","tech","hyg"]},
+ {id:"sectors",k:"sectors",roles:["mgmt","tech","hyg"]},
+ {id:"thr",k:"thr",roles:["mgmt","tech"]},
+ {id:"sim",k:"sim",roles:["mgmt","tech","hyg"]},
+ {id:"mat",k:"mat",roles:["mgmt","tech"]},
+ {id:"kit",k:"kit",roles:["mgmt","tech","hyg"]},
+ {id:"cmp",k:"cmp",roles:["mgmt"]}
 ];
+const STORE="cbr.v1";
+let S={lang:"ro",sector:"health",role:"mgmt",view:"mc",threat:0,timerOn:true,
+       sim:{step:-1,log:[],ax:{},done:false},kits:{}};
+try{const r=localStorage.getItem(STORE);if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(S));}catch(e){}}
 
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L=x=>(x&&typeof x==="object"&&("ro" in x))?(x[S.lang]||x.ro):x;
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sec=()=>SECTORS.find(x=>x.id===S.sector)||SECTORS[0];
+const scn=()=>SCENARIOS[S.sector];
+function kitsFor(s){return CORE_KITS.concat(s.extraKits||[]);}
+function kitState(s,k){const m=S.kits[s.id]||{};return m[k]||"todo";}
 
-/* readiness = maturitate + credit din simulare, exprimat pe 0-100 */
-function readiness(){
-  const base = MATURITY.reduce((a,b)=>a+b,0)/(DOMAINS.length*5)*100;
-  const simAvg = (S.simAxes.clin+S.simAxes.data+S.simAxes.legal+S.simAxes.eviq)/4;
-  const kitDone = Object.values(S.kits).filter(v=>v==="done").length/TOOLKIT.length*100;
-  return Math.round(base*.55 + simAvg*.25 + kitDone*.20);
+function readiness(sid){
+  const s=SECTORS.find(x=>x.id===sid)||sec();
+  const base=s.maturity.reduce((a,b)=>a+b,0)/(16*5)*100;
+  const ks=kitsFor(s), m=S.kits[s.id]||{};
+  const kd=ks.filter(k=>m[k.k]==="done").length/ks.length*100;
+  let sv=50;
+  if(s.id===S.sector&&Object.keys(S.sim.ax).length){
+    const v=Object.values(S.sim.ax); sv=v.reduce((a,b)=>a+b,0)/v.length;
+  }
+  return Math.round(base*.55+sv*.25+kd*.20);
 }
 
-/* ============ randare ============ */
+/* ---------- atmosferă ---------- */
+const cv=document.getElementById("amb"),cx=cv.getContext("2d");
+const RM=window.matchMedia("(prefers-reduced-motion: reduce)");
+let P=[],W=0,H=0,tick=0,alarm=0,raf=null;
+function hueOf(){return sec().hue;}
+function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;cx.scale(1,1);}
+function seed(){
+  const m=sec().motion, n=m==="mesh"?64:m==="ticker"?110:m==="paper"?34:m==="struct"?70:56;
+  P=[];for(let i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5),vy:(Math.random()-.5),r:Math.random()*2+.7,p:Math.random()*Math.PI*2,s:Math.random()});
+}
+function draw(){
+  const m=sec().motion,h=hueOf(),dp=devicePixelRatio;
+  cx.clearRect(0,0,W,H);
+  const hue=h+alarm*(-h+8), sat=alarm>.3?85:60, al=.30+alarm*.35;
+  const col=(a)=>`hsla(${hue},${sat}%,${62+alarm*6}%,${a})`;
+  tick+=RM.matches?0:1;
+  const sp=1+alarm*1.8;
+  if(m==="mesh"){
+    for(const p of P){p.x+=p.vx*.22*sp*dp;p.y+=p.vy*.22*sp*dp;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;}
+    cx.lineWidth=dp*.6;
+    for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){
+      const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.hypot(dx,dy);
+      if(d<170*dp){cx.strokeStyle=col(al*.22*(1-d/(170*dp)));cx.beginPath();cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke();}}
+    for(const p of P){cx.fillStyle=col(al*.6);cx.beginPath();cx.arc(p.x,p.y,p.r*dp,0,7);cx.fill();}
+  }else if(m==="flow"||m==="ticker"){
+    const fast=m==="ticker";
+    for(const p of P){p.x+=(fast?2.4:.9)*sp*dp*(0.5+p.s);
+      if(p.x>W+60*dp)p.x=-60*dp;
+      const len=(fast?26:60)*dp*(0.4+p.s);
+      cx.strokeStyle=col(al*(fast?.5:.35));cx.lineWidth=dp*(fast?.9:.7);
+      cx.beginPath();cx.moveTo(p.x-len,p.y);cx.lineTo(p.x,p.y);cx.stroke();}
+  }else if(m==="grid"||m==="struct"){
+    const g=(m==="grid"?96:120)*dp;
+    cx.strokeStyle=col(al*.14);cx.lineWidth=dp*.6;
+    for(let x=0;x<W;x+=g){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,H);cx.stroke();}
+    for(let y=0;y<H;y+=g){cx.beginPath();cx.moveTo(0,y);cx.lineTo(W,y);cx.stroke();}
+    for(const p of P){p.p+=.006*sp;const t2=(p.p%1);
+      const gx=Math.floor(p.x/g)*g, gy=Math.floor(p.y/g)*g;
+      const cxp=p.s>.5?gx+t2*g:gx, cyp=p.s>.5?gy:gy+t2*g;
+      cx.fillStyle=col(al*.75);cx.beginPath();cx.arc(cxp,cyp,1.7*dp,0,7);cx.fill();}
+  }else if(m==="pulse"){
+    for(const p of P){p.p+=.012*sp;
+      const r=(Math.sin(p.p)*.5+.5);
+      cx.fillStyle=col(al*(.25+r*.5));cx.beginPath();cx.arc(p.x,p.y,(1+r*2.2)*dp,0,7);cx.fill();}
+    const bt=(tick%150)/150, ring=bt*Math.max(W,H)*.6;
+    cx.strokeStyle=col(al*.16*(1-bt));cx.lineWidth=dp*1.4;
+    cx.beginPath();cx.arc(W*.78,H*.12,ring,0,7);cx.stroke();
+  }else if(m==="mech"){
+    for(const p of P){p.p+=.02*sp;
+      const off=Math.sin(p.p)*14*dp;
+      cx.strokeStyle=col(al*.42);cx.lineWidth=dp*1.1;
+      cx.beginPath();cx.moveTo(p.x,p.y+off);cx.lineTo(p.x,p.y+off+16*dp);cx.stroke();}
+  }else if(m==="burst"){
+    for(const p of P){p.p+=.008*sp;const t2=p.p%1;
+      cx.strokeStyle=col(al*.30*(1-t2));cx.lineWidth=dp*.8;
+      cx.beginPath();cx.arc(p.x,p.y,t2*70*dp,0,7);cx.stroke();}
+  }else if(m==="paper"){
+    for(const p of P){p.y+=.35*sp*dp*(.4+p.s);p.p+=.004;
+      if(p.y>H+40*dp)p.y=-40*dp;
+      const w=22*dp*(.6+p.s),hh=30*dp*(.6+p.s);
+      cx.save();cx.translate(p.x,p.y);cx.rotate(Math.sin(p.p)*.25);
+      cx.strokeStyle=col(al*.26);cx.lineWidth=dp*.7;cx.strokeRect(-w/2,-hh/2,w,hh);cx.restore();}
+  }else{ /* drift */
+    for(const p of P){p.x+=p.vx*.14*sp*dp;p.y+=p.vy*.14*sp*dp;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      cx.fillStyle=col(al*.42);cx.beginPath();cx.arc(p.x,p.y,p.r*1.5*dp,0,7);cx.fill();}
+  }
+  if(!RM.matches) raf=requestAnimationFrame(draw); else raf=null;
+}
+function ambient(){
+  const h=hueOf();
+  document.documentElement.style.setProperty("--amb",`hsl(${h},92%,62%)`);
+  document.getElementById("veil").style.background=
+    `radial-gradient(1200px 700px at 78% -10%,hsla(${h},90%,60%,.09),transparent 60%),`+
+    `radial-gradient(900px 600px at 4% 108%,hsla(${(h+70)%360},80%,62%,.07),transparent 58%)`;
+}
+function setAlarm(v){alarm=v;}
+addEventListener("resize",()=>{resize();seed();});
+resize();seed();ambient();draw();
+RM.addEventListener&&RM.addEventListener("change",()=>{if(!raf&&!RM.matches)draw();else{cancelAnimationFrame(raf);raf=null;draw();}});
 
-const main=document.getElementById("main");
-const navEl=document.getElementById("nav");
+/* ---------- randare ---------- */
+const main=document.getElementById("main"),navEl=document.getElementById("nav");
 
-function renderNav(){
-  navEl.innerHTML = VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>
-    `<button data-view="${v.id}" aria-current="${S.view===v.id}"><span class="dot"></span><span class="lbl">${esc(v.n)}</span></button>`
-  ).join("");
+function chrome(){
+  document.getElementById("secSel").innerHTML=SECTORS.map(s=>
+    `<option value="${s.id}" ${s.id===S.sector?"selected":""}>${esc(L(s.name))}</option>`).join("");
+  document.getElementById("roles").innerHTML=["mgmt","tech","hyg"].map(r=>
+    `<button data-role="${r}" aria-pressed="${S.role===r}">${esc(L(UI[r]))}</button>`).join("");
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===S.lang)));
+  document.getElementById("rdLab").textContent=L(UI.readiness);
+  document.getElementById("demoT").textContent=L(UI.demoT);
+  document.getElementById("demoB").textContent=L(UI.demoB);
+  navEl.innerHTML=VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>
+    `<button data-view="${v.id}" aria-current="${S.view===v.id}"><span class="dot"></span>${esc(L(UI[v.k]))}</button>`).join("");
 }
 
 function render(){
-  const allowed=VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>v.id);
-  if(!allowed.includes(S.view)) S.view=allowed[0];
-  document.getElementById("app").classList.toggle("focus", S.view==="sim" && S.simStep>=0 && !S.simDone);
-  document.getElementById("topScore").textContent=readiness();
-  renderNav();
-  main.innerHTML = ({mc:viewMC,thr:viewThreat,sim:viewSim,mat:viewMat,kit:viewKit,cmp:viewCmp})[S.view]();
-  window.scrollTo({top:0,behavior:"instant"});
-  if(S.view==="sim" && S.simStep>=0 && !S.simDone) startTimer();
+  const ok=VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>v.id);
+  if(!ok.includes(S.view))S.view=ok[0];
+  const inSim=S.view==="sim"&&S.sim.step>=0&&!S.sim.done;
+  document.getElementById("app").classList.toggle("focus",inSim);
+  setAlarm(inSim?Math.min(1,(S.sim.step+1)/scn().steps.length):0);
+  ambient();
+  document.getElementById("topScore").textContent=readiness(S.sector);
+  chrome();
+  main.innerHTML=({mc:vMC,sectors:vSectors,thr:vThreat,sim:vSim,mat:vMat,kit:vKit,cmp:vCmp})[S.view]();
+  window.scrollTo({top:0});
+  if(inSim)startTimer();
 }
 
-/* ---- Mission Control ---- */
-function viewMC(){
-  const r=readiness(), C=2*Math.PI*78;
-  const gaps=DOMAINS.map((d,i)=>({d,gap:TARGET[i]-MATURITY[i],lv:MATURITY[i]})).sort((a,b)=>b.gap-a.gap).slice(0,4);
-  const nba = S.simDone
-    ? {e:"Următorul pas",h:"Închide cele trei lacune pe care le-a scos exercițiul",p:"Simularea a arătat unde se rupe lanțul de decizie. Toolkit Vault are template-urile care transformă constatările în proceduri scrise.",b:"Deschide Toolkit Vault",v:"kit"}
-    : {e:"Următorul pas recomandat",h:"Rulează scenariul de ransomware",p:"18 minute. Șase decizii sub ceas, cu consecințe. La final primești un debrief pe patru axe și lista de instrumente care acoperă lacunele găsite.",b:"Intră în scenariu",v:"sim"};
-  return `
-  <div class="view">
-    <div class="head">
-      <p class="eyebrow">Mission Control</p>
-      <h1>Starea de pregătire a clinicii</h1>
-      <p>Trei sisteme critice nu au backup testat în ultimele 90 de zile, iar segmentul dispozitivelor medicale nu este încă separat de rețeaua administrativă.</p>
+/* Mission Control */
+function vMC(){
+  const s=sec(),r=readiness(s.id),C=2*Math.PI*78;
+  const gaps=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i],lv:s.maturity[i]})).sort((a,b)=>b.g-a.g).slice(0,4);
+  const done=S.sim.done&&S.sim.sector===s.id;
+  const nb=done
+    ?{h:L(UI.doneH),p:L(UI.doneP),b:L(UI.openKit),v:"kit",cls:""}
+    :{h:L(UI.runScn),p:L(UI.runScnP),b:L(UI.enterScn),v:"sim",cls:"sim"};
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.mc))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(UI.mcH))}</h1><p>${esc(L(s.lead))}</p></div>
+   <div class="mc">
+    <div class="panel">
+     <svg class="ring" viewBox="0 0 190 190" role="img" aria-label="${esc(L(UI.readiness))} ${r}/100">
+      <circle class="track" cx="95" cy="95" r="78"></circle>
+      <circle class="prog" cx="95" cy="95" r="78" transform="rotate(-90 95 95)" stroke-dasharray="${(C*r/100).toFixed(1)} ${C.toFixed(1)}"></circle>
+      <text class="ring-val" x="95" y="97" text-anchor="middle" dominant-baseline="middle">${r}</text>
+      <text class="ring-lab" x="95" y="122" text-anchor="middle">${esc(L(UI.readiness).toUpperCase())} / 100</text></svg>
+     <div class="segs">${gaps.map(g=>`<div class="seg"><span>${esc(g.d)}</span>
+       <span class="n">${esc(L(UI.gapTo))} ${g.lv} → ${g.lv+g.g}</span>
+       <span class="bar"><i style="width:${g.lv/5*100}%"></i></span></div>`).join("")}</div>
     </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+     <div class="nba"><p class="eyebrow">${esc(L(UI.nextStep))}</p><h3>${esc(nb.h)}</h3><p>${esc(nb.p)}</p>
+      <button class="btn ${nb.cls}" data-go="${nb.v}">${esc(nb.b)} <span aria-hidden="true">→</span></button></div>
+     <div class="panel flush"><div style="padding:16px 18px 2px"><h3>${esc(L(UI.signals))}</h3>
+      <p class="sub">${esc(L(UI.signalsS))}</p></div>
+      <div class="alerts">${s.alerts.map(a=>`<div class="alert"><span class="mark ${a.st}"></span>
+        <div><p>${esc(L(a.n))}</p><p class="meta">${esc(L(a.m))}</p></div></div>`).join("")}</div></div>
+    </div></div>
+   <div><h3 style="font-size:15px;margin-bottom:4px">${esc(L(UI.missions))} ${esc(L(UI[S.role]).toLowerCase())}</h3>
+    <p class="sub" style="color:var(--tx3);font-size:12.5px;margin-bottom:14px">${esc(L(UI.missionsS))}</p>
+    <div class="cards">${missions(s).map(m=>`<button class="card" data-go="${m.v}">
+      <span class="pill ${m.tone}"><span class="mark ${m.tone}"></span>${esc(m.tag)}</span>
+      <h4>${esc(m.n)}</h4><p>${esc(m.p)}</p>
+      <span class="foot"><span class="mono" style="font-size:11.5px;color:var(--tx3)">${m.min} ${esc(L(UI.mins))}</span></span>
+     </button>`).join("")}</div></div>
+  </div>`;
+}
+function missions(s){
+  const g=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i]})).sort((a,b)=>b.g-a.g);
+  const ks=kitsFor(s), crit=s.kpis.filter(k=>k.st==="crit");
+  const out=[];
+  out.push({n:L(scn().title),p:L(scn().brief).slice(0,120)+"…",min:18,tag:L(t("Exercițiu","Exercise")),tone:"sim",v:"sim"});
+  (s.extraKits||[]).forEach(k=>out.push({n:L(k.n),p:L(k.p),min:k.min,tag:L(t("Must have","Must have")),tone:"crit",v:"kit"}));
+  if(crit[0])out.push({n:L(crit[0].n),p:L(t("Indicator critic. Formula și pragul sunt în tabloul de pregătire.","Critical indicator. Formula and threshold are on the readiness board.")),min:20,tag:L(t("Indicator","Indicator")),tone:"warn",v:"mat"});
+  if(S.role==="mgmt")out.push({n:L(UI.cmpH),p:L(t("Ce e cerință legală, ce e standard și ce e bună practică — separat, nu amestecat.","What is legal, what is a standard and what is good practice — separated, not mixed.")),min:20,tag:L(t("Conformitate","Compliance")),tone:"info",v:"cmp"});
+  else out.push({n:L(g[0].d)+" · "+L(t("decalaj","gap"))+" +"+g[0].g,p:L(t("Domeniul cu cel mai mare decalaj față de nivelul-țintă.","The domain with the largest gap to the target level.")),min:15,tag:L(t("Decalaj","Gap")),tone:"warn",v:"mat"});
+  return out.slice(0,4);
+}
 
-    <div class="mc">
-      <div class="panel">
-        <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 190 190" role="img" aria-label="Scor de pregătire ${r} din 100">
-            <circle class="track" cx="95" cy="95" r="78"></circle>
-            <circle class="prog" cx="95" cy="95" r="78" transform="rotate(-90 95 95)"
-                    stroke-dasharray="${(C*r/100).toFixed(1)} ${C.toFixed(1)}"></circle>
-            <text class="ring-val" x="95" y="97" text-anchor="middle" dominant-baseline="middle">${r}</text>
-            <text class="ring-lab" x="95" y="122" text-anchor="middle">READINESS / 100</text>
-          </svg>
-          <span class="delta mono">+4 față de evaluarea inițială</span>
-        </div>
-        <div class="segs">
-          ${gaps.map(g=>`<div class="seg">
-            <span>${esc(g.d)}</span><span class="n">niv. ${g.lv} → ${g.lv+g.gap}</span>
-            <span class="bar"><i style="width:${g.lv/5*100}%"></i></span>
-          </div>`).join("")}
-        </div>
-      </div>
+/* Sectors */
+function vSectors(){
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.sectors))}</p><h1>${esc(L(UI.secH))}</h1><p>${esc(L(UI.secP))}</p></div>
+   <div class="sgrid">${SECTORS.map(s=>{const r=readiness(s.id);
+     return `<button class="scard" data-sec="${s.id}" aria-current="${s.id===S.sector}" style="--sc:hsl(${s.hue},88%,62%)">
+      <span class="foot" style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+        <h4>${esc(L(s.name))}</h4><span class="rd">${r}</span></span>
+      <p>${esc(L(s.sub))}</p>
+      <span class="pill idle"><span class="mark idle"></span>${esc(L(UI.nis2))}: ${esc(L(s.nis2))}</span>
+     </button>`;}).join("")}</div>
+   <p class="note">${esc(L(UI.verifyP))}</p></div>`;
+}
 
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="nba">
-          <p class="eyebrow">${nba.e}</p>
-          <h3>${nba.h}</h3>
-          <p>${nba.p}</p>
-          <button class="btn ${S.simDone?"":"sim"}" data-go="${nba.v}">${nba.b} <span aria-hidden="true">→</span></button>
-        </div>
-        <div class="panel flush">
-          <div style="padding:16px 18px 2px"><h3>Semnale active</h3><p class="sub">Din evaluarea de maturitate și din indicatorii colectați</p></div>
-          <div class="alerts">
-            <div class="alert"><span class="mark crit"></span><div>
-              <p>Niciun test de restaurare complet pentru PACS în ultimele 12 luni</p>
-              <p class="meta">KPI: 1 test · țintă ≥ 4 · scenariul 3 depinde direct de asta</p></div></div>
-            <div class="alert"><span class="mark crit"></span><div>
-              <p>7 conturi partajate între utilizatori pe secții</p>
-              <p class="meta">KPI: țintă 0 · face imposibilă atribuirea unei acțiuni în investigație</p></div></div>
-            <div class="alert"><span class="mark warn"></span><div>
-              <p>Accesul furnizorului HIS nu a fost revizuit de 9 luni</p>
-              <p class="meta">KPI: 40% furnizori revizuiți · țintă 100%</p></div></div>
-            <div class="alert"><span class="mark warn"></span><div>
-              <p>MFA activ pe 62% din conturile cu acces extern</p>
-              <p class="meta">KPI: țintă 100% · măsura cu cel mai bun raport efect/efort</p></div></div>
-          </div>
-        </div>
-      </div>
+/* Threat Landscape */
+function vThreat(){
+  const s=sec(),T=s.threats,i=Math.min(S.threat,T.length-1),th=T[i];
+  const X=v=>78+(v-1)*108,Y=v=>300-(v-1)*62;
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.thr))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(UI.thrH))}</h1><p>${esc(L(UI.thrP))}</p></div>
+   <div class="tmap">
+    <div class="panel"><h3>${esc(L(UI.plotT))}</h3><p class="sub">${esc(L(UI.plotS))}</p>
+     <svg class="plot" viewBox="0 0 640 360" role="img" aria-label="${esc(L(UI.plotT))}">
+      ${[1,2,3,4,5].map(v=>`<line class="gl" x1="${X(v)}" y1="42" x2="${X(v)}" y2="300"/>`).join("")}
+      ${[1,2,3,4,5].map(v=>`<line class="gl" x1="70" y1="${Y(v)}" x2="${X(5)+22}" y2="${Y(v)}"/>`).join("")}
+      <line class="axis" x1="70" y1="300" x2="${X(5)+22}" y2="300"/><line class="axis" x1="70" y1="42" x2="70" y2="300"/>
+      ${[1,2,3,4,5].map(v=>`<text x="${X(v)}" y="318" text-anchor="middle">${v}</text>`).join("")}
+      ${[1,2,3,4,5].map(v=>`<text x="60" y="${Y(v)+3}" text-anchor="end">${v}</text>`).join("")}
+      <text x="${(70+X(5))/2}" y="340" text-anchor="middle" style="letter-spacing:.10em">${esc(L(UI.lk))}</text>
+      <text x="22" y="171" text-anchor="middle" transform="rotate(-90 22 171)" style="letter-spacing:.10em">${esc(L(UI.im))}</text>
+      ${T.map((x,j)=>{const on=j===i,c=x.im>=5?"#FF6B4A":x.im>=4?"#FFB547":x.lk>=4?"#38E1FF":"#7C8AA3";
+        return `<g class="node" data-thr="${j}" role="button" tabindex="0" aria-pressed="${on}" aria-label="${esc(L(x.n))}">
+         <circle cx="${X(x.lk)}" cy="${Y(x.im)}" r="${9+x.im*2.6}" fill="${c}" fill-opacity="${on?.46:.18}" stroke="${c}" stroke-width="${on?2.4:1.4}"/>
+         <text x="${X(x.lk)}" y="${Y(x.im)+3.5}" text-anchor="middle" style="fill:${on?"#E8EEF9":c};font-size:11px;font-weight:600">${j+1}</text></g>`;}).join("")}
+     </svg>
+     <ol class="tlegend">${T.map((x,j)=>{const on=j===i,tn=x.im>=5?"crit":x.im>=4?"warn":x.lk>=4?"info":"idle";
+       return `<li><button data-thr="${j}" aria-pressed="${on}"><span class="tn">${j+1}</span>
+        <span class="mark ${tn}"></span><span class="tl">${esc(L(x.n))}</span></button></li>`;}).join("")}</ol>
     </div>
-
-    <div>
-      <h3 style="font-size:15px;margin-bottom:4px">Misiuni pentru traseul ${S.role==="mgmt"?"de management":S.role==="tech"?"tehnic":"de igienă cibernetică"}</h3>
-      <p class="sub" style="color:var(--tx3);font-size:12.5px;margin-bottom:14px">Ordonate după reducerea de risc pe unitatea de efort, nu după logica academică</p>
-      <div class="missions">
-        ${missionsFor(S.role).map(m=>`
-          <button class="mission" data-go="${m.v}">
-            <span class="pill ${m.tone}"><span class="mark ${m.tone}"></span>${esc(m.tag)}</span>
-            <h4>${esc(m.n)}</h4>
-            <p class="why">${esc(m.p)}</p>
-            <span class="foot"><span class="mono" style="font-size:11.5px;color:var(--tx3)">${esc(m.min)} min</span></span>
-          </button>`).join("")}
-      </div>
-    </div>
+    <div class="panel">
+     <span class="pill ${th.im>=5?"crit":th.im>=4?"warn":"info"}"><span class="mark ${th.im>=5?"crit":th.im>=4?"warn":"info"}"></span>${esc(L(UI.impact))} ${th.im}/5 · ${esc(L(UI.likeli))} ${th.lk}/5</span>
+     <h3 style="margin-top:12px;font-size:17px">${esc(L(th.n))}</h3>
+     <dl style="margin:14px 0 0;display:grid;gap:11px;font-size:13px">
+      <div><dt class="eyebrow">${esc(L(UI.actor))}</dt><dd style="margin:2px 0 0">${esc(L(th.actor))}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.vector))}</dt><dd style="margin:2px 0 0">${esc(L(th.vec))}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.affected))}</dt><dd style="margin:2px 0 0">${esc(L(th.asset))}</dd></div>
+      <div><dt class="eyebrow">MITRE ATT&amp;CK</dt><dd style="margin:4px 0 0;display:flex;gap:5px;flex-wrap:wrap">
+       ${th.mitre.length?th.mitre.map(m=>`<span class="pill">${esc(m)}</span>`).join(""):`<span style="color:var(--tx3);font-size:12.5px">${esc(L(UI.noMitre))}</span>`}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.early))}</dt><dd style="margin:2px 0 0;color:var(--tx2)">${esc(L(th.ind))}</dd></div>
+     </dl></div></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.assetsH))}</h3><p class="sub">${esc(L(UI.assetsS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.asset))}</th><th>${esc(L(UI.importance))}</th><th>${esc(L(UI.vuln))}</th><th>${esc(L(UI.potImp))}</th></tr></thead>
+     <tbody>${s.assets.map(a=>`<tr><td><strong>${esc(L(a.n))}</strong></td>
+      <td><span class="pill ${a.imp===1?"crit":"warn"}"><span class="mark ${a.imp===1?"crit":"warn"}"></span>${esc(a.imp===1?L(UI.critical):L(UI.high))}</span></td>
+      <td style="color:var(--tx2)">${esc(L(a.vuln))}</td><td style="color:var(--tx2)">${esc(L(a.impact))}</td></tr>`).join("")}</tbody></table></div></div>
   </div>`;
 }
 
-function missionsFor(role){
-  if(role==="tech") return [
-    {n:"Inventarul dispozitivelor medicale",p:"Ce e conectat, pe ce segment, cine îl poate actualiza și cine nu.",min:60,tag:"Must have",tone:"crit",v:"kit"},
-    {n:"Test de restaurare PACS",p:"Restaurare completă pe mediu separat, documentată, cu timp măsurat.",min:90,tag:"Must have",tone:"crit",v:"kit"},
-    {n:"Segmentarea rețelei clinice",p:"VLAN dedicat pentru dispozitive, fără rută către rețeaua administrativă.",min:120,tag:"Should have",tone:"warn",v:"mat"},
-    {n:"Analiza amenințărilor sectoriale",p:"Șapte amenințări relevante pentru sănătate, cu tacticile MITRE și indicatorii timpurii.",min:25,tag:"Context",tone:"info",v:"thr"}
-  ];
-  if(role==="hyg") return [
-    {n:"Phishing și BEC în context clinic",p:"Cum arată o cerere falsă de schimbare de IBAN de la un furnizor de consumabile.",min:20,tag:"Must have",tone:"crit",v:"kit"},
-    {n:"Conturi și sesiuni la ghișeu",p:"De ce contul partajat de pe recepție transformă un incident în ceva imposibil de investigat.",min:15,tag:"Must have",tone:"crit",v:"kit"},
-    {n:"Date de pacient pe canale personale",p:"Ce faci când un medic cere să trimită rezultate pe WhatsApp, la ora 07:30.",min:18,tag:"Scenariu",tone:"sim",v:"sim"}
-  ];
-  return [
-    {n:"Cine declară un incident major",p:"Mandatul de decizie, scris, înainte de a fi nevoie de el.",min:30,tag:"Must have",tone:"crit",v:"kit"},
-    {n:"Scenariu de ransomware, sub ceas",p:"Șase decizii de conducere, cu consecințe clinice, juridice și de reputație.",min:18,tag:"Exercițiu",tone:"sim",v:"sim"},
-    {n:"Obligațiile care ni se aplică efectiv",p:"Ce e cerință legală, ce e standard și ce e bună practică — separat, nu amestecat.",min:20,tag:"Conformitate",tone:"info",v:"cmp"},
-    {n:"Ce investiție reduce cel mai mult riscul",p:"Patru domenii cu decalajul cel mai mare față de nivelul-țintă.",min:15,tag:"Decizie",tone:"warn",v:"mat"}
-  ];
-}
-
-/* ---- Threat Landscape ---- */
-function viewThreat(){
-  const t=THREATS.find(x=>x.id===S.threat)||THREATS[0];
-  const X=v=>78+(v-1)*108, Y=v=>300-(v-1)*62;
-  return `
-  <div class="view">
-    <div class="head">
-      <p class="eyebrow">Threat Landscape · Sănătate</p>
-      <h1>Ce ne atacă, de fapt</h1>
-      <p>Șapte amenințări derivate din activele clinice concrete, nu dintr-o listă universală. Poziția pe hartă combină probabilitatea cu impactul asupra activității clinice.</p>
-    </div>
-    <div class="tmap">
-      <div class="panel">
-        <h3>Probabilitate × impact</h3>
-        <p class="sub">Selectează o amenințare pentru detalii. Dimensiunea marcajului redă impactul.</p>
-        <svg class="plot" viewBox="0 0 640 360" role="img" aria-label="Harta amenințărilor după probabilitate și impact">
-          ${[1,2,3,4,5].map(v=>`<line class="gl" x1="${X(v)}" y1="42" x2="${X(v)}" y2="300"/>`).join("")}
-          ${[1,2,3,4,5].map(v=>`<line class="gl" x1="70" y1="${Y(v)}" x2="${X(5)+22}" y2="${Y(v)}"/>`).join("")}
-          <line class="axis" x1="70" y1="300" x2="${X(5)+22}" y2="300"/>
-          <line class="axis" x1="70" y1="42" x2="70" y2="300"/>
-          ${[1,2,3,4,5].map(v=>`<text x="${X(v)}" y="318" text-anchor="middle">${v}</text>`).join("")}
-          ${[1,2,3,4,5].map(v=>`<text x="60" y="${Y(v)+3}" text-anchor="end">${v}</text>`).join("")}
-          <text x="${(70+X(5))/2}" y="340" text-anchor="middle" style="letter-spacing:.10em">PROBABILITATE</text>
-          <text x="22" y="171" text-anchor="middle" transform="rotate(-90 22 171)" style="letter-spacing:.10em">IMPACT</text>
-          ${THREATS.map((th,i)=>{
-            const on=th.id===S.threat, col= th.im>=5?"#FF6B4A": th.im>=4?"#FFB547": th.lk>=4?"#38E1FF":"#7C8AA3";
-            return `<g class="node" data-threat="${th.id}" role="button" tabindex="0" aria-pressed="${on}" aria-label="${esc(th.n)}, probabilitate ${th.lk} din 5, impact ${th.im} din 5">
-              <circle cx="${X(th.lk)}" cy="${Y(th.im)}" r="${9+th.im*2.6}" fill="${col}" fill-opacity="${on?.46:.18}" stroke="${col}" stroke-width="${on?2.4:1.4}" opacity="${on?1:.82}"/>
-              <text x="${X(th.lk)}" y="${Y(th.im)+3.5}" text-anchor="middle" style="fill:${on?"#E8EEF9":col};font-size:11px;font-weight:600">${i+1}</text>
-            </g>`;}).join("")}
-        </svg>
-        <ol class="tlegend">
-          ${THREATS.map((th,i)=>{
-            const on=th.id===S.threat, tone= th.im>=5?"crit": th.im>=4?"warn": th.lk>=4?"info":"idle";
-            return `<li><button data-threat="${th.id}" aria-pressed="${on}">
-              <span class="tn mono">${i+1}</span><span class="mark ${tone}"></span><span class="tl">${esc(th.n)}</span>
-            </button></li>`;}).join("")}
-        </ol>
-      </div>
-      <div class="panel">
-        <span class="pill ${t.im>=5?"crit":t.im>=4?"warn":"info"}"><span class="mark ${t.im>=5?"crit":t.im>=4?"warn":"info"}"></span>Impact ${t.im}/5 · Probabilitate ${t.lk}/5</span>
-        <h3 style="margin-top:12px;font-size:17px">${esc(t.n)}</h3>
-        <dl style="margin:14px 0 0;display:grid;gap:11px;font-size:13px">
-          <div><dt class="eyebrow">Actor</dt><dd style="margin:2px 0 0">${esc(t.actor)}</dd></div>
-          <div><dt class="eyebrow">Vector</dt><dd style="margin:2px 0 0">${esc(t.vec)}</dd></div>
-          <div><dt class="eyebrow">Activ afectat</dt><dd style="margin:2px 0 0">${esc(t.asset)}</dd></div>
-          <div><dt class="eyebrow">MITRE ATT&amp;CK</dt><dd style="margin:4px 0 0;display:flex;gap:5px;flex-wrap:wrap">
-            ${t.mitre.length?t.mitre.map(m=>`<span class="pill">${esc(m)}</span>`).join(""):'<span style="color:var(--tx3);font-size:12.5px">Nu se încadrează în matricea ATT&amp;CK — comportament neintenționat, nu tehnică de atac.</span>'}
-          </dd></div>
-          <div><dt class="eyebrow">Indicatori timpurii</dt><dd style="margin:2px 0 0;color:var(--tx2)">${esc(t.ind)}</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="panel flush">
-      <div style="padding:18px 20px 4px"><h3>Active critice și ce le amenință</h3>
-      <p class="sub">Amenințările de mai sus derivă din aceste active. Ordinea inversă produce conținut generic.</p></div>
-      <div class="tw"><table>
-        <thead><tr><th>Activ</th><th>Importanță</th><th>Vulnerabilități tipice</th><th>Impact potențial</th></tr></thead>
-        <tbody>${ASSETS.map(a=>`<tr>
-          <td><strong>${esc(a.n)}</strong></td>
-          <td><span class="pill ${a.imp==="Critică"?"crit":"warn"}"><span class="mark ${a.imp==="Critică"?"crit":"warn"}"></span>${esc(a.imp)}</span></td>
-          <td style="color:var(--tx2)">${esc(a.vuln)}</td>
-          <td style="color:var(--tx2)">${esc(a.impact)}</td>
-        </tr>`).join("")}</tbody>
-      </table></div>
-    </div>
-  </div>`;
-}
-
-/* ---- Simulation Lab ---- */
-function viewSim(){
-  if(S.simDone) return simDebrief();
-  if(S.simStep<0) return simIntro();
-  return simStep();
-}
-
+/* Simulation */
+function axKeys(){const o=scn().steps[0].o[0].d;return Object.keys(o);}
+function vSim(){ if(S.sim.done&&S.sim.sector===S.sector)return simDeb(); if(S.sim.step<0||S.sim.sector!==S.sector)return simIntro(); return simStep(); }
 function simIntro(){
-  return `
-  <div class="view sim-stage">
-    <div class="head">
-      <p class="eyebrow">Simulation Lab · Scenariul 1 din 3</p>
-      <h1>${esc(SCENARIO.title)}</h1>
-      <p>${esc(SCENARIO.org)}</p>
-    </div>
-    <div class="panel" style="border-color:rgba(155,107,255,.30)">
-      <p style="margin:0 0 16px;font-size:16px;line-height:1.7">${esc(SCENARIO.brief)}</p>
-      <div class="grid g-3" style="margin-bottom:18px">
-        <div><p class="eyebrow">Durată</p><p class="mono" style="margin:2px 0 0;font-size:15px">≈ 18 minute</p></div>
-        <div><p class="eyebrow">Decizii</p><p class="mono" style="margin:2px 0 0;font-size:15px">6 puncte</p></div>
-        <div><p class="eyebrow">Evaluare</p><p class="mono" style="margin:2px 0 0;font-size:15px">4 axe</p></div>
-      </div>
-      <p class="note">Nu primești soluția înainte de a decide. După fiecare alegere vezi consecința ei — inclusiv atunci când alegerea a fost greșită. Ceasul poate fi oprit oricând; presiunea de timp nu trebuie să devină o barieră.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
-        <button class="btn sim" data-sim="start">Începe exercițiul <span aria-hidden="true">→</span></button>
-        <button class="btn ghost" data-sim="toggletimer">${S.timerOn?"Oprește ceasul de decizie":"Pornește ceasul de decizie"}</button>
-      </div>
-    </div>
-    <div class="panel">
-      <h3>Ce se evaluează</h3>
-      <p class="sub">Fiecare decizie mișcă patru axe simultan. Cele mai multe alegeri bune într-o singură axă costă în alta.</p>
-      <div class="axes">
-        ${AXES.map(a=>`<div class="ax"><span>${esc(a.n)}</span><span class="n">50</span>
-          <span class="bar"><i style="width:50%;background:${a.c}"></i></span></div>`).join("")}
-      </div>
-    </div>
-  </div>`;
+  const sp=scn(),ks=axKeys();
+  return `<div class="view sim-stage">
+   <div class="head"><p class="eyebrow">${esc(L(UI.scn))} · ${esc(L(sec().name))}</p>
+    <h1>${esc(L(sp.title))}</h1><p>${esc(L(sec().org))}</p></div>
+   <div class="panel" style="border-color:rgba(155,107,255,.30)">
+    <p style="margin:0 0 16px;font-size:16px;line-height:1.7">${esc(L(sp.brief))}</p>
+    <div class="grid g3" style="margin-bottom:18px">
+     <div><p class="eyebrow">${esc(L(UI.duration))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">≈ 15 ${esc(L(UI.mins))}</p></div>
+     <div><p class="eyebrow">${esc(L(UI.decisions))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">${sp.steps.length} ${esc(L(UI.points))}</p></div>
+     <div><p class="eyebrow">${esc(L(UI.evalAx))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">4 ${esc(L(UI.axesW))}</p></div></div>
+    <p class="note">${esc(L(UI.noSol))}</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+     <button class="btn sim" data-sim="start">${esc(L(UI.start))} <span aria-hidden="true">→</span></button>
+     <button class="btn ghost" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button></div></div>
+   <div class="panel"><h3>${esc(L(UI.whatEval))}</h3><p class="sub">${esc(L(UI.whatEvalS))}</p>
+    <div class="axes">${ks.map(k=>`<div class="ax"><span>${esc(L(AXK[k]))}</span><span class="n">50</span>
+      <span class="bar"><i style="width:50%;background:${AXC[k]}"></i></span></div>`).join("")}</div></div></div>`;
 }
-
 function simStep(){
-  const st=SCENARIO.steps[S.simStep];
-  const last=S.simLog[S.simLog.length-1];
-  const showC = last && last.step===S.simStep;
-  return `
-  <div class="view sim-stage">
-    <div class="sim-bar">
-      <span class="tplus">${esc(st.tplus)}</span>
-      <span class="clock">${esc(st.clock)}</span>
-      <span class="rail-time" aria-hidden="true">
-        ${SCENARIO.steps.map((_,i)=>`<i class="${i<S.simStep?"done":i===S.simStep?"now":""}"></i>`).join("")}
-      </span>
-      <span class="spacer"></span>
-      <span class="timer ${S.timerOn?"":"off"}" id="tmr">${S.timerOn?"90s":"ceas oprit"}</span>
-      <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="toggletimer">${S.timerOn?"Oprește ceasul":"Pornește ceasul"}</button>
-      <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="abort">Ieși din exercițiu</button>
-    </div>
+  const sp=scn(),st=sp.steps[S.sim.step],last=S.sim.log[S.sim.log.length-1],show=last&&last.step===S.sim.step;
+  return `<div class="view sim-stage">
+   <div class="sim-bar"><span class="tplus">${esc(L(st.tp))}</span><span class="clock">${esc(L(st.ck))}</span>
+    <span class="rt" aria-hidden="true">${sp.steps.map((_,i)=>`<i class="${i<S.sim.step?"done":i===S.sim.step?"now":""}"></i>`).join("")}</span>
+    <span class="spacer"></span>
+    <span class="timer ${S.timerOn?"":"off"}" id="tmr">${S.timerOn?"90s":esc(L(UI.clockOff))}</span>
+    <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button>
+    <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="abort">${esc(L(UI.exit))}</button></div>
+   <div class="inject"><div class="inject-h"><span class="mark sim"></span>
+     <span class="eyebrow" style="color:var(--tx2)">${esc(L(UI.inject))} ${S.sim.step+1} / ${sp.steps.length}</span>
+     <span class="spacer"></span><span class="eyebrow">${esc(L(UI.source))}: ${esc(L(st.src))}</span></div>
+    <div class="inject-b"><p class="msg">${esc(L(st.msg))}</p><p class="q">${esc(L(st.q))}</p>
+     <div class="opts">${st.o.map((o,j)=>{const pick=show&&last.opt===j;
+      return `<button class="opt ${pick?"chosen":""}" data-opt="${j}" ${show?"disabled":""}>
+      <span class="k">${String.fromCharCode(65+j)}${pick?'<span class="mark sim"></span>':""}</span>
+      <span>${esc(L(o.t))}</span></button>`;}).join("")}</div></div></div>
+   ${show?`<div class="consq"><p class="eyebrow">${esc(L(UI.consq))}</p><p class="lead">${esc(last.c)}</p>
+    ${last.alt?`<p class="alt"><strong>${esc(L(UI.altern))}:</strong> ${esc(last.alt)}</p>`:""}
+    <div class="deltas">${Object.keys(last.d).map(k=>{const v=last.d[k];
+      return `<span class="dlt ${v>0?"up":v<0?"dn":"z"}">${esc(L(AXK[k]).split(" ")[0])} ${v>0?"+":""}${v*5}</span>`;}).join("")}</div>
+    <button class="btn sim" data-sim="next" style="align-self:flex-start">
+     ${esc(S.sim.step+1<sp.steps.length?L(UI.nextInj):L(UI.seeDeb))} <span aria-hidden="true">→</span></button></div>`
+    :`<p class="note">${esc(L(UI.decide))}</p>`}</div>`;
+}
+function simDeb(){
+  const sp=scn(),ks=axKeys(),s=sec();
+  const worst=ks.slice().sort((a,b)=>S.sim.ax[a]-S.sim.ax[b])[0];
+  /* instrumentele recomandate sunt cele care acoperă efectiv axa cea mai slabă */
+  const BYAX={data:["ph","acl","pol"],legal:["not","ir","com"],evi:["rw","vnd","acl"]};
+  const want=BYAX[worst]||["deg","bc","ir"];
+  const all=kitsFor(s);
+  const recs=want.map(w=>all.find(k=>k.k===w)).filter(Boolean).slice(0,2)
+    .concat((s.extraKits||[]).slice(0,1));
+  return `<div class="view sim-stage">
+   <div class="head"><p class="eyebrow">${esc(L(UI.debrief))} · ${esc(L(sp.title))}</p>
+    <h1>${esc(L(UI.debH))}</h1><p>${esc(L(UI.debP))}</p></div>
+   <div class="panel"><h3>${esc(L(UI.fourAx))}</h3><p class="sub">${esc(L(UI.startedAt))}</p>
+    <div class="axes">${ks.map(k=>`<div class="ax"><span>${esc(L(AXK[k]))}</span><span class="n">${S.sim.ax[k]}</span>
+      <span class="bar"><i style="width:${S.sim.ax[k]}%;background:${AXC[k]}"></i></span></div>`).join("")}</div></div>
+   <div class="panel" style="border-color:rgba(255,181,71,.30)"><p class="eyebrow">${esc(L(UI.weakest))}</p>
+    <h3 style="font-size:18px;margin:6px 0 8px">${esc(L(AXK[worst]))} · ${S.sim.ax[worst]}/100</h3>
+    <p style="margin:0 0 14px;color:var(--tx2)">${esc(L(UI.weakP))}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+     ${recs.map(r=>`<span class="pill warn"><span class="mark warn"></span>${esc(L(r.n))}</span>`).join("")}</div>
+    <button class="btn" data-go="kit">${esc(L(UI.openKit))} <span aria-hidden="true">→</span></button></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.log))}</h3><p class="sub">${esc(L(UI.logS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.moment))}</th><th>${esc(L(UI.decision))}</th><th>${esc(L(UI.conseq))}</th></tr></thead>
+     <tbody>${S.sim.log.map(l=>`<tr><td class="num">${esc(L(sp.steps[l.step].tp))}<br><span style="color:var(--tx3)">${esc(L(sp.steps[l.step].ck))}</span></td>
+      <td style="max-width:280px">${esc(l.t)}</td><td style="color:var(--tx2);max-width:360px">${esc(l.c)}</td></tr>`).join("")}</tbody></table></div></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn ghost" data-sim="reset">${esc(L(UI.again))}</button>
+    <button class="btn ghost" data-go="mc">${esc(L(UI.backMc))}</button></div></div>`;
+}
 
-    <div class="inject">
-      <div class="inject-h">
-        <span class="mark sim"></span>
-        <span class="eyebrow" style="color:var(--tx2)">Inject ${S.simStep+1} / ${SCENARIO.steps.length}</span>
-        <span class="spacer"></span>
-        <span class="eyebrow">Sursa: ${esc(st.src)}</span>
-      </div>
-      <div class="inject-b">
-        <p class="msg">${esc(st.msg)}</p>
-        <p class="q">${esc(st.q)}</p>
-        <div class="opts">
-          ${st.opts.map((o,i)=>`<button class="opt" data-opt="${i}" ${showC?"disabled":""}>
-            <span class="k">${String.fromCharCode(65+i)}</span><span class="t">${esc(o.t)}</span></button>`).join("")}
-        </div>
-      </div>
-    </div>
-
-    ${showC?`
-    <div class="consq">
-      <p class="eyebrow">Consecința</p>
-      <p class="lead">${esc(last.c)}</p>
-      ${last.alt?`<p class="alt"><strong>Alternativa:</strong> ${esc(last.alt)}</p>`:""}
-      <div class="deltas">
-        ${AXES.map(a=>{const d=last.d[a.k]||0;return `<span class="dlt ${d>0?"up":d<0?"dn":"z"}">${esc(a.n.split(" ")[0])} ${d>0?"+":""}${d*5}</span>`;}).join("")}
-      </div>
-      <button class="btn sim" data-sim="next" style="align-self:flex-start">
-        ${S.simStep+1<SCENARIO.steps.length?"Următorul inject":"Vezi debriefingul"} <span aria-hidden="true">→</span>
-      </button>
-    </div>`:`<p class="note">Decide înainte de a continua. Nu există opțiune neutră — și neintervenția este o decizie cu consecințe.</p>`}
+/* Readiness */
+function vMat(){
+  const s=sec(),cols=["#3A4356","#4E5C7A","#3E7FA8","#2E9FB5","#2EC5A8","#2EE6C4"];
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.mat))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.matH))}</h1><p>${esc(L(UI.matP))}</p></div>
+   <div class="panel flush"><div class="tw mx"><table>
+    <thead><tr><th>${esc(L(UI.domain))}</th><th>0 → 5</th><th>${esc(L(UI.current))}</th><th>${esc(L(UI.target))}</th><th>${esc(L(UI.gap))}</th></tr></thead>
+    <tbody>${DOMAINS.map((d,i)=>{const c=s.maturity[i],g=s.target[i]-c;
+      return `<tr><td><strong>${esc(L(d))}</strong></td>
+       <td><span class="cell">${cols.map((cc,l)=>`<span class="lv ${l<=c?"on":""} ${l===c?"cur":""} ${l===s.target[i]?"tgt":""}" style="${l<=c?`background:${cc}`:""}"></span>`).join("")}</span></td>
+       <td class="num">${c}</td><td class="num">${s.target[i]}</td>
+       <td class="num"><span class="pill ${g>=3?"crit":g===2?"warn":"ok"}"><span class="mark ${g>=3?"crit":g===2?"warn":"ok"}"></span>+${g}</span></td></tr>`;}).join("")}</tbody></table></div>
+    <div class="legend"><span><span class="lv on cur" style="background:#2E9FB5"></span> ${esc(L(UI.curLvl))}</span>
+     <span><span class="lv tgt"></span> ${esc(L(UI.tgtLvl))}</span><span>${esc(L(UI.lvlNames))}</span></div></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.kpiH))}</h3><p class="sub">${esc(L(UI.kpiS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.indicator))}</th><th>${esc(L(UI.formula))}</th><th>${esc(L(UI.now))}</th><th>${esc(L(UI.target))}</th></tr></thead>
+     <tbody>${s.kpis.map(k=>`<tr><td><span class="pill ${k.st}"><span class="mark ${k.st}"></span></span> <strong>${esc(L(k.n))}</strong></td>
+      <td class="mono" style="font-size:11.5px;color:var(--tx3)">${esc(L(k.f))}</td>
+      <td class="num"><strong>${esc(L(k.now))}</strong></td><td class="num" style="color:var(--tx3)">${esc(L(k.tgt))}</td></tr>`).join("")}</tbody></table></div></div>
   </div>`;
 }
 
-function simDebrief(){
-  const worst=[...AXES].sort((a,b)=>S.simAxes[a.k]-S.simAxes[b.k])[0];
-  const recs={
-    clin:["Procedura de lucru degradat","Checklist continuitate clinică"],
-    data:["Checklist phishing și BEC","Politica de securitate — model scurt"],
-    legal:["Template de notificare a incidentului","Plan de răspuns la incident — o pagină"],
-    eviq:["Checklist ransomware","Control al accesului furnizorului"]
-  }[worst.k];
-  return `
-  <div class="view sim-stage">
-    <div class="head">
-      <p class="eyebrow">Debrief · ${esc(SCENARIO.title)}</p>
-      <h1>Ce a arătat exercițiul</h1>
-      <p>Scorul nu este o notă. Este harta lacunelor care s-au văzut sub presiune și care există și în afara exercițiului.</p>
-    </div>
-    <div class="panel">
-      <h3>Rezultat pe patru axe</h3>
-      <p class="sub">Punctul de plecare a fost 50 pe fiecare axă</p>
-      <div class="axes">
-        ${AXES.map(a=>`<div class="ax"><span>${esc(a.n)}</span><span class="n">${S.simAxes[a.k]}</span>
-          <span class="bar"><i style="width:${S.simAxes[a.k]}%;background:${a.c}"></i></span></div>`).join("")}
-      </div>
-    </div>
-    <div class="panel" style="border-color:rgba(255,181,71,.30)">
-      <p class="eyebrow">Axa cea mai slabă</p>
-      <h3 style="font-size:18px;margin:6px 0 8px">${esc(worst.n)} · ${S.simAxes[worst.k]}/100</h3>
-      <p style="margin:0 0 14px;color:var(--tx2)">Lacuna se închide cu proceduri scrise înainte de incident, nu cu vigilență în timpul lui. Două instrumente din Toolkit acoperă direct această axă:</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
-        ${recs.map(r=>`<span class="pill warn"><span class="mark warn"></span>${esc(r)}</span>`).join("")}
-      </div>
-      <button class="btn" data-go="kit">Deschide Toolkit Vault <span aria-hidden="true">→</span></button>
-    </div>
-    <div class="panel flush">
-      <div style="padding:18px 20px 4px"><h3>Jurnalul deciziilor</h3>
-      <p class="sub">Documentarea pe parcurs, nu retroactiv — exact ce îți va cere autoritatea</p></div>
-      <div class="tw"><table>
-        <thead><tr><th>Moment</th><th>Decizia luată</th><th>Consecința</th></tr></thead>
-        <tbody>${S.simLog.map(l=>`<tr>
-          <td class="num">${esc(SCENARIO.steps[l.step].tplus)}<br><span style="color:var(--tx3)">${esc(SCENARIO.steps[l.step].clock)}</span></td>
-          <td style="max-width:280px">${esc(l.t)}</td>
-          <td style="color:var(--tx2);max-width:360px">${esc(l.c)}</td>
-        </tr>`).join("")}</tbody>
-      </table></div>
-    </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn ghost" data-sim="reset">Reia exercițiul</button>
-      <button class="btn ghost" data-go="mc">Înapoi la Mission Control</button>
-    </div>
-  </div>`;
+/* Toolkit */
+function vKit(){
+  const s=sec(),ks=kitsFor(s),lab={todo:L(UI.todo),prog:L(UI.prog),done:L(UI.done)},tone={todo:"idle",prog:"warn",done:"ok"};
+  const m=S.kits[s.id]||{},d=ks.filter(k=>m[k.k]==="done").length;
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.kit))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.kitH))}</h1>
+    <p>${ks.length} ${esc(L(UI.kitP1))} ${d}/${ks.length} ${esc(L(UI.kitP2))}</p></div>
+   <div class="cards">${ks.map(k=>{const st=m[k.k]||"todo";
+     return `<button class="card" data-kit="${k.k}"><h4>${esc(L(k.n))}</h4><p>${esc(L(k.p))}</p>
+      <span class="foot" style="justify-content:space-between"><span class="pill ${tone[st]}"><span class="mark ${tone[st]}"></span>${esc(lab[st])}</span>
+      <span class="mono" style="font-size:11.5px;color:var(--tx3)">${k.min} ${esc(L(UI.mins))}</span></span></button>`;}).join("")}</div>
+   <p class="note">${esc(L(UI.kitNote))}</p></div>`;
 }
 
-/* ---- Readiness / maturitate ---- */
-function viewMat(){
-  const cols=["#3A4356","#4E5C7A","#3E7FA8","#2E9FB5","#2EC5A8","#2EE6C4"];
-  return `
-  <div class="view">
-    <div class="head">
-      <p class="eyebrow">Readiness Dashboard</p>
-      <h1>Maturitate pe 16 domenii</h1>
-      <p>Nivelurile au criterii observabile, nu impresii. Conturul continuu marchează nivelul actual, cel punctat marchează ținta pentru următoarele 12 luni.</p>
-    </div>
-    <div class="panel flush">
-      <div class="mx"><table>
-        <thead><tr><th>Domeniu</th><th>Nivel 0 → 5</th><th>Actual</th><th>Țintă</th><th>Decalaj</th></tr></thead>
-        <tbody>${DOMAINS.map((d,i)=>{
-          const cur=MATURITY[i],tg=TARGET[i],gap=tg-cur;
-          return `<tr>
-            <td><strong>${esc(d)}</strong></td>
-            <td><span class="cell">${cols.map((c,l)=>`<span class="lv ${l<=cur?"on":""} ${l===cur?"cur":""} ${l===tg?"tgt":""}" style="${l<=cur?`background:${c}`:""}" title="Nivel ${l}"></span>`).join("")}</span></td>
-            <td class="num">${cur}</td><td class="num">${tg}</td>
-            <td class="num"><span class="pill ${gap>=3?"crit":gap===2?"warn":"ok"}"><span class="mark ${gap>=3?"crit":gap===2?"warn":"ok"}"></span>+${gap}</span></td>
-          </tr>`;}).join("")}</tbody>
-      </table></div>
-      <div class="legend" style="padding:0 20px 18px">
-        <span><span class="lv on cur" style="background:#2E9FB5"></span> nivel actual</span>
-        <span><span class="lv tgt"></span> nivel țintă</span>
-        <span>0 Absent · 1 Initial · 2 Basic · 3 Managed · 4 Advanced · 5 Resilient</span>
-      </div>
-    </div>
-
-    <div class="panel flush">
-      <div style="padding:18px 20px 4px"><h3>Indicatori</h3>
-      <p class="sub">Fiecare cu formula lui. Un indicator fără formulă nu se poate contesta și nici verifica.</p></div>
-      <div class="tw"><table>
-        <thead><tr><th>Indicator</th><th>Formulă</th><th>Acum</th><th>Țintă</th></tr></thead>
-        <tbody>${KPIS.map(k=>`<tr>
-          <td><span class="pill ${k.st}"><span class="mark ${k.st}"></span></span> <strong>${esc(k.n)}</strong></td>
-          <td class="mono" style="font-size:11.5px;color:var(--tx3)">${esc(k.f)}</td>
-          <td class="num"><strong>${esc(k.now)}</strong></td>
-          <td class="num" style="color:var(--tx3)">${esc(k.tgt)}</td>
-        </tr>`).join("")}</tbody>
-      </table></div>
-    </div>
-  </div>`;
+/* Compliance */
+function vCmp(){
+  const s=sec(),lab={legal:L(UI.legal),standard:L(UI.standard),practice:L(UI.practice)},tone={legal:"crit",standard:"info",practice:"idle"};
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.cmp))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.cmpH))}</h1><p>${esc(L(UI.cmpP))}</p></div>
+   <div class="panel flush"><div class="tw"><table>
+    <thead><tr><th>${esc(L(UI.act))}</th><th>${esc(L(UI.nature))}</th><th>${esc(L(UI.scope))}</th><th>${esc(L(UI.obs))}</th></tr></thead>
+    <tbody>${s.compliance.map(c=>`<tr><td><strong>${esc(L(c.act))}</strong></td>
+     <td><span class="pill ${tone[c.kind]}"><span class="mark ${tone[c.kind]}"></span>${esc(lab[c.kind])}</span></td>
+     <td style="color:var(--tx2)">${esc(L(c.scope))}</td><td style="color:var(--tx2);max-width:420px">${esc(L(c.note))}</td></tr>`).join("")}</tbody></table></div></div>
+   <div class="panel" style="border-color:rgba(255,181,71,.28)"><span class="pill warn"><span class="mark warn"></span>${esc(L(UI.verifyT))}</span>
+    <h3 style="margin:12px 0 8px;font-size:16px">${esc(L(UI.verifyH))}</h3>
+    <p style="margin:0;color:var(--tx2);max-width:74ch">${esc(L(UI.verifyP))}</p></div></div>`;
 }
 
-/* ---- Toolkit ---- */
-function viewKit(){
-  const lab={todo:"Necompletat",prog:"În lucru",done:"Finalizat"};
-  const tone={todo:"idle",prog:"warn",done:"ok"};
-  const done=Object.values(S.kits).filter(v=>v==="done").length;
-  return `
-  <div class="view">
-    <div class="head">
-      <p class="eyebrow">Toolkit Vault</p>
-      <h1>Ce rămâne clinicii după training</h1>
-      <p>Șaisprezece instrumente completabile. ${done} din ${TOOLKIT.length} finalizate. Fiecare are un timp estimat realist pentru o organizație fără personal IT dedicat.</p>
-    </div>
-    <div class="kits">
-      ${TOOLKIT.map(k=>{const st=S.kits[k.key]||"todo";return `
-        <button class="kit" data-kit="${k.key}" aria-label="${esc(k.n)} — ${lab[st]}. Apasă pentru a schimba starea.">
-          <h4>${esc(k.n)}</h4>
-          <p>${esc(k.p)}</p>
-          <span class="foot">
-            <span class="pill ${tone[st]}"><span class="mark ${tone[st]}"></span>${lab[st]}</span>
-            <span class="mono" style="font-size:11.5px;color:var(--tx3)">${k.min} min</span>
-          </span>
-        </button>`;}).join("")}
-    </div>
-    <p class="note">Starea instrumentelor intră în scorul de readiness. În platforma completă, fiecare element se completează în interfață și se exportă ca document; aici se poate doar marca, pentru a arăta bucla.</p>
-  </div>`;
-}
-
-/* ---- Compliance ---- */
-function viewCmp(){
-  const lab={legal:"Cerință legală",standard:"Cerință de standard",practice:"Bună practică"};
-  const tone={legal:"crit",standard:"info",practice:"idle"};
-  return `
-  <div class="view">
-    <div class="head">
-      <p class="eyebrow">Compliance Navigator</p>
-      <h1>Ce ni se aplică, de fapt</h1>
-      <p>Separarea dintre cerință legală, cerință de standard și bună practică este ținută strict. Transformarea unei recomandări în obligație este eroarea care compromite un întreg program de conformitate.</p>
-    </div>
-    <div class="panel flush">
-      <div class="tw"><table>
-        <thead><tr><th>Act / referință</th><th>Natura</th><th>Domeniu</th><th>Observație</th></tr></thead>
-        <tbody>${COMPLIANCE.map(c=>`<tr>
-          <td><strong>${esc(c.act)}</strong><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px">${c.mods.map(m=>`<span class="pill">${esc(m)}</span>`).join("")}</div></td>
-          <td><span class="pill ${tone[c.kind]}"><span class="mark ${tone[c.kind]}"></span>${lab[c.kind]}</span></td>
-          <td style="color:var(--tx2)">${esc(c.scope)}</td>
-          <td style="color:var(--tx2);max-width:400px">${esc(c.note)}</td>
-        </tr>`).join("")}</tbody>
-      </table></div>
-    </div>
-    <div class="panel" style="border-color:rgba(255,181,71,.28)">
-      <span class="pill warn"><span class="mark warn"></span>De verificat înainte de livrare</span>
-      <h3 style="margin:12px 0 8px;font-size:16px">Încadrarea se stabilește juridic, nu dintr-un tabel</h3>
-      <p style="margin:0;color:var(--tx2);max-width:72ch">Un cabinet individual poate să nu intre în domeniul NIS2 din cauza pragurilor de dimensiune, dar rămâne integral sub GDPR și poate fi tras în sfera cerințelor prin contractele cu spitale sau case de asigurări. Cele două lucruri se tratează separat. Verifică textul în vigoare în EUR-Lex și la DNSC pentru fiecare organizație concretă.</p>
-    </div>
-  </div>`;
-}
-
-/* ============ interacțiune ============ */
-
-let tmrId=null, tmrLeft=90;
-function stopTimer(){ if(tmrId){clearInterval(tmrId);tmrId=null;} }
+/* ---------- interacțiune ---------- */
+let tid=null,left=90;
+function stopTimer(){if(tid){clearInterval(tid);tid=null;}}
 function startTimer(){
-  stopTimer();
-  const el=document.getElementById("tmr"); if(!el) return;
-  const answered = S.simLog.some(l=>l.step===S.simStep);
-  if(!S.timerOn||answered){ el.textContent = S.timerOn?"decis":"ceas oprit"; el.classList.toggle("off",!S.timerOn); return; }
-  tmrLeft=90; el.classList.remove("off"); el.textContent=tmrLeft+"s";
-  tmrId=setInterval(()=>{
-    tmrLeft--;
-    const e=document.getElementById("tmr"); if(!e){stopTimer();return;}
-    e.textContent = tmrLeft>0 ? tmrLeft+"s" : "timpul a expirat";
-    if(tmrLeft<=0){ stopTimer(); e.style.color="var(--crit)"; }
-  },1000);
+  stopTimer();const el=document.getElementById("tmr");if(!el)return;
+  const answered=S.sim.log.some(l=>l.step===S.sim.step);
+  if(!S.timerOn||answered){el.textContent=S.timerOn?L(UI.decided):L(UI.clockOff);el.classList.toggle("off",!S.timerOn);return;}
+  left=90;el.classList.remove("off");el.textContent=left+"s";
+  tid=setInterval(()=>{left--;const e=document.getElementById("tmr");if(!e){stopTimer();return;}
+    e.textContent=left>0?left+"s":L(UI.expired);
+    if(left<=0){stopTimer();e.style.color="var(--crit)";}},1000);
 }
-
-function choose(i){
-  const st=SCENARIO.steps[S.simStep], o=st.opts[i];
-  for(const k in o.d) S.simAxes[k]=Math.max(0,Math.min(100,S.simAxes[k]+o.d[k]*5));
-  S.simLog.push({step:S.simStep,t:o.t,c:o.c,alt:o.alt,d:o.d});
-  stopTimer(); save(); render();
+function choose(j){
+  const st=scn().steps[S.sim.step],o=st.o[j];
+  if(!Object.keys(S.sim.ax).length)axKeys().forEach(k=>S.sim.ax[k]=50);
+  for(const k in o.d)S.sim.ax[k]=Math.max(0,Math.min(100,(S.sim.ax[k]||50)+o.d[k]*5));
+  S.sim.log.push({step:S.sim.step,opt:j,t:L(o.t),c:L(o.c),alt:o.alt?L(o.alt):null,d:o.d});
+  stopTimer();save();render();
+}
+function resetSim(start){
+  S.sim={sector:S.sector,step:start?0:-1,log:[],ax:{},done:false};
+  axKeys().forEach(k=>S.sim.ax[k]=50);
 }
 
 document.addEventListener("click",e=>{
-  const nav=e.target.closest("[data-view]");
-  if(nav){ S.view=nav.dataset.view; stopTimer(); save(); render(); return; }
-
-  const go=e.target.closest("[data-go]");
-  if(go){ S.view=go.dataset.go; save(); render(); return; }
-
-  const role=e.target.closest("#roles [data-role]");
-  if(role){
-    S.role=role.dataset.role;
-    document.querySelectorAll("#roles button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.role===S.role)));
-    save(); render(); return;
-  }
-
-  const th=e.target.closest("[data-threat]");
-  if(th){ S.threat=th.dataset.threat; save(); render(); return; }
-
-  const opt=e.target.closest("[data-opt]");
-  if(opt && !opt.disabled){ choose(+opt.dataset.opt); return; }
-
-  const kit=e.target.closest("[data-kit]");
-  if(kit){
-    const k=kit.dataset.kit, order=["todo","prog","done"];
-    S.kits[k]=order[(order.indexOf(S.kits[k]||"todo")+1)%3];
-    save(); render(); return;
-  }
-
-  const sim=e.target.closest("[data-sim]");
-  if(sim){
-    const a=sim.dataset.sim;
-    if(a==="start"){ S.simStep=0; S.simLog=[]; S.simDone=false; S.simAxes={clin:50,data:50,legal:50,eviq:50}; }
-    if(a==="next"){ if(S.simStep+1<SCENARIO.steps.length) S.simStep++; else { S.simDone=true; S.simStep=-1; } }
-    if(a==="toggletimer"){ S.timerOn=!S.timerOn; }
-    if(a==="abort"){ S.simStep=-1; S.simLog=[]; S.simDone=false; stopTimer(); }
-    if(a==="reset"){ S.simStep=0; S.simLog=[]; S.simDone=false; S.simAxes={clin:50,data:50,legal:50,eviq:50}; }
-    save(); render(); return;
-  }
+  const v=e.target.closest("[data-view]");if(v){S.view=v.dataset.view;stopTimer();save();render();return;}
+  const g=e.target.closest("[data-go]");if(g){S.view=g.dataset.go;save();render();return;}
+  const r=e.target.closest("[data-role]");if(r){S.role=r.dataset.role;save();render();return;}
+  const la=e.target.closest("[data-lang]");if(la){S.lang=la.dataset.lang;save();render();return;}
+  const sc=e.target.closest("[data-sec]");if(sc){S.sector=sc.dataset.sec;S.threat=0;resetSim(false);seed();save();render();return;}
+  const th=e.target.closest("[data-thr]");if(th){S.threat=+th.dataset.thr;save();render();return;}
+  const op=e.target.closest("[data-opt]");if(op&&!op.disabled){choose(+op.dataset.opt);return;}
+  const k=e.target.closest("[data-kit]");if(k){
+    const s=sec();S.kits[s.id]=S.kits[s.id]||{};
+    const ord=["todo","prog","done"],cur=S.kits[s.id][k.dataset.kit]||"todo";
+    S.kits[s.id][k.dataset.kit]=ord[(ord.indexOf(cur)+1)%3];save();render();return;}
+  const sm=e.target.closest("[data-sim]");if(sm){
+    const a=sm.dataset.sim;
+    if(a==="start"||a==="reset")resetSim(true);
+    if(a==="next"){if(S.sim.step+1<scn().steps.length)S.sim.step++;else{S.sim.done=true;S.sim.step=-1;}}
+    if(a==="tt")S.timerOn=!S.timerOn;
+    if(a==="abort"){resetSim(false);stopTimer();}
+    save();render();return;}
 });
-
+document.getElementById("secSel").addEventListener("change",e=>{
+  S.sector=e.target.value;S.threat=0;resetSim(false);seed();save();render();});
 document.addEventListener("keydown",e=>{
-  const n=e.target.closest("[data-threat]");
-  if(n&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); S.threat=n.dataset.threat; save(); render(); }
-});
+  const n=e.target.closest("[data-thr]");
+  if(n&&(e.key==="Enter"||e.key===" ")){e.preventDefault();S.threat=+n.dataset.thr;save();render();}});
 
+if(!S.sim.sector)resetSim(false);
 render();
 </script>
