@@ -19,8 +19,31 @@ Accentul UI rămâne constant, ca semantica risc/alertă să nu se strice. Se sc
 | **Readiness** | Matricea de maturitate 16 domenii × 6 niveluri, cu nivel actual și țintă; indicatori cu formule |
 | **Toolkit Vault** | 18 instrumente per sector, **completabile efectiv**: tabele cu rânduri, formulare și liste de verificare, fiecare cu schema lui. Se salvează automat și se exportă (`.csv` pentru tabele, `.md` pentru restul). Starea intră în scorul de readiness |
 | **Compliance Navigator** | Maparea actelor, cu separarea strictă legal / standard / bună practică |
+| **Facilitator** | Rolul de facilitator din metodologie (Etapa 9), implementat în platformă: explică, ajută la completarea instrumentelor și propune drafturi, fără să dea răspunsul unui inject înainte de decizie |
 
 **Bucla completă a produsului este implementată:** deciziile din simulare mișcă cele patru axe → axa cea mai slabă determină instrumentele recomandate → starea instrumentelor intră înapoi în scorul de readiness. Asta este logica `ASSESS → TRAIN → SIMULATE → re-măsurare` din varianta C.
+
+## Facilitatorul
+
+Metodologia cere, pentru orice tabletop, un **rol de facilitator**. Platforma avea inject-uri, decizii și consecințe, dar nu avea pe nimeni care să conducă exercițiul — iar varianta self-service pentru IMM-uri spune explicit că trebuie să funcționeze fără trainer. Facilitatorul umple exact acest gol.
+
+**Formă.** Nu un chip animat. Design blueprint-ul interzice mascotele și tonul infantil, iar un cap uman stilizat într-un centru de comandă cade în uncanny valley. Este o **prezență**: un nucleu reactiv cu stări vizibile — inactiv, gândește, vorbește, alertă. În timpul unei simulări escaladate trece pe roșu, odată cu fundalul.
+
+**Ce știe.** Sectorul, ecranul curent, decalajele reale de maturitate, indicatorii critici, amenințarea selectată, instrumentul deschis și ce e deja completat în el, momentul din scenariu.
+
+**Regulile care contează.** Sunt în prompt și sunt verificabile:
+
+1. **Nu dă răspunsul înainte de decizie.** Cât timp un inject e nedecis, facilitatorul primește instrucțiune explicită să nu evalueze opțiunile, să nu sugereze care e bună și să nu anticipeze consecința. Reformulează și întreabă ce informație lipsește. După decizie, discută liber.
+2. Nu transformă o bună practică în obligație legală.
+3. Pentru orice referință legală spune că se verifică în textul în vigoare.
+4. Nu presupune CISO, SOC, SIEM sau buget.
+5. Scurt — maximum 120 de cuvinte. Un facilitator nu ține prelegeri.
+
+**Ce poate face concret.** Explică o amenințare fără jargon; spune de unde începi dacă ai o singură zi; și, cu instrumentul deschis, **propune un draft** — rânduri sau câmpuri specifice sectorului, care se adaugă la ce ai deja completat și pe care le editezi tu. Draftul nu suprascrie niciodată conținut existent.
+
+**Citire cu voce tare**, opțională, prin sinteza vocală a browserului. Implicit oprită.
+
+**Cost.** Răspunsurile sunt generate pe contul de Claude al vizitatorului, care își dă acordul la prima întrebare. Dacă refuză sau capabilitatea nu e disponibilă, butonul dispare și restul platformei funcționează neschimbat.
 
 ## Unde se păstrează datele
 

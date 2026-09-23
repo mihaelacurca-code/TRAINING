@@ -231,6 +231,41 @@ textarea{min-height:76px;line-height:1.55}
 .stsel button{padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
 .stsel button[aria-pressed="true"]{background:rgba(232,238,249,.12);color:var(--tx)}
 .scn-pick{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+
+/* ---- facilitator ---- */
+.fbtn{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--sim) 40%,transparent);background:rgba(155,107,255,.12);
+  font-size:12.5px;color:#D2BCFF}
+.fbtn:hover{background:rgba(155,107,255,.20)}
+.fbtn canvas{width:18px;height:18px}
+#fac{position:fixed;top:0;right:0;bottom:0;width:390px;max-width:100%;z-index:60;display:flex;flex-direction:column;
+  background:rgba(8,11,19,.94);backdrop-filter:blur(20px);border-left:1px solid var(--bd);
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+#fac.on{transform:none}
+#fac header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--bd)}
+#fac header h3{font-size:14px;font-weight:600}
+#fac header p{margin:1px 0 0;font-size:11px;font-family:var(--mono);color:var(--tx3);letter-spacing:.06em}
+#facAv{width:44px;height:44px;flex:none}
+.fclose{color:var(--tx3);font-size:19px;line-height:1;padding:5px 9px;border-radius:var(--r-sm)}
+.fclose:hover{color:var(--tx);background:rgba(145,175,220,.08)}
+#facLog{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.fmsg{font-size:13.5px;line-height:1.62}
+.fmsg.me{color:var(--tx2);border-left:2px solid var(--bd-strong);padding-left:11px}
+.fmsg.it{color:var(--tx);white-space:pre-wrap}
+.fmsg.err{color:#FFC2B1;font-size:12.5px}
+.fthink{font-family:var(--mono);font-size:11.5px;color:var(--sim);letter-spacing:.08em}
+.fsug{display:flex;flex-direction:column;gap:6px;padding:0 16px 10px}
+.fsug button{text-align:left;font-size:12.5px;color:var(--tx2);padding:8px 11px;border:1px solid var(--bd);
+  border-radius:var(--r-sm);background:rgba(22,30,48,.6)}
+.fsug button:hover{border-color:var(--sim);color:var(--tx)}
+#fac footer{padding:12px 16px;border-top:1px solid var(--bd);display:flex;flex-direction:column;gap:9px}
+.frow{display:flex;gap:8px;align-items:flex-end}
+#facIn{flex:1;min-height:40px;max-height:110px}
+.ficon{padding:9px 11px;border-radius:var(--r-sm);border:1px solid var(--bd-strong);color:var(--tx2);font-size:13px}
+.ficon:hover{background:rgba(145,175,220,.08);color:var(--tx)}
+.ficon[aria-pressed="true"]{border-color:var(--sim);color:#D2BCFF;background:rgba(155,107,255,.14)}
+.fnote{font-size:11px;color:var(--tx3);line-height:1.45}
+@media (max-width:640px){#fac{width:100%}}
 .sgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
 .scard{display:flex;flex-direction:column;gap:10px;padding:17px;border-radius:var(--r-md);border:1px solid var(--bd);
   background:rgba(22,30,48,.74);text-align:left;transition:border-color .14s,transform .14s;position:relative;overflow:hidden}
@@ -287,10 +322,30 @@ textarea{min-height:76px;line-height:1.55}
         <button data-lang="en" aria-pressed="false">EN</button>
       </div>
       <span class="chip"><span class="mark info"></span><span id="rdLab"></span> <span class="val" id="topScore">—</span></span>
+      <button class="fbtn" id="facBtn" hidden aria-expanded="false"><canvas id="facDot" width="36" height="36" aria-hidden="true"></canvas><span id="facBtnLab"></span></button>
     </header>
     <main id="main"></main>
   </div>
 </div>
+
+<aside id="fac" hidden aria-label="Facilitator">
+  <header>
+    <canvas id="facAv" width="88" height="88" aria-hidden="true"></canvas>
+    <div><h3>Facilitator</h3><p id="facRole"></p></div>
+    <span class="spacer"></span>
+    <button class="fclose" id="facX" aria-label="Close">×</button>
+  </header>
+  <div id="facLog"></div>
+  <div class="fsug" id="facSug"></div>
+  <footer>
+    <div class="frow">
+      <textarea id="facIn" rows="1"></textarea>
+      <button class="ficon" id="facSpk" aria-pressed="false" title="">🔊</button>
+      <button class="btn" id="facSend" style="padding:9px 14px">→</button>
+    </div>
+    <p class="fnote" id="facNote"></p>
+  </footer>
+</aside>
 
 <script src="data/sectors.js"></script>
 <script src="data/sectors-b.js"></script>
@@ -590,11 +645,14 @@ function render(){
   if(!ok.includes(S.view))S.view=ok[0];
   const inSim=S.view==="sim"&&S.sim.step>=0&&!S.sim.done;
   document.getElementById("app").classList.toggle("focus",inSim);
-  setAlarm(inSim?Math.min(1,(S.sim.step+1)/scn().steps.length):0);
+  const esc2=inSim?Math.min(1,(S.sim.step+1)/scn().steps.length):0;
+  setAlarm(esc2);
+  if(FST!=="thinking"&&FST!=="speaking")FST=esc2>.5?"alert":"idle";
   ambient();
   document.getElementById("topScore").textContent=readiness(S.sector);
   chrome();
   main.innerHTML=({mc:vMC,sectors:vSectors,thr:vThreat,sim:vSim,mat:vMat,kit:vKit,cmp:vCmp})[S.view]();
+  facChrome();
   window.scrollTo({top:0});
   if(inSim)startTimer();
 }
@@ -1031,5 +1089,240 @@ document.addEventListener("keydown",e=>{
   if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();c.click();}});
 
 if(!S.sim.sector)resetSim(false);
+
+/* ================= FACILITATOR =================
+   Rolul de facilitator din metodologie (Etapa 9), implementat în platformă.
+   Regula de bază: nu evaluează opțiunile înainte ca participantul să decidă. */
+const FUI={
+ role:t("Conduce exercițiul","Runs the exercise"),
+ ask:t("Întreabă facilitatorul","Ask the facilitator"),
+ ph:t("Scrie o întrebare…","Type a question…"),
+ thinking:t("Se gândește…","Thinking…"),
+ hello:t("Sunt facilitatorul acestui exercițiu. Pot explica de ce contează ceva pentru sectorul tău, te pot ajuta să completezi un instrument sau să reformulăm o decizie. Nu îți dau răspunsul unui inject înainte să decizi — asta ar strica exercițiul.","I run this exercise. I can explain why something matters for your sector, help you fill in an instrument, or reframe a decision with you. I will not give you an inject's answer before you decide — that would ruin the exercise."),
+ speak:t("Citește cu voce tare","Read aloud"),
+ cost:t("Răspunsurile sunt generate de Claude, pe contul tău. Prima întrebare cere acordul tău.","Answers are generated by Claude, on your own account. The first question asks for your consent."),
+ off:t("Facilitatorul nu este disponibil în această vizualizare.","The facilitator is not available in this view."),
+ errRate:t("Prea multe întrebări deodată. Încearcă din nou peste puțin.","Too many questions at once. Try again shortly."),
+ errGen:t("Nu am putut răspunde acum. Încearcă din nou.","I could not answer just now. Try again."),
+ stop:t("Oprește","Stop"),
+ draftBtn:t("Propune un draft","Propose a draft"),
+ drafted:t("Am propus un draft. Verifică-l și modifică-l — este un punct de plecare, nu un răspuns.","I have proposed a draft. Check it and change it — it is a starting point, not an answer.")
+};
+const SUG={
+ mc:[t("Care este cel mai mare risc al nostru, în cuvinte simple?","What is our biggest risk, in plain words?"),
+     t("De unde încep, dacă am o singură zi?","Where do I start if I have one day?")],
+ thr:[t("Explică-mi amenințarea selectată fără jargon","Explain the selected threat without jargon"),
+      t("Cum aș observa asta devreme, fără instrumente scumpe?","How would I spot this early, without expensive tooling?")],
+ sim:[t("Ce ar întreba un facilitator bun aici?","What would a good facilitator ask here?"),
+      t("Ce informație îmi lipsește ca să decid?","What information am I missing in order to decide?")],
+ mat:[t("Ce înseamnă concret să trec de la nivelul 1 la 3?","What does moving from level 1 to 3 actually involve?"),
+      t("Care decalaj merită închis primul și de ce?","Which gap is worth closing first, and why?")],
+ kit:[t("Ce pun în acest instrument, pentru organizația mea?","What do I put in this instrument, for my organisation?"),
+      t("Dă-mi un exemplu de rând completat corect","Give me an example of a correctly filled row")],
+ cmp:[t("Ni se aplică asta, în cazul nostru?","Does this apply to us, in our case?"),
+      t("Ce e obligație legală și ce e doar recomandare?","What is a legal obligation and what is only a recommendation?")],
+ sectors:[t("Ce sector seamănă cel mai mult cu organizația mea?","Which sector most resembles my organisation?")]
+};
+
+let SAMPLE=null,FACON=false,FTURNS=[],FBUSY=false,FCTL=null,FSPK=false,FST="idle";
+const $=id=>document.getElementById(id);
+
+/* --- prezența vizuală: stări, nu un chip --- */
+function drawAv(cv,size){
+  const x=cv.getContext("2d"),w=cv.width,h=cv.height,cxp=w/2,cyp=h/2,ts=performance.now()/1000;
+  x.clearRect(0,0,w,h);
+  const col=FST==="alert"?"255,107,74":FST==="thinking"?"155,107,255":FST==="speaking"?"56,225,255":"155,107,255";
+  const sp=FST==="thinking"?2.6:FST==="speaking"?1.5:.45;
+  for(let i=0;i<3;i++){
+    const r=(size*.26)+i*(size*.13), a=ts*sp*(i%2?-1:1)+i*2;
+    x.strokeStyle="rgba("+col+","+(.5-i*.11)+")";x.lineWidth=Math.max(1,size*.022);
+    x.beginPath();x.arc(cxp,cyp,r,a,a+Math.PI*(1.1-i*.22));x.stroke();
+  }
+  const puls=FST==="speaking"?(.5+Math.abs(Math.sin(ts*7))*.5):FST==="thinking"?(.6+Math.sin(ts*4)*.2):(.55+Math.sin(ts*1.3)*.18);
+  const g=x.createRadialGradient(cxp,cyp,0,cxp,cyp,size*.22);
+  g.addColorStop(0,"rgba("+col+","+(.85*puls)+")");g.addColorStop(1,"rgba("+col+",0)");
+  x.fillStyle=g;x.beginPath();x.arc(cxp,cyp,size*.22,0,7);x.fill();
+}
+function avLoop(){
+  if(RM.matches){FST==="idle";}
+  const a=$("facAv"),d=$("facDot");
+  if(a)drawAv(a,88); if(d)drawAv(d,36);
+  requestAnimationFrame(avLoop);
+}
+
+/* --- contextul pe care îl vede facilitatorul --- */
+function facCtx(){
+  const s=sec(),ro=S.lang==="ro";
+  let c=(ro?"CONTEXT\nSector: ":"CONTEXT\nSector: ")+L(s.name)+" — "+L(s.sub)
+   +(ro?"\nOrganizația-tip: ":"\nTypical organisation: ")+L(s.org)
+   +(ro?"\nÎncadrare NIS2 (orientativ): ":"\nNIS2 scoping (indicative): ")+L(s.nis2)
+   +(ro?"\nScor de pregătire: ":"\nReadiness score: ")+readiness(s.id)+"/100"
+   +(ro?"\nTraseul utilizatorului: ":"\nUser track: ")+L(UI[S.role])
+   +(ro?"\nEcranul curent: ":"\nCurrent screen: ")+L(UI[VIEWS.find(v=>v.id===S.view)?VIEWS.find(v=>v.id===S.view).k:"mc"]);
+  const gaps=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i],lv:s.maturity[i]})).sort((a,b)=>b.g-a.g).slice(0,4);
+  c+=(ro?"\nDecalajele cele mai mari: ":"\nLargest gaps: ")+gaps.map(g=>g.d+" ("+g.lv+"→"+(g.lv+g.g)+")").join(", ");
+  c+=(ro?"\nIndicatori critici: ":"\nCritical indicators: ")+s.kpis.filter(k=>k.st==="crit").map(k=>L(k.n)+" = "+L(k.now)+" (țintă "+L(k.tgt)+")").join("; ");
+  if(S.view==="thr"){const th=s.threats[Math.min(S.threat,s.threats.length-1)];
+    c+=(ro?"\nAmenințarea selectată: ":"\nSelected threat: ")+L(th.n)+" — "+L(th.vec)+"; "+(ro?"indicatori: ":"indicators: ")+L(th.ind);}
+  if(S.view==="cmp")c+=(ro?"\nCadrul aplicabil: ":"\nApplicable framework: ")+s.compliance.map(x=>L(x.act)+" ["+L(UI[x.kind])+"]").join("; ");
+  if(S.view==="kit"&&S.kitOpen){
+    const k=kitsFor(s).find(z=>z.k===S.kitOpen),sc=KIT_SCHEMA[S.kitOpen],d=kitDoc(s.id,S.kitOpen).data||{};
+    c+=(ro?"\nInstrument deschis: ":"\nOpen instrument: ")+L(k.n)+" — "+L(k.p);
+    if(sc)c+=(ro?"\nStructura: ":"\nStructure: ")+(sc.type==="table"?sc.cols.map(x=>L(x.n)).join(" | ")
+      :sc.type==="check"?sc.items.map(x=>L(x)).join(" / "):sc.fields.map(x=>L(x.n)).join(" | "));
+    c+=(ro?"\nCompletat până acum: ":"\nFilled so far: ")+JSON.stringify(d).slice(0,1400);
+  }
+  if(S.view==="sim"&&S.sim.step>=0&&!S.sim.done){
+    const sp=scn(),st=sp.steps[S.sim.step],ans=S.sim.log.some(l=>l.step===S.sim.step);
+    c+=(ro?"\nScenariu: ":"\nScenario: ")+L(sp.title)+" — "+L(sp.brief)
+     +(ro?"\nMomentul: ":"\nMoment: ")+L(st.tp)+" "+L(st.ck)+" — "+L(st.msg)
+     +(ro?"\nÎntrebarea pusă participantului: ":"\nQuestion put to the participant: ")+L(st.q);
+    c+=ans?(ro?"\nParticipantul A DECIS deja la acest inject. Poți discuta liber opțiunile și consecințele."
+              :"\nThe participant HAS ALREADY decided on this inject. You may discuss the options and consequences freely.")
+          :(ro?"\nATENȚIE: participantul NU a decis încă. NU evalua opțiunile, NU sugera care e bună, NU anticipa consecința. Reformulează situația, întreabă ce informație îi lipsește, amintește-i ce e în joc. Atât."
+              :"\nIMPORTANT: the participant has NOT decided yet. Do NOT evaluate the options, do NOT hint at which is right, do NOT preview the consequence. Reframe the situation, ask what information they are missing, remind them what is at stake. Nothing more.");
+  }
+  if(S.sim.done){c+=(ro?"\nDebrief: ":"\nDebrief: ")+axKeys().map(k=>L(AXK[k])+" "+S.sim.ax[k]).join(", ");}
+  return c;
+}
+function facRules(){
+  const ro=S.lang==="ro";
+  return (ro
+   ?`Ești facilitatorul unui exercițiu de reziliență cibernetică, în platforma Cyber-Bridge Range. Nu ești un asistent general.
+REGULI:
+1. Răspunde în română. Scurt: 2-5 propoziții, maximum 120 de cuvinte. Un facilitator nu ține prelegeri.
+2. Vorbește concret, pentru organizația din context, nu în general. Folosește cifrele și decalajele reale de mai jos.
+3. Nu presupune că există CISO, SOC, SIEM sau buget. Dacă recomanzi ceva, spune cine îl face într-o organizație de această dimensiune.
+4. Separă strict: cerință legală / cerință de standard / bună practică. Nu transforma niciodată o recomandare în obligație.
+5. Pentru orice referință legală spune că se verifică în textul în vigoare, la EUR-Lex și la autoritatea națională. Nu inventa articole, termene sau cifre. Dacă nu știi, spune.
+6. Fără statistici inventate. Fără exclamații. Fără laude.
+7. Dacă întrebarea nu are legătură cu exercițiul sau cu securitatea organizației, spune asta într-o propoziție și readu discuția la ecranul curent.`
+   :`You are the facilitator of a cyber resilience exercise, inside the Cyber-Bridge Range platform. You are not a general assistant.
+RULES:
+1. Answer in English. Short: 2-5 sentences, 120 words maximum. A facilitator does not lecture.
+2. Be concrete about the organisation in the context below, not generic. Use its real numbers and gaps.
+3. Do not assume a CISO, SOC, SIEM or budget exists. If you recommend something, say who does it in an organisation of this size.
+4. Keep strictly separate: legal requirement / standard requirement / good practice. Never turn a recommendation into an obligation.
+5. For any legal reference, say it must be verified against the text in force, in EUR-Lex and with the national authority. Never invent articles, deadlines or figures. If you do not know, say so.
+6. No invented statistics. No exclamations. No praise.
+7. If the question is unrelated to the exercise or to the organisation's security, say so in one sentence and bring it back to the current screen.`)
+  +"\n\n"+facCtx();
+}
+
+function facRender(){
+  const log=$("facLog");if(!log)return;
+  log.innerHTML=FTURNS.map(m=>m.role==="user"
+    ?`<div class="fmsg me">${esc(m.content)}</div>`
+    :`<div class="fmsg it">${esc(m.content)}</div>`).join("")
+    ||`<div class="fmsg it">${esc(L(FUI.hello))}</div>`;
+  log.scrollTop=log.scrollHeight;
+}
+function facSug(){
+  const el=$("facSug");if(!el)return;
+  let list=SUG[S.view]||SUG.mc;
+  if(S.view==="kit"&&S.kitOpen)list=SUG.kit;
+  el.innerHTML=(FBUSY?"":list.map(q=>`<button data-fq="${esc(L(q))}">${esc(L(q))}</button>`).join(""))
+   +((!FBUSY&&S.view==="kit"&&S.kitOpen&&KIT_SCHEMA[S.kitOpen])
+     ?`<button data-fdraft="1" style="border-color:rgba(155,107,255,.42);color:#D2BCFF">✦ ${esc(L(FUI.draftBtn))}</button>`:"");
+}
+function facChrome(){
+  const b=$("facBtn");if(!b)return;
+  b.hidden=!SAMPLE;
+  $("facBtnLab").textContent=L(FUI.ask);
+  $("facRole").textContent=L(FUI.role).toUpperCase();
+  $("facIn").placeholder=L(FUI.ph);
+  $("facNote").textContent=L(FUI.cost);
+  $("facSpk").title=L(FUI.speak);
+  facSug();
+}
+function facOpen(v){
+  FACON=v;const p=$("fac");p.hidden=!v;p.classList.toggle("on",v);
+  $("facBtn").setAttribute("aria-expanded",String(v));
+  if(v){facRender();facSug();setTimeout(()=>$("facIn").focus(),260);}
+}
+function say(txt){
+  if(!FSPK||!window.speechSynthesis)return;
+  try{speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(txt);u.lang=S.lang==="ro"?"ro-RO":"en-GB";u.rate=1.02;
+    speechSynthesis.speak(u);}catch(e){}
+}
+async function facAsk(q){
+  if(FBUSY||!SAMPLE||!q.trim())return;
+  FBUSY=true;FST="thinking";FTURNS.push({role:"user",content:q.trim()});facRender();facSug();
+  const log=$("facLog");
+  const bub=document.createElement("div");bub.className="fthink";bub.textContent=L(FUI.thinking);
+  log.appendChild(bub);log.scrollTop=log.scrollHeight;
+  FCTL=new AbortController();
+  const turns=[{role:"user",content:facRules()}].concat(FTURNS.slice(-8));
+  try{
+    const r=await SAMPLE(turns,{signal:FCTL.signal,cache:false,modelTier:"default",
+      onText:({text})=>{FST="speaking";bub.className="fmsg it";bub.textContent=text;log.scrollTop=log.scrollHeight;}});
+    FTURNS.push({role:"assistant",content:r.text});say(r.text);
+  }catch(e){
+    const code=e&&e.code;
+    if(code==="cancelled"){ if(e.text)FTURNS.push({role:"assistant",content:e.text}); }
+    else{
+      const m=code==="rate_limited"?L(FUI.errRate)
+        :(code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled")?L(FUI.off)
+        :L(FUI.errGen);
+      if(code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled"){SAMPLE=null;facChrome();}
+      bub.className="fmsg err";bub.textContent=m;
+      FBUSY=false;FST="idle";facSug();return;
+    }
+  }
+  FBUSY=false;FST="idle";facRender();facSug();
+}
+async function facDraft(){
+  if(FBUSY||!SAMPLE||!S.kitOpen)return;
+  const s=sec(),sc=KIT_SCHEMA[S.kitOpen],k=kitsFor(s).find(z=>z.k===S.kitOpen),ro=S.lang==="ro";
+  FBUSY=true;FST="thinking";facSug();
+  const log=$("facLog");const bub=document.createElement("div");bub.className="fthink";
+  bub.textContent=L(FUI.thinking);log.appendChild(bub);log.scrollTop=log.scrollHeight;
+  let ask,shape;
+  if(sc.type==="table"){shape='{"rows":[{'+sc.cols.map(c=>'"'+c.k+'":"…"').join(",")+'}]}';
+    ask=(ro?"Propune 5 rânduri plauzibile pentru acest tabel, specifice organizației din context. Coloane: "
+           :"Propose 5 plausible rows for this table, specific to the organisation in the context. Columns: ")
+      +sc.cols.map(c=>c.k+" = "+L(c.n)).join("; ");}
+  else if(sc.type==="check"){FBUSY=false;FST="idle";bub.remove();facSug();return;}
+  else{shape='{'+sc.fields.map(f=>'"'+f.k+'":"…"').join(",")+'}';
+    ask=(ro?"Propune un conținut scurt și concret pentru fiecare câmp, specific organizației din context. Câmpuri: "
+           :"Propose short, concrete content for each field, specific to the organisation in the context. Fields: ")
+      +sc.fields.map(f=>f.k+" = "+L(f.n)).join("; ");}
+  const p=facRules()+"\n\n"+ask+(ro
+    ?"\n\nRăspunde DOAR cu JSON de forma "+shape+". Fără text în jur. Scurt în fiecare celulă. Nu inventa cifre exacte pe care nu le poți susține; unde nu știi, scrie ce trebuie stabilit."
+    :"\n\nReply with ONLY JSON of the form "+shape+". No surrounding text. Keep each cell short. Do not invent exact figures you cannot support; where unknown, write what must be established.");
+  try{
+    const d=await SAMPLE.json(p,{cache:false,modelTier:"default"});
+    const doc=kitDoc(s.id,S.kitOpen),cur=doc.data||{};
+    if(sc.type==="table"&&d&&Array.isArray(d.rows)){
+      const keep=(cur.rows||[]).filter(r=>Object.values(r).some(v=>String(v||"").trim()));
+      cur.rows=keep.concat(d.rows.slice(0,8).map(r=>{const o={};sc.cols.forEach(c=>o[c.k]=String(r[c.k]==null?"":r[c.k]));return o;}));
+    } else if(sc.type==="form"&&d&&typeof d==="object"){
+      sc.fields.forEach(f=>{if(!String(cur[f.k]||"").trim()&&d[f.k]!=null)cur[f.k]=String(d[f.k]);});
+    }
+    kitWrite(s.id,S.kitOpen,{status:doc.status==="todo"?"prog":doc.status,data:cur});
+    bub.className="fmsg it";bub.textContent=L(FUI.drafted);
+    FTURNS.push({role:"assistant",content:L(FUI.drafted)});
+    FBUSY=false;FST="idle";render();facOpen(true);return;
+  }catch(e){
+    bub.className="fmsg err";bub.textContent=(e&&e.code==="rate_limited")?L(FUI.errRate):L(FUI.errGen);
+  }
+  FBUSY=false;FST="idle";facSug();
+}
+
+(async function(){
+  try{ SAMPLE=window.claude&&claude.use?await claude.use("sample"):null; }catch(e){ SAMPLE=null; }
+  facChrome();avLoop();
+})();
+$("facBtn").addEventListener("click",()=>facOpen(!FACON));
+$("facX").addEventListener("click",()=>{if(FCTL&&FBUSY)FCTL.abort();facOpen(false);});
+$("facSend").addEventListener("click",()=>{const i=$("facIn");const v=i.value;i.value="";facAsk(v);});
+$("facIn").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("facSend").click();}});
+$("facSpk").addEventListener("click",e=>{FSPK=!FSPK;e.currentTarget.setAttribute("aria-pressed",String(FSPK));
+  if(!FSPK&&window.speechSynthesis)try{speechSynthesis.cancel();}catch(x){}});
+$("facSug").addEventListener("click",e=>{
+  const q=e.target.closest("[data-fq]");if(q){facAsk(q.dataset.fq);return;}
+  if(e.target.closest("[data-fdraft]"))facDraft();});
+
 render();
 </script>
