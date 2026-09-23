@@ -198,6 +198,39 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .legend span{display:inline-flex;align-items:center;gap:6px}
 
 .note{font-size:12.5px;color:var(--tx3);border-left:2px solid var(--bd-strong);padding-left:12px;margin:0}
+
+/* instrument editor */
+.ed{max-width:1000px;display:flex;flex-direction:column;gap:18px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fld label{font-size:13px;color:var(--tx2)}
+.fld .hint{font-size:11.5px;color:var(--tx3);font-family:var(--mono)}
+input[type=text],textarea{width:100%;background:rgba(5,7,13,.55);border:1px solid var(--bd);border-radius:var(--r-sm);
+  color:var(--tx);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+input[type=text]:focus,textarea:focus{border-color:var(--amb);outline:none}
+textarea{min-height:76px;line-height:1.55}
+.etab{width:100%;border-collapse:collapse;min-width:100%}
+.etab th{white-space:normal}
+.etab td{padding:5px 6px;border-bottom:1px solid var(--bd)}
+.etab input[type=text]{padding:7px 9px;font-size:13px;min-width:120px}
+.etab td.del{width:34px;padding-right:0}
+.rmv{color:var(--tx3);font-size:16px;line-height:1;padding:4px 7px;border-radius:var(--r-sm)}
+.rmv:hover{color:var(--crit);background:rgba(255,107,74,.10)}
+.cks{display:flex;flex-direction:column;gap:2px}
+.ck{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-sm);border:1px solid transparent;cursor:pointer}
+.ck:hover{background:rgba(145,175,220,.05)}
+.ck.on{background:rgba(46,230,196,.07);border-color:rgba(46,230,196,.26)}
+.ck .bx{width:17px;height:17px;flex:none;border:1.5px solid var(--bd-strong);border-radius:4px;margin-top:2px;position:relative}
+.ck.on .bx{border-color:var(--ok);background:rgba(46,230,196,.18)}
+.ck.on .bx::after{content:"";position:absolute;left:4.5px;top:1px;width:5px;height:9px;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ck span.tx{font-size:13.5px}
+.edbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 0;position:sticky;bottom:0;
+  background:linear-gradient(to top,var(--bg-base) 62%,transparent)}
+.saved{font-family:var(--mono);font-size:11.5px;color:var(--ok)}
+.saved.warn{color:var(--warn)}
+.stsel{display:flex;gap:3px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:rgba(5,7,13,.5)}
+.stsel button{padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
+.stsel button[aria-pressed="true"]{background:rgba(232,238,249,.12);color:var(--tx)}
+.scn-pick{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
 .sgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
 .scard{display:flex;flex-direction:column;gap:10px;padding:17px;border-radius:var(--r-md);border:1px solid var(--bd);
   background:rgba(22,30,48,.74);text-align:left;transition:border-color .14s,transform .14s;position:relative;overflow:hidden}
@@ -261,8 +294,13 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 
 <script src="data/sectors.js"></script>
 <script src="data/sectors-b.js"></script>
+<script src="data/kits.js"></script>
 <script src="data/scenarios.js"></script>
 <script src="data/scenarios-b.js"></script>
+<script src="data/scenarios-c.js"></script>
+<script src="data/scenarios-cb.js"></script>
+<script src="data/scenarios-d.js"></script>
+<script src="data/scenarios-db.js"></script>
 <script>
 "use strict";
 const t=(ro,en)=>({ro:ro,en:en});
@@ -348,6 +386,17 @@ const UI={
  act:t("Act / referință","Instrument / reference"), nature:t("Natura","Nature"), scope:t("Domeniu","Scope"), obs:t("Observație","Note"),
  legal:t("Cerință legală","Legal requirement"), standard:t("Cerință de standard","Standard requirement"), practice:t("Bună practică","Good practice"),
  verifyT:t("De verificat înainte de livrare","Verify before delivery"),
+ kind1:t("Incident tehnic","Technical incident"), kind2:t("Lanț de aprovizionare","Supply chain"), kind3:t("Criză și continuitate","Crisis and continuity"),
+ pickScn:t("Alege scenariul","Choose the scenario"),
+ pickScnP:t("Trei scenarii pentru acest sector. Fiecare testează alt lanț de decizie; niciunul nu îl înlocuiește pe celelalte.","Three scenarios for this sector. Each tests a different decision chain; none replaces the others."),
+ completed:t("parcurs","completed"),
+ open:t("Deschide","Open"), backKit:t("Înapoi la seif","Back to the vault"),
+ addRow:t("Adaugă rând","Add row"), removeRow:t("Șterge rândul","Remove row"),
+ save:t("Salvează","Save"), exportMd:t("Exportă","Export"),
+ savedAt:t("Salvat","Saved"), notSaved:t("Modificări nesalvate","Unsaved changes"),
+ shared:t("Datele completate sunt partajate cu toți cei care pot deschide această pagină.","Completed data is shared with everyone who can open this page."),
+ localOnly:t("Stocare partajată indisponibilă în această vizualizare. Datele rămân doar în acest browser.","Shared storage is unavailable in this view. Data stays in this browser only."),
+ dlOff:t("Exportul nu este disponibil în această vizualizare.","Export is not available in this view."),
  verifyH:t("Încadrarea se stabilește juridic, nu dintr-un tabel","Scoping is a legal determination, not a table lookup"),
  verifyP:t("Aplicabilitatea reală depinde de activitatea concretă, de praguri și de legea națională de transpunere. Verifică textul în vigoare în EUR-Lex și la autoritatea națională competentă pentru fiecare organizație în parte.","Actual applicability depends on the concrete activity, on thresholds and on the national transposing law. Verify the text in force in EUR-Lex and with the competent national authority for each organisation.")
 };
@@ -372,23 +421,64 @@ const VIEWS=[
  {id:"cmp",k:"cmp",roles:["mgmt"]}
 ];
 const STORE="cbr.v1";
-let S={lang:"ro",sector:"health",role:"mgmt",view:"mc",threat:0,timerOn:true,
-       sim:{step:-1,log:[],ax:{},done:false},kits:{}};
+let S={lang:"ro",sector:"health",role:"mgmt",view:"mc",threat:0,timerOn:true,kitOpen:null,
+       sim:{scn:0,step:-1,log:[],ax:{},done:false},done:{}};
 try{const r=localStorage.getItem(STORE);if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(S));}catch(e){}}
 
 const L=x=>(x&&typeof x==="object"&&("ro" in x))?(x[S.lang]||x.ro):x;
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const sec=()=>SECTORS.find(x=>x.id===S.sector)||SECTORS[0];
-const scn=()=>SCENARIOS[S.sector];
+const scnList=()=>[SCENARIOS[S.sector],SCN2[S.sector],SCN3[S.sector]].filter(Boolean);
+const scn=()=>scnList()[S.sim.scn||0];
 function kitsFor(s){return CORE_KITS.concat(s.extraKits||[]);}
-function kitState(s,k){const m=S.kits[s.id]||{};return m[k]||"todo";}
+
+/* ---------- stratul de date: db partajat, cu revenire la browser ---------- */
+const KD={};                 /* cache: "sector__kit" -> {status,data} */
+let DB=null,DBST="pending";  /* pending | shared | local */
+const kid=(sid,k)=>sid+"__"+k;
+function lsKey(id){return "cbr.kit."+id;}
+function kitDoc(sid,k){
+  const id=kid(sid,k);
+  if(KD[id])return KD[id];
+  let v=null;
+  try{const r=localStorage.getItem(lsKey(id));if(r)v=JSON.parse(r);}catch(e){}
+  KD[id]=v||{status:"todo",data:{}};
+  return KD[id];
+}
+function kitWrite(sid,k,doc){
+  const id=kid(sid,k);KD[id]=doc;
+  try{localStorage.setItem(lsKey(id),JSON.stringify(doc));}catch(e){}
+  if(DB){ DB.doc("instruments/"+id).set({sector:sid,kit:k,status:doc.status,data:doc.data,updatedAt:Date.now()})
+    .catch(()=>{}); }
+}
+(async function(){
+  try{
+    const d=window.claude&&claude.use?await claude.use("db"):null;
+    if(!d){DBST="local";return;}
+    DB=d;DBST="shared";
+    const rows=await d.collection("instruments").get();
+    (rows||[]).forEach(r=>{const v=r.data||r;if(v&&v.sector&&v.kit)KD[kid(v.sector,v.kit)]={status:v.status||"todo",data:v.data||{}};});
+    render();
+  }catch(e){DBST="local";}
+})();
+
+function kitStatus(sid,k){return kitDoc(sid,k).status;}
+function kitFilled(sid,k){
+  const d=kitDoc(sid,k).data||{},sc=KIT_SCHEMA[k];
+  if(!sc)return 0;
+  if(sc.type==="table")return (d.rows||[]).filter(r=>Object.values(r).some(v=>String(v||"").trim())).length;
+  if(sc.type==="check")return (d.on||[]).filter(Boolean).length;
+  return sc.fields.filter(f=>String(d[f.k]||"").trim()).length;
+}
+function kitTotal(k){const sc=KIT_SCHEMA[k];if(!sc)return 0;
+  return sc.type==="table"?0:sc.type==="check"?sc.items.length:sc.fields.length;}
 
 function readiness(sid){
   const s=SECTORS.find(x=>x.id===sid)||sec();
   const base=s.maturity.reduce((a,b)=>a+b,0)/(16*5)*100;
-  const ks=kitsFor(s), m=S.kits[s.id]||{};
-  const kd=ks.filter(k=>m[k.k]==="done").length/ks.length*100;
+  const ks=kitsFor(s);
+  const kd=ks.filter(k=>kitStatus(s.id,k.k)==="done").length/ks.length*100;
   let sv=50;
   if(s.id===S.sector&&Object.keys(S.sim.ax).length){
     const v=Object.values(S.sim.ax); sv=v.reduce((a,b)=>a+b,0)/v.length;
@@ -621,11 +711,33 @@ function vThreat(){
 
 /* Simulation */
 function axKeys(){const o=scn().steps[0].o[0].d;return Object.keys(o);}
-function vSim(){ if(S.sim.done&&S.sim.sector===S.sector)return simDeb(); if(S.sim.step<0||S.sim.sector!==S.sector)return simIntro(); return simStep(); }
+const KINDS=[UI.kind1,UI.kind2,UI.kind3];
+function vSim(){
+  if(S.sim.sector!==S.sector)return simPick();
+  if(S.sim.done)return simDeb();
+  if(S.sim.step<0)return S.sim.picked?simIntro():simPick();
+  return simStep();
+}
+function simPick(){
+  const list=scnList();
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.sim))} · ${esc(L(sec().name))}</p>
+    <h1>${esc(L(UI.pickScn))}</h1><p>${esc(L(UI.pickScnP))}</p></div>
+   <div class="scn-pick">${list.map((sp,i)=>{
+     const seen=(S.done[S.sector]||[]).indexOf(i)>=0;
+     return `<button class="card" data-scn="${i}">
+      <span class="pill ${seen?"ok":"sim"}"><span class="mark ${seen?"ok":"sim"}"></span>${esc(L(KINDS[i]))}</span>
+      <h4>${esc(L(sp.title))}</h4><p>${esc(L(sp.brief))}</p>
+      <span class="foot" style="justify-content:space-between">
+       <span class="mono" style="font-size:11.5px;color:var(--tx3)">${sp.steps.length} ${esc(L(UI.points))}</span>
+       ${seen?`<span class="mono" style="font-size:11.5px;color:var(--ok)">${esc(L(UI.completed))}</span>`:""}</span>
+     </button>`;}).join("")}</div>
+   <p class="note">${esc(L(UI.noSol))}</p></div>`;
+}
 function simIntro(){
   const sp=scn(),ks=axKeys();
   return `<div class="view sim-stage">
-   <div class="head"><p class="eyebrow">${esc(L(UI.scn))} · ${esc(L(sec().name))}</p>
+   <div class="head"><p class="eyebrow">${esc(L(KINDS[S.sim.scn]))} · ${esc(L(sec().name))}</p>
     <h1>${esc(L(sp.title))}</h1><p>${esc(L(sec().org))}</p></div>
    <div class="panel" style="border-color:rgba(155,107,255,.30)">
     <p style="margin:0 0 16px;font-size:16px;line-height:1.7">${esc(L(sp.brief))}</p>
@@ -636,7 +748,8 @@ function simIntro(){
     <p class="note">${esc(L(UI.noSol))}</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
      <button class="btn sim" data-sim="start">${esc(L(UI.start))} <span aria-hidden="true">→</span></button>
-     <button class="btn ghost" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button></div></div>
+     <button class="btn ghost" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button>
+     <button class="btn ghost" data-sim="pick">← ${esc(L(UI.pickScn))}</button></div></div>
    <div class="panel"><h3>${esc(L(UI.whatEval))}</h3><p class="sub">${esc(L(UI.whatEvalS))}</p>
     <div class="axes">${ks.map(k=>`<div class="ax"><span>${esc(L(AXK[k]))}</span><span class="n">50</span>
       <span class="bar"><i style="width:50%;background:${AXC[k]}"></i></span></div>`).join("")}</div></div></div>`;
@@ -693,6 +806,7 @@ function simDeb(){
       <td style="max-width:280px">${esc(l.t)}</td><td style="color:var(--tx2);max-width:360px">${esc(l.c)}</td></tr>`).join("")}</tbody></table></div></div>
    <div style="display:flex;gap:10px;flex-wrap:wrap">
     <button class="btn ghost" data-sim="reset">${esc(L(UI.again))}</button>
+    <button class="btn ghost" data-sim="pick">${esc(L(UI.pickScn))}</button>
     <button class="btn ghost" data-go="mc">${esc(L(UI.backMc))}</button></div></div>`;
 }
 
@@ -719,17 +833,75 @@ function vMat(){
 }
 
 /* Toolkit */
+const KLAB=()=>({todo:L(UI.todo),prog:L(UI.prog),done:L(UI.done)});
+const KTONE={todo:"idle",prog:"warn",done:"ok"};
 function vKit(){
-  const s=sec(),ks=kitsFor(s),lab={todo:L(UI.todo),prog:L(UI.prog),done:L(UI.done)},tone={todo:"idle",prog:"warn",done:"ok"};
-  const m=S.kits[s.id]||{},d=ks.filter(k=>m[k.k]==="done").length;
+  if(S.kitOpen)return vKitEd();
+  const s=sec(),ks=kitsFor(s),lab=KLAB();
+  const d=ks.filter(k=>kitStatus(s.id,k.k)==="done").length;
   return `<div class="view">
    <div class="head"><p class="eyebrow">${esc(L(UI.kit))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.kitH))}</h1>
     <p>${ks.length} ${esc(L(UI.kitP1))} ${d}/${ks.length} ${esc(L(UI.kitP2))}</p></div>
-   <div class="cards">${ks.map(k=>{const st=m[k.k]||"todo";
+   <div class="cards">${ks.map(k=>{const st=kitStatus(s.id,k.k),f=kitFilled(s.id,k.k),tot=kitTotal(k.k);
      return `<button class="card" data-kit="${k.k}"><h4>${esc(L(k.n))}</h4><p>${esc(L(k.p))}</p>
-      <span class="foot" style="justify-content:space-between"><span class="pill ${tone[st]}"><span class="mark ${tone[st]}"></span>${esc(lab[st])}</span>
-      <span class="mono" style="font-size:11.5px;color:var(--tx3)">${k.min} ${esc(L(UI.mins))}</span></span></button>`;}).join("")}</div>
-   <p class="note">${esc(L(UI.kitNote))}</p></div>`;
+      <span class="foot" style="justify-content:space-between"><span class="pill ${KTONE[st]}"><span class="mark ${KTONE[st]}"></span>${esc(lab[st])}</span>
+      <span class="mono" style="font-size:11.5px;color:var(--tx3)">${f>0?(tot?f+"/"+tot:f+" ×"):k.min+" "+L(UI.mins)}</span></span></button>`;}).join("")}</div>
+   <p class="note">${esc(DBST==="local"?L(UI.localOnly):L(UI.shared))}</p></div>`;
+}
+function vKitEd(){
+  const s=sec(),k=kitsFor(s).find(x=>x.k===S.kitOpen);
+  if(!k){S.kitOpen=null;return vKit();}
+  const sc=KIT_SCHEMA[k.k],doc=kitDoc(s.id,k.k),d=doc.data||{},lab=KLAB();
+  let body="";
+  if(!sc){ body=`<p class="note">${esc(L(k.p))}</p>`; }
+  else if(sc.type==="form"){
+    body=sc.fields.map(f=>`<div class="fld"><label for="f_${f.k}">${esc(L(f.n))}</label>
+      ${f.hint?`<span class="hint">${esc(L(f.hint))}</span>`:""}
+      ${f.long?`<textarea id="f_${f.k}" data-f="${f.k}">${esc(d[f.k]||"")}</textarea>`
+               :`<input type="text" id="f_${f.k}" data-f="${f.k}" value="${esc(d[f.k]||"")}">`}</div>`).join("");
+  } else if(sc.type==="check"){
+    const on=d.on||[];
+    body=`<div class="cks">${sc.items.map((it,i)=>`<div class="ck ${on[i]?"on":""}" data-ck="${i}" role="checkbox"
+      aria-checked="${!!on[i]}" tabindex="0"><span class="bx"></span><span class="tx">${esc(L(it))}</span></div>`).join("")}</div>`;
+  } else {
+    const rows=d.rows&&d.rows.length?d.rows:[{}];
+    body=`<div class="tw"><table class="etab"><thead><tr>${sc.cols.map(c=>`<th>${esc(L(c.n))}</th>`).join("")}<th></th></tr></thead>
+     <tbody>${rows.map((r,i)=>`<tr>${sc.cols.map(c=>`<td><input type="text" data-r="${i}" data-c="${c.k}" value="${esc(r[c.k]||"")}"></td>`).join("")}
+      <td class="del"><button class="rmv" data-rm="${i}" aria-label="${esc(L(UI.removeRow))}">×</button></td></tr>`).join("")}</tbody></table></div>
+     <button class="btn ghost" data-add="1" style="margin-top:12px;padding:7px 14px;font-size:13px">+ ${esc(L(UI.addRow))}</button>`;
+  }
+  return `<div class="view ed">
+   <div class="head"><p class="eyebrow">${esc(L(UI.kit))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(k.n))}</h1><p>${esc(L(k.p))}</p></div>
+   <div class="panel">${body}</div>
+   <div class="edbar">
+    <button class="btn ghost" data-kback="1">← ${esc(L(UI.backKit))}</button>
+    <div class="stsel" role="group">${["todo","prog","done"].map(st=>
+      `<button data-st="${st}" aria-pressed="${doc.status===st}">${esc(lab[st])}</button>`).join("")}</div>
+    <span class="spacer"></span>
+    <span class="saved" id="savedMsg"></span>
+    <button class="btn" data-exp="1">${esc(L(UI.exportMd))}</button>
+   </div></div>`;
+}
+
+/* export: Markdown pentru formular/checklist, CSV pentru tabel */
+function kitExport(){
+  const s=sec(),k=kitsFor(s).find(x=>x.k===S.kitOpen),sc=KIT_SCHEMA[k.k],d=kitDoc(s.id,k.k).data||{};
+  const stamp=new Date().toISOString().slice(0,10);
+  const safe=L(k.n).replace(/[^\p{L}\p{N}]+/gu,"-").replace(/^-|-$/g,"").toLowerCase();
+  if(sc&&sc.type==="table"){
+    const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+    const lines=[sc.cols.map(c=>q(L(c.n))).join(",")];
+    (d.rows||[]).forEach(r=>{ if(Object.values(r).some(v=>String(v||"").trim()))
+      lines.push(sc.cols.map(c=>q(r[c.k])).join(",")); });
+    return {filename:safe+"-"+stamp+".csv",data:lines.join("\r\n")};
+  }
+  let md="# "+L(k.n)+"\n\n"+L(s.name)+" · "+L(s.org)+"\n\n";
+  if(sc&&sc.type==="check"){const on=d.on||[];
+    sc.items.forEach((it,i)=>{md+="- ["+(on[i]?"x":" ")+"] "+L(it)+"\n";});}
+  else if(sc){sc.fields.forEach(f=>{md+="## "+L(f.n)+"\n\n"+(d[f.k]||"—")+"\n\n";});}
+  md+="\n---\n"+stamp+" · Cyber-Bridge Range\n";
+  return {filename:safe+"-"+stamp+".md",data:md};
 }
 
 /* Compliance */
@@ -767,8 +939,14 @@ function choose(j){
   stopTimer();save();render();
 }
 function resetSim(start){
-  S.sim={sector:S.sector,step:start?0:-1,log:[],ax:{},done:false};
+  const n=S.sim&&S.sim.scn||0,p=S.sim&&S.sim.picked;
+  S.sim={sector:S.sector,scn:n,picked:p,step:start?0:-1,log:[],ax:{},done:false};
   axKeys().forEach(k=>S.sim.ax[k]=50);
+}
+function switchSector(id){
+  S.sector=id;S.threat=0;S.kitOpen=null;
+  S.sim={sector:id,scn:0,picked:false,step:-1,log:[],ax:{},done:false};
+  seed();save();render();
 }
 
 document.addEventListener("click",e=>{
@@ -776,26 +954,81 @@ document.addEventListener("click",e=>{
   const g=e.target.closest("[data-go]");if(g){S.view=g.dataset.go;save();render();return;}
   const r=e.target.closest("[data-role]");if(r){S.role=r.dataset.role;save();render();return;}
   const la=e.target.closest("[data-lang]");if(la){S.lang=la.dataset.lang;save();render();return;}
-  const sc=e.target.closest("[data-sec]");if(sc){S.sector=sc.dataset.sec;S.threat=0;resetSim(false);seed();save();render();return;}
+  const sc=e.target.closest("[data-sec]");if(sc){switchSector(sc.dataset.sec);return;}
   const th=e.target.closest("[data-thr]");if(th){S.threat=+th.dataset.thr;save();render();return;}
   const op=e.target.closest("[data-opt]");if(op&&!op.disabled){choose(+op.dataset.opt);return;}
-  const k=e.target.closest("[data-kit]");if(k){
-    const s=sec();S.kits[s.id]=S.kits[s.id]||{};
-    const ord=["todo","prog","done"],cur=S.kits[s.id][k.dataset.kit]||"todo";
-    S.kits[s.id][k.dataset.kit]=ord[(ord.indexOf(cur)+1)%3];save();render();return;}
+  const k=e.target.closest("[data-kit]");if(k){S.kitOpen=k.dataset.kit;save();render();return;}
+  if(e.target.closest("[data-kback]")){S.kitOpen=null;save();render();return;}
+  const st=e.target.closest("[data-st]");if(st){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen);
+    kitWrite(s.id,S.kitOpen,{status:st.dataset.st,data:doc.data});save();render();return;}
+  const add=e.target.closest("[data-add]");if(add){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+    d.rows=(d.rows&&d.rows.length?d.rows:[{}]).concat([{}]);
+    kitWrite(s.id,S.kitOpen,{status:doc.status,data:d});render();return;}
+  const rm=e.target.closest("[data-rm]");if(rm){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+    const rows=(d.rows&&d.rows.length?d.rows:[{}]).slice();
+    rows.splice(+rm.dataset.rm,1); d.rows=rows.length?rows:[{}];
+    kitWrite(s.id,S.kitOpen,{status:doc.status,data:d});render();return;}
+  const ck=e.target.closest("[data-ck]");if(ck){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{},i=+ck.dataset.ck;
+    d.on=d.on||[]; d.on[i]=!d.on[i];
+    ck.classList.toggle("on",!!d.on[i]); ck.setAttribute("aria-checked",String(!!d.on[i]));
+    kitWrite(s.id,S.kitOpen,{status:doc.status==="todo"?"prog":doc.status,data:d});flash();return;}
+  if(e.target.closest("[data-exp]")){doExport();return;}
+  const sp=e.target.closest("[data-scn]");if(sp){
+    S.sim.scn=+sp.dataset.scn;resetSim(false);S.sim.picked=true;save();render();return;}
   const sm=e.target.closest("[data-sim]");if(sm){
     const a=sm.dataset.sim;
-    if(a==="start"||a==="reset")resetSim(true);
-    if(a==="next"){if(S.sim.step+1<scn().steps.length)S.sim.step++;else{S.sim.done=true;S.sim.step=-1;}}
+    if(a==="start"||a==="reset"){resetSim(true);S.sim.picked=true;}
+    if(a==="next"){if(S.sim.step+1<scn().steps.length)S.sim.step++;else{
+      S.sim.done=true;S.sim.step=-1;
+      const l=S.done[S.sector]||[];if(l.indexOf(S.sim.scn)<0)l.push(S.sim.scn);S.done[S.sector]=l;}}
     if(a==="tt")S.timerOn=!S.timerOn;
-    if(a==="abort"){resetSim(false);stopTimer();}
+    if(a==="abort"||a==="pick"){resetSim(false);S.sim.picked=false;stopTimer();}
     save();render();return;}
 });
-document.getElementById("secSel").addEventListener("change",e=>{
-  S.sector=e.target.value;S.threat=0;resetSim(false);seed();save();render();});
+
+/* editare de câmpuri: fără re-randare, ca să nu se piardă cursorul */
+let flashT=null;
+function flash(msg,warn){
+  const el=document.getElementById("savedMsg");if(!el)return;
+  el.textContent=msg||(L(UI.savedAt)+" "+new Date().toLocaleTimeString(S.lang==="ro"?"ro-RO":"en-GB",{hour:"2-digit",minute:"2-digit"}));
+  el.classList.toggle("warn",!!warn);
+  clearTimeout(flashT);flashT=setTimeout(()=>{if(el)el.textContent="";},4000);
+}
+let wT=null;
+document.addEventListener("input",e=>{
+  const el=e.target;if(!S.kitOpen)return;
+  const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+  if(el.dataset.f!=null){ d[el.dataset.f]=el.value; }
+  else if(el.dataset.r!=null){
+    d.rows=d.rows&&d.rows.length?d.rows:[{}];
+    const i=+el.dataset.r; d.rows[i]=d.rows[i]||{}; d.rows[i][el.dataset.c]=el.value;
+  } else return;
+  clearTimeout(wT);
+  wT=setTimeout(()=>{
+    const st=doc.status==="todo"?"prog":doc.status;
+    kitWrite(s.id,S.kitOpen,{status:st,data:d});
+    document.querySelectorAll("[data-st]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.st===st)));
+    flash();},600);
+});
+
+async function doExport(){
+  const f=kitExport();
+  try{
+    const dl=window.claude&&claude.use?await claude.use("downloads"):null;
+    if(!dl){flash(L(UI.dlOff),true);return;}
+    await dl.save(f);flash();
+  }catch(err){ if(err&&err.code==="declined")return; flash(L(UI.dlOff),true); }
+}
+document.getElementById("secSel").addEventListener("change",e=>{switchSector(e.target.value);});
 document.addEventListener("keydown",e=>{
   const n=e.target.closest("[data-thr]");
-  if(n&&(e.key==="Enter"||e.key===" ")){e.preventDefault();S.threat=+n.dataset.thr;save();render();}});
+  if(n&&(e.key==="Enter"||e.key===" ")){e.preventDefault();S.threat=+n.dataset.thr;save();render();return;}
+  const c=e.target.closest("[data-ck]");
+  if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();c.click();}});
 
 if(!S.sim.sector)resetSim(false);
 render();

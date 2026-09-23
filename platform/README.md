@@ -15,19 +15,29 @@ Accentul UI rămâne constant, ca semantica risc/alertă să nu se strice. Se sc
 | **Mission Control** | Scor de readiness calculat, semnale legate de KPI reali, misiuni generate din decalajele reale de maturitate ale sectorului |
 | **Sectoare** | Toate cele zece, cu scorul fiecăruia și încadrarea NIS2 orientativă |
 | **Threat Landscape** | 6-8 amenințări per sector pe hartă probabilitate × impact, cu tactici MITRE ATT&CK și indicatori timpurii; matricea de active critice |
-| **Simulation Lab** | Un scenariu propriu fiecărui sector, 4-5 decizii sub ceas, consecințe pe 4 axe (prima axă diferă per sector), jurnal de decizii, debrief care recomandă instrumentele care acoperă axa cea mai slabă |
+| **Simulation Lab** | **Trei scenarii per sector** — incident tehnic, lanț de aprovizionare, criză și continuitate — cu decizii sub ceas, consecințe pe 4 axe (prima axă diferă per sector), jurnal de decizii și debrief care recomandă instrumentele care acoperă axa cea mai slabă |
 | **Readiness** | Matricea de maturitate 16 domenii × 6 niveluri, cu nivel actual și țintă; indicatori cu formule |
-| **Toolkit Vault** | 18 instrumente per sector: 16 de bază plus două specifice sectorului; starea intră în scorul de readiness |
+| **Toolkit Vault** | 18 instrumente per sector, **completabile efectiv**: tabele cu rânduri, formulare și liste de verificare, fiecare cu schema lui. Se salvează automat și se exportă (`.csv` pentru tabele, `.md` pentru restul). Starea intră în scorul de readiness |
 | **Compliance Navigator** | Maparea actelor, cu separarea strictă legal / standard / bună practică |
 
 **Bucla completă a produsului este implementată:** deciziile din simulare mișcă cele patru axe → axa cea mai slabă determină instrumentele recomandate → starea instrumentelor intră înapoi în scorul de readiness. Asta este logica `ASSESS → TRAIN → SIMULATE → re-măsurare` din varianta C.
 
-## Ce este demonstrativ
+## Unde se păstrează datele
 
-- **Un scenariu per sector**, din cele trei pe care le descrie metodologia (tehnic, lanț de aprovizionare, criză).
-- **Instrumentele se pot doar marca**, nu completa. În produsul complet fiecare se completează în interfață și se exportă.
+Două straturi distincte, deliberat:
+
+- **Preferințele de vizualizare** — limbă, rol, sector curent, progresul prin scenariu — stau în `localStorage`, deci sunt ale fiecărui vizitator și nu pleacă nicăieri.
+- **Instrumentele completate** stau în baza de date partajată a artifactului (capabilitatea `db`), pentru că exact asta sunt: registrul de active al organizației, planul de răspuns, chestionarul de furnizor. Mai multe persoane le completează împreună, iar conținutul supraviețuiește republicărilor.
+
+> **Atenție la partajare.** Conținutul completat este vizibil oricui poate deschide pagina. Dacă artifactul este partajat prin link public, nu completa în el date reale ale unei organizații. Pentru uz real, restrânge partajarea din meniul Share al paginii.
+
+Dacă stocarea partajată nu este disponibilă în vizualizarea curentă, platforma revine automat la `localStorage` și spune asta în interfață.
+
+## Ce rămâne demonstrativ
+
 - **Scorurile de maturitate sunt date de exemplu** pentru profilul de organizație afișat, nu rezultatul unei evaluări reale.
-- **Progresul se păstrează doar în browserul vizitatorului** (`localStorage`), nu pe server și nu între dispozitive.
+- **Exportul depinde de vizualizare**: dacă platforma nu poate oferi fișierul, spune asta în loc să eșueze tăcut.
+- Conținutul juridic rămâne de verificat în surse oficiale înainte de orice livrare comercială, ca peste tot în bibliotecă.
 
 ## Rolul în bibliotecă
 
