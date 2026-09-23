@@ -1,0 +1,1373 @@
+<title>Cyber-Bridge Range</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="theme.css">
+<style>
+:root{
+  --disp:var(--font-display); --body:var(--font-body); --mono:var(--font-mono);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg-base);color:var(--tx);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:.01em}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--info);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--tx3)}
+.spacer{flex:1 1 auto}
+
+/* ambient atmosphere layer */
+#amb{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
+#veil{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(1200px 700px at 78% -10%,color-mix(in srgb,var(--info) 9%,transparent),transparent 60%),
+             radial-gradient(900px 600px at 4% 108%,color-mix(in srgb,var(--sim) 8%,transparent),transparent 58%);
+  transition:background .9s ease}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:var(--rail) 1fr;min-height:100%}
+.app.focus{grid-template-columns:1fr}
+.app.focus .rail{display:none}
+
+.rail{border-right:1px solid var(--bd);background:var(--glass);backdrop-filter:blur(14px);
+  padding:20px 14px;display:flex;flex-direction:column;gap:20px;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:0 6px;min-width:0}
+.brand img{display:block;height:auto;max-width:100%}
+.brand .lock{width:190px}
+.brand .mk{width:30px;flex:none}
+.brand b{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:.05em;display:block;line-height:1.15;color:var(--tx)}
+.brand span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--tx3);text-transform:uppercase}
+/* identitatea site-ului: lockup-ul real, cu sub-brandul dedesubt */
+:root:not([data-skin="dark"]) .brand{flex-direction:column;align-items:flex-start;gap:5px}
+:root:not([data-skin="dark"]) .brand .mk,
+:root:not([data-skin="dark"]) .brand .bt b{display:none}
+:root:not([data-skin="dark"]) .brand .bt{padding-left:2px}
+/* skin dark: wordmark-ul navy nu s-ar citi, deci rămâne scutul plus tipografia */
+:root[data-skin="dark"] .brand .lock{display:none}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:var(--r-sm);
+  color:var(--tx2);font-size:13.5px;border:1px solid transparent;transition:background .12s,color .12s}
+.nav button:hover{background:var(--hover);color:var(--tx)}
+.nav button[aria-current="true"]{background:color-mix(in srgb,var(--amb) 12%,transparent);border-color:color-mix(in srgb,var(--amb) 30%,transparent);color:var(--tx)}
+.nav .dot{width:6px;height:6px;border-radius:50%;background:var(--idle);flex:none}
+.nav button[aria-current="true"] .dot{background:var(--amb);box-shadow:0 0 10px var(--amb)}
+.rail-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--bd)}
+
+.topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 22px;border-bottom:1px solid var(--bd);
+  background:var(--glass);backdrop-filter:blur(18px);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.sel{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border:1px solid var(--bd);border-radius:999px;background:var(--sunk)}
+.sel select{background:none;border:none;color:var(--tx);font:inherit;font-size:13px;padding:1px 2px;cursor:pointer;max-width:200px}
+.sel select option{background:var(--solid-raised);color:var(--tx)}
+.roles{display:flex;gap:3px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:var(--sunk)}
+.roles button{padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
+.roles button[aria-pressed="true"]{background:color-mix(in srgb,var(--amb) 15%,transparent);color:var(--tx)}
+.lang{display:flex;gap:2px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:var(--sunk)}
+.lang button{padding:4px 9px;border-radius:999px;font-family:var(--mono);font-size:11.5px;color:var(--tx3);letter-spacing:.04em}
+.lang button[aria-pressed="true"]{background:var(--sel);color:var(--tx)}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--bd);background:var(--sunk);font-size:12.5px;color:var(--tx2)}
+.chip .val{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--tx);font-weight:600}
+
+main{padding:26px 22px 64px;max-width:1460px;width:100%}
+.view{display:flex;flex-direction:column;gap:20px}
+.head h1{font-size:27px;font-weight:700;letter-spacing:-.01em}
+.head p{margin:6px 0 0;color:var(--tx2);max-width:70ch}
+
+.panel{background:var(--bg-raised);border:1px solid var(--bd);border-radius:var(--r-lg);padding:20px;backdrop-filter:var(--surface-blur)}
+.panel.flush{padding:0;overflow:hidden}
+.panel h3{font-size:15px;font-weight:600;margin-bottom:3px}
+.panel .sub{color:var(--tx3);font-size:12.5px;margin-bottom:14px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+
+.mark{display:inline-block;width:9px;height:9px;flex:none;background:currentColor}
+.mark.info{border-radius:50%;color:var(--info)}
+.mark.ok{color:var(--ok);clip-path:polygon(14% 46%,0 60%,40% 100%,100% 22%,86% 8%,38% 70%)}
+.mark.sim{color:var(--sim);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.mark.warn{color:var(--warn);clip-path:polygon(50% 4%,100% 96%,0 96%)}
+.mark.crit{color:var(--crit);clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+.mark.idle{color:var(--idle);height:3px;align-self:center}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-family:var(--mono);border:1px solid var(--bd);color:var(--tx2);white-space:nowrap}
+.pill.crit{border-color:color-mix(in srgb,var(--crit) 44%,transparent);color:var(--crit-tx)}
+.pill.warn{border-color:color-mix(in srgb,var(--warn) 44%,transparent);color:var(--warn-tx)}
+.pill.ok{border-color:color-mix(in srgb,var(--ok) 42%,transparent);color:var(--ok-tx)}
+.pill.info{border-color:color-mix(in srgb,var(--info) 42%,transparent);color:var(--info-tx)}
+.pill.sim{border-color:color-mix(in srgb,var(--sim) 44%,transparent);color:var(--sim-tx)}
+.pill.idle{color:var(--tx3)}
+
+.mc{display:grid;grid-template-columns:minmax(258px,318px) 1fr;gap:16px;align-items:start}
+.ring{width:190px;height:190px;display:block;margin:0 auto}
+.ring .track{fill:none;stroke:var(--track);stroke-width:12}
+.ring .prog{fill:none;stroke:var(--amb);stroke-width:12;stroke-linecap:round;transition:stroke-dasharray .9s cubic-bezier(.16,1,.3,1)}
+.ring-val{font-family:var(--disp);font-size:42px;font-weight:700;fill:var(--tx);font-variant-numeric:tabular-nums}
+.ring-lab{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;fill:var(--tx3)}
+.segs{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+.seg{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:12.5px}
+.seg .bar{grid-column:1/-1;height:4px;border-radius:999px;background:var(--track);overflow:hidden}
+.seg .bar i{display:block;height:100%;border-radius:999px;background:var(--amb)}
+.seg .n{font-family:var(--mono);color:var(--tx3);font-variant-numeric:tabular-nums}
+
+.nba{border:1px solid color-mix(in srgb,var(--amb) 32%,transparent);border-radius:var(--r-lg);padding:20px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--amb) 10%,transparent),color-mix(in srgb,var(--sim) 7%,transparent))}
+.nba h3{font-size:19px;margin:8px 0 6px}
+.nba p{margin:0 0 16px;color:var(--tx2);max-width:62ch}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:var(--r-sm);background:var(--amb);color:var(--tx-inv);font-weight:600;font-size:14px;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px color-mix(in srgb,var(--amb) 30%,transparent)}
+.btn.ghost{background:none;color:var(--tx);border:1px solid var(--bd-strong)}
+.btn.ghost:hover{background:var(--hover);box-shadow:none}
+.btn.sim{background:var(--sim);color:#fff}
+
+.alerts{display:flex;flex-direction:column}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:13px 18px;border-top:1px solid var(--bd)}
+.alert:first-child{border-top:none}
+.alert .mark{margin-top:7px}
+.alert p{margin:0;font-size:13.5px}
+.alert .meta{font-family:var(--mono);font-size:11px;color:var(--tx3);margin-top:3px}
+
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.card{display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:var(--bg-overlay);text-align:left;width:100%;transition:border-color .14s,transform .14s}
+.card:hover{border-color:var(--bd-strong);transform:translateY(-2px)}
+.card h4{font-size:14.5px;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--tx3);flex:1}
+.card .foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:580px;font-size:13px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--tx3);font-weight:500;white-space:nowrap}
+tbody tr:hover{background:var(--hover)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.tmap{display:grid;grid-template-columns:1fr minmax(240px,306px);gap:16px}
+.plot{width:100%;height:auto;display:block}
+.plot text{font-family:var(--mono);font-size:9px;fill:var(--tx3)}
+.plot .axis{stroke:var(--bd)}
+.plot .gl{stroke:var(--hover)}
+.node{cursor:pointer}
+.node text{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tlegend{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(236px,1fr))}
+.tlegend button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:6px 8px;border-radius:var(--r-sm);font-size:12.5px;color:var(--tx2);border:1px solid transparent}
+.tlegend button:hover{background:var(--hover);color:var(--tx)}
+.tlegend button[aria-pressed="true"]{background:color-mix(in srgb,var(--amb) 10%,transparent);border-color:color-mix(in srgb,var(--amb) 28%,transparent);color:var(--tx)}
+.tlegend .tn{width:17px;flex:none;text-align:center;font-size:11px;color:var(--tx3);font-family:var(--mono)}
+.tlegend .tl{overflow-wrap:anywhere}
+
+.sim-stage{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.sim-bar{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:12px 18px;border:1px solid color-mix(in srgb,var(--sim) 34%,transparent);border-radius:var(--r-md);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--sim) 13%,transparent),var(--bg-raised))}
+.clock{font-family:var(--mono);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.tplus{font-family:var(--mono);font-size:12px;color:var(--sim);letter-spacing:.08em}
+.timer{font-family:var(--mono);font-size:13px;color:var(--warn);font-variant-numeric:tabular-nums}
+.timer.off{color:var(--tx3)}
+.rt{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+.rt i{width:24px;height:3px;border-radius:2px;background:var(--track);display:block}
+.rt i.done{background:var(--sim)}
+.rt i.now{background:var(--tx);box-shadow:0 0 8px var(--tx)}
+
+.inject{border:1px solid var(--bd);border-radius:var(--r-lg);background:var(--bg-raised);overflow:hidden}
+.inject-h{display:flex;gap:10px;align-items:center;padding:13px 20px;border-bottom:1px solid var(--bd);background:var(--sunk);flex-wrap:wrap}
+.inject-b{padding:20px}
+.inject-b .msg{font-size:16px;line-height:1.65;margin:0}
+.inject-b .q{font-family:var(--disp);font-size:17px;font-weight:600;margin:18px 0 0}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:var(--bg-overlay);text-align:left;width:100%;transition:border-color .13s,background .13s}
+.opt:hover:not(:disabled){border-color:var(--sim);background:color-mix(in srgb,var(--sim) 10%,transparent)}
+.opt:disabled{opacity:.38;cursor:default}
+.opt.chosen{opacity:1;border-color:var(--sim);background:color-mix(in srgb,var(--sim) 15%,transparent)}
+.opt.chosen .k{color:var(--sim)}
+.opt .k{font-family:var(--mono);font-size:12px;color:var(--tx3);padding-top:1px;display:flex;align-items:center;gap:5px}
+
+.consq{border:1px solid var(--bd-strong);border-radius:var(--r-lg);background:var(--bg-overlay);padding:20px;display:flex;flex-direction:column;gap:14px}
+.consq .lead{font-size:15.5px;margin:0;line-height:1.65}
+.consq .alt{font-size:13.5px;color:var(--tx2);margin:0;padding-left:14px;border-left:2px solid var(--bd-strong)}
+.deltas{display:flex;gap:8px;flex-wrap:wrap}
+.dlt{font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--bd);font-variant-numeric:tabular-nums}
+.dlt.up{color:var(--ok-tx);border-color:color-mix(in srgb,var(--ok) 42%,transparent)}
+.dlt.dn{color:var(--crit-tx);border-color:color-mix(in srgb,var(--crit) 42%,transparent)}
+.dlt.z{color:var(--tx3)}
+.axes{display:grid;gap:11px}
+.ax{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:13px}
+.ax .bar{grid-column:1/-1;height:6px;border-radius:999px;background:var(--track);overflow:hidden}
+.ax .bar i{display:block;height:100%;border-radius:999px;transition:width .7s cubic-bezier(.16,1,.3,1)}
+.ax .n{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--tx2)}
+
+.mx table{min-width:640px}
+.cell{display:flex;gap:3px}
+.lv{width:22px;height:22px;border-radius:4px;background:var(--track);border:1px solid transparent;position:relative}
+.lv.on{border-color:var(--lvbd)}
+.lv.cur{outline:2px solid var(--tx);outline-offset:1px}
+.lv.tgt::after{content:"";position:absolute;inset:4px;border:1.5px dashed var(--dash);border-radius:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--tx3);padding:0 20px 18px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.note{font-size:12.5px;color:var(--tx3);border-left:2px solid var(--bd-strong);padding-left:12px;margin:0}
+
+/* instrument editor */
+.ed{max-width:1000px;display:flex;flex-direction:column;gap:18px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fld label{font-size:13px;color:var(--tx2)}
+.fld .hint{font-size:11.5px;color:var(--tx3);font-family:var(--mono)}
+input[type=text],textarea{width:100%;background:var(--sunk);border:1px solid var(--bd);border-radius:var(--r-sm);
+  color:var(--tx);font:inherit;font-size:13.5px;padding:9px 11px;resize:vertical}
+input[type=text]:focus,textarea:focus{border-color:var(--amb);outline:none}
+textarea{min-height:76px;line-height:1.55}
+.etab{width:100%;border-collapse:collapse;min-width:100%}
+.etab th{white-space:normal}
+.etab td{padding:5px 6px;border-bottom:1px solid var(--bd)}
+.etab input[type=text]{padding:7px 9px;font-size:13px;min-width:120px}
+.etab td.del{width:34px;padding-right:0}
+.rmv{color:var(--tx3);font-size:16px;line-height:1;padding:4px 7px;border-radius:var(--r-sm)}
+.rmv:hover{color:var(--crit);background:color-mix(in srgb,var(--crit) 12%,transparent)}
+.cks{display:flex;flex-direction:column;gap:2px}
+.ck{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-sm);border:1px solid transparent;cursor:pointer}
+.ck:hover{background:var(--hover)}
+.ck.on{background:color-mix(in srgb,var(--ok) 9%,transparent);border-color:color-mix(in srgb,var(--ok) 28%,transparent)}
+.ck .bx{width:17px;height:17px;flex:none;border:1.5px solid var(--bd-strong);border-radius:4px;margin-top:2px;position:relative}
+.ck.on .bx{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,transparent)}
+.ck.on .bx::after{content:"";position:absolute;left:4.5px;top:1px;width:5px;height:9px;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ck span.tx{font-size:13.5px}
+.edbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 0;position:sticky;bottom:0;
+  background:linear-gradient(to top,var(--bg-base) 62%,transparent)}
+.saved{font-family:var(--mono);font-size:11.5px;color:var(--ok)}
+.saved.warn{color:var(--warn)}
+.stsel{display:flex;gap:3px;padding:3px;border:1px solid var(--bd);border-radius:999px;background:var(--sunk)}
+.stsel button{padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--tx3)}
+.stsel button[aria-pressed="true"]{background:var(--sel);color:var(--tx)}
+.scn-pick{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+
+/* ---- facilitator ---- */
+.fbtn{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--sim) 40%,transparent);background:color-mix(in srgb,var(--sim) 13%,transparent);
+  font-size:12.5px;color:var(--sim-tx)}
+.fbtn:hover{background:color-mix(in srgb,var(--sim) 20%,transparent)}
+.fbtn canvas{width:18px;height:18px}
+#fac{position:fixed;top:0;right:0;bottom:0;width:390px;max-width:100%;z-index:60;display:flex;flex-direction:column;
+  background:var(--drawer);backdrop-filter:blur(20px);border-left:1px solid var(--bd);
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+#fac.on{transform:none}
+#fac header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--bd)}
+#fac header h3{font-size:14px;font-weight:600}
+#fac header p{margin:1px 0 0;font-size:11px;font-family:var(--mono);color:var(--tx3);letter-spacing:.06em}
+#facAv{width:44px;height:44px;flex:none}
+.fclose{color:var(--tx3);font-size:19px;line-height:1;padding:5px 9px;border-radius:var(--r-sm)}
+.fclose:hover{color:var(--tx);background:var(--hover)}
+#facLog{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.fmsg{font-size:13.5px;line-height:1.62}
+.fmsg.me{color:var(--tx2);border-left:2px solid var(--bd-strong);padding-left:11px}
+.fmsg.it{color:var(--tx);white-space:pre-wrap}
+.fmsg.err{color:var(--crit-tx);font-size:12.5px}
+.fthink{font-family:var(--mono);font-size:11.5px;color:var(--sim);letter-spacing:.08em}
+.fsug{display:flex;flex-direction:column;gap:6px;padding:0 16px 10px}
+.fsug button{text-align:left;font-size:12.5px;color:var(--tx2);padding:8px 11px;border:1px solid var(--bd);
+  border-radius:var(--r-sm);background:var(--bg-overlay)}
+.fsug button:hover{border-color:var(--sim);color:var(--tx)}
+#fac footer{padding:12px 16px;border-top:1px solid var(--bd);display:flex;flex-direction:column;gap:9px}
+.frow{display:flex;gap:8px;align-items:flex-end}
+#facIn{flex:1;min-height:40px;max-height:110px}
+.ficon{padding:9px 11px;border-radius:var(--r-sm);border:1px solid var(--bd-strong);color:var(--tx2);font-size:13px}
+.ficon:hover{background:var(--hover);color:var(--tx)}
+.ficon[aria-pressed="true"]{border-color:var(--sim);color:var(--sim-tx);background:color-mix(in srgb,var(--sim) 15%,transparent)}
+.fnote{font-size:11px;color:var(--tx3);line-height:1.45}
+@media (max-width:640px){#fac{width:100%}}
+.sgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
+.scard{display:flex;flex-direction:column;gap:10px;padding:17px;border-radius:var(--r-md);border:1px solid var(--bd);
+  background:var(--bg-overlay);text-align:left;transition:border-color .14s,transform .14s;position:relative;overflow:hidden}
+.scard:hover{transform:translateY(-2px)}
+.scard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sc)}
+.scard[aria-current="true"]{border-color:var(--sc)}
+.scard h4{font-size:15px;font-weight:600}
+.scard p{margin:0;font-size:12.5px;color:var(--tx3);flex:1}
+.scard .rd{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--sc)}
+
+@media (max-width:940px){
+  .app{grid-template-columns:1fr}
+  .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;overflow-x:auto;padding:12px 16px}
+  .rail .brand{flex:none}
+  :root:not([data-skin="dark"]) .rail .brand{flex-direction:row;align-items:center;gap:9px}
+  :root:not([data-skin="dark"]) .rail .brand .lock{width:132px}
+  :root:not([data-skin="dark"]) .rail .brand .bt{display:none}
+  .nav{flex-direction:row;gap:4px}
+  .nav button{white-space:nowrap;padding:7px 11px;font-size:13px}
+  .rail-foot{display:none}
+  .mc,.tmap{grid-template-columns:1fr}
+  main{padding:20px 16px 56px}
+  .topbar{padding:10px 16px}
+  .sel select{max-width:150px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+
+<canvas id="amb" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
+
+<div class="app" id="app">
+  <aside class="rail">
+    <div class="brand">
+      <img class="lock" src="logo.webp" alt="Cyber-Bridge" width="1977" height="621">
+      <img class="mk" src="logo-mark.webp" alt="" aria-hidden="true" width="568" height="621">
+      <div class="bt"><b>CYBER-BRIDGE</b><span>Range</span></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-foot">
+      <p class="eyebrow" id="demoT" style="margin:0 0 6px"></p>
+      <p id="demoB" style="margin:0;font-size:12px;color:var(--tx3);line-height:1.5"></p>
+    </div>
+  </aside>
+  <div>
+    <header class="topbar">
+      <span class="sel">
+        <span class="mark info" aria-hidden="true"></span>
+        <select id="secSel" aria-label="Sector"></select>
+      </span>
+      <span class="spacer"></span>
+      <div class="roles" id="roles" role="group"></div>
+      <div class="lang" role="group">
+        <button data-lang="ro" aria-pressed="true">RO</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="ficon" id="skinBtn" style="padding:6px 10px;font-size:12.5px" aria-pressed="false"></button>
+      <span class="chip"><span class="mark info"></span><span id="rdLab"></span> <span class="val" id="topScore">—</span></span>
+      <button class="fbtn" id="facBtn" hidden aria-expanded="false"><canvas id="facDot" width="36" height="36" aria-hidden="true"></canvas><span id="facBtnLab"></span></button>
+    </header>
+    <main id="main"></main>
+  </div>
+</div>
+
+<aside id="fac" hidden aria-label="Facilitator">
+  <header>
+    <canvas id="facAv" width="88" height="88" aria-hidden="true"></canvas>
+    <div><h3>Facilitator</h3><p id="facRole"></p></div>
+    <span class="spacer"></span>
+    <button class="fclose" id="facX" aria-label="Close">×</button>
+  </header>
+  <div id="facLog"></div>
+  <div class="fsug" id="facSug"></div>
+  <footer>
+    <div class="frow">
+      <textarea id="facIn" rows="1"></textarea>
+      <button class="ficon" id="facSpk" aria-pressed="false" title="">🔊</button>
+      <button class="btn" id="facSend" style="padding:9px 14px">→</button>
+    </div>
+    <p class="fnote" id="facNote"></p>
+  </footer>
+</aside>
+
+<script src="data/sectors.js"></script>
+<script src="data/sectors-b.js"></script>
+<script src="data/kits.js"></script>
+<script src="data/scenarios.js"></script>
+<script src="data/scenarios-b.js"></script>
+<script src="data/scenarios-c.js"></script>
+<script src="data/scenarios-cb.js"></script>
+<script src="data/scenarios-d.js"></script>
+<script src="data/scenarios-db.js"></script>
+<script>
+"use strict";
+const t=(ro,en)=>({ro:ro,en:en});
+
+/* ---------- i18n ---------- */
+const UI={
+ mc:t("Mission Control","Mission Control"), sectors:t("Sectoare","Sectors"),
+ thr:t("Peisajul amenințărilor","Threat Landscape"), sim:t("Laborator de simulare","Simulation Lab"),
+ mat:t("Pregătire","Readiness"), kit:t("Seif de instrumente","Toolkit Vault"), cmp:t("Conformitate","Compliance"),
+ mgmt:t("Management","Management"), tech:t("Tehnic","Technical"), hyg:t("Igienă","Hygiene"),
+ readiness:t("Pregătire","Readiness"),
+ demoT:t("Sesiune demo","Demo session"),
+ demoB:t("Date de exemplu pentru profilul afișat. Progresul se păstrează doar în acest browser.","Example data for the displayed profile. Progress is kept in this browser only."),
+ mcH:t("Starea de pregătire","State of readiness"),
+ nextStep:t("Următorul pas recomandat","Recommended next step"),
+ runScn:t("Rulează scenariul sectorial","Run the sector scenario"),
+ runScnP:t("Decizii sub ceas, cu consecințe. La final primești un debrief pe patru axe și instrumentele care acoperă lacunele găsite.","Decisions against the clock, with consequences. At the end you get a four-axis debrief and the instruments that close the gaps found."),
+ enterScn:t("Intră în scenariu","Enter the scenario"),
+ doneH:t("Închide lacunele pe care le-a scos exercițiul","Close the gaps the exercise exposed"),
+ doneP:t("Simularea a arătat unde se rupe lanțul de decizie. Seiful conține instrumentele care transformă constatările în proceduri scrise.","The simulation showed where the decision chain breaks. The vault holds the instruments that turn findings into written procedures."),
+ openKit:t("Deschide seiful","Open the vault"),
+ signals:t("Semnale active","Active signals"),
+ signalsS:t("Din evaluarea de maturitate și din indicatorii colectați","From the maturity assessment and the collected indicators"),
+ missions:t("Misiuni pentru traseul","Missions for the"), missionsB:t("","track"),
+ missionsS:t("Ordonate după reducerea de risc pe unitatea de efort","Ordered by risk reduction per unit of effort"),
+ gapTo:t("niv.","lvl"),
+ secH:t("Zece sectoare, același nucleu metodologic","Ten sectors, one methodological core"),
+ secP:t("Scenariile, activele, amenințările și obligațiile diferă complet de la un sector la altul. Metoda rămâne aceeași. Selectează un sector pentru a încărca profilul lui.","Scenarios, assets, threats and obligations differ completely between sectors. The method stays the same. Select a sector to load its profile."),
+ nis2:t("NIS2 (orientativ)","NIS2 (indicative)"),
+ thrH:t("Ce ne atacă, de fapt","What actually attacks us"),
+ thrP:t("Amenințări derivate din activele concrete ale sectorului, nu dintr-o listă universală. Poziția combină probabilitatea cu impactul.","Threats derived from the sector's actual assets, not from a universal list. Position combines likelihood with impact."),
+ plotT:t("Probabilitate × impact","Likelihood × impact"),
+ plotS:t("Selectează o amenințare pentru detalii. Dimensiunea marcajului redă impactul.","Select a threat for detail. Marker size encodes impact."),
+ lk:t("PROBABILITATE","LIKELIHOOD"), im:t("IMPACT","IMPACT"),
+ impact:t("Impact","Impact"), likeli:t("Probabilitate","Likelihood"),
+ actor:t("Actor","Actor"), vector:t("Vector","Vector"), affected:t("Activ afectat","Asset affected"),
+ early:t("Indicatori timpurii","Early indicators"),
+ noMitre:t("Nu se încadrează în matricea ATT&CK — comportament neintenționat, nu tehnică de atac.","Does not map to the ATT&CK matrix — unintentional behaviour, not an attack technique."),
+ assetsH:t("Active critice și ce le amenință","Critical assets and what threatens them"),
+ assetsS:t("Amenințările de mai sus derivă din aceste active. Ordinea inversă produce conținut generic.","The threats above derive from these assets. The reverse order produces generic content."),
+ asset:t("Activ","Asset"), importance:t("Importanță","Importance"), vuln:t("Vulnerabilități tipice","Typical weaknesses"), potImp:t("Impact potențial","Potential impact"),
+ critical:t("Critică","Critical"), high:t("Ridicată","High"),
+ scn:t("Scenariu sectorial","Sector scenario"),
+ duration:t("Durată","Duration"), decisions:t("Decizii","Decisions"), evalAx:t("Evaluare","Evaluation"),
+ points:t("puncte","points"), axesW:t("axe","axes"), mins:t("minute","minutes"),
+ noSol:t("Nu primești soluția înainte de a decide. După fiecare alegere vezi consecința ei — inclusiv atunci când alegerea a fost greșită. Ceasul poate fi oprit oricând; presiunea de timp nu trebuie să devină o barieră.","You do not get the answer before you decide. After each choice you see its consequence — including when the choice was wrong. The clock can be stopped at any time; time pressure must not become a barrier."),
+ start:t("Începe exercițiul","Start the exercise"),
+ stopClock:t("Oprește ceasul","Stop the clock"), startClock:t("Pornește ceasul","Start the clock"),
+ whatEval:t("Ce se evaluează","What is evaluated"),
+ whatEvalS:t("Fiecare decizie mișcă patru axe simultan. Cele mai multe alegeri bune într-o axă costă în alta.","Each decision moves four axes at once. Most choices that are good on one axis cost you on another."),
+ inject:t("Inject","Inject"), source:t("Sursa","Source"),
+ exit:t("Ieși din exercițiu","Exit the exercise"),
+ decide:t("Decide înainte de a continua. Nu există opțiune neutră — și neintervenția este o decizie cu consecințe.","Decide before continuing. There is no neutral option — inaction is also a decision with consequences."),
+ consq:t("Consecința","The consequence"), altern:t("Alternativa","The alternative"),
+ nextInj:t("Următorul inject","Next inject"), seeDeb:t("Vezi debriefingul","See the debrief"),
+ decided:t("decis","decided"), clockOff:t("ceas oprit","clock off"), expired:t("timpul a expirat","time expired"),
+ debrief:t("Debrief","Debrief"),
+ debH:t("Ce a arătat exercițiul","What the exercise showed"),
+ debP:t("Scorul nu este o notă. Este harta lacunelor care s-au văzut sub presiune și care există și în afara exercițiului.","The score is not a grade. It is a map of the gaps that showed under pressure and that exist outside the exercise too."),
+ fourAx:t("Rezultat pe patru axe","Result across four axes"),
+ startedAt:t("Punctul de plecare a fost 50 pe fiecare axă","The starting point was 50 on every axis"),
+ weakest:t("Axa cea mai slabă","Weakest axis"),
+ weakP:t("Lacuna se închide cu proceduri scrise înainte de incident, nu cu vigilență în timpul lui. Instrumente care acoperă direct această axă:","The gap closes with procedures written before the incident, not with vigilance during it. Instruments that address this axis directly:"),
+ log:t("Jurnalul deciziilor","Decision log"),
+ logS:t("Documentarea pe parcurs, nu retroactiv — exact ce îți va cere autoritatea","Documented as you go, not retroactively — exactly what the authority will ask for"),
+ moment:t("Moment","Moment"), decision:t("Decizia luată","Decision taken"), conseq:t("Consecința","Consequence"),
+ again:t("Reia exercițiul","Run it again"), backMc:t("Înapoi la Mission Control","Back to Mission Control"),
+ matH:t("Maturitate pe 16 domenii","Maturity across 16 domains"),
+ matP:t("Nivelurile au criterii observabile, nu impresii. Conturul continuu marchează nivelul actual, cel punctat marchează ținta pentru următoarele 12 luni.","Levels have observable criteria, not impressions. The solid outline marks the current level, the dashed one the target for the next 12 months."),
+ domain:t("Domeniu","Domain"), current:t("Actual","Current"), target:t("Țintă","Target"), gap:t("Decalaj","Gap"),
+ lvlNames:t("0 Absent · 1 Inițial · 2 De bază · 3 Gestionat · 4 Avansat · 5 Rezilient","0 Absent · 1 Initial · 2 Basic · 3 Managed · 4 Advanced · 5 Resilient"),
+ curLvl:t("nivel actual","current level"), tgtLvl:t("nivel țintă","target level"),
+ kpiH:t("Indicatori","Indicators"),
+ kpiS:t("Fiecare cu formula lui. Un indicator fără formulă nu se poate contesta și nici verifica.","Each with its formula. An indicator without a formula can be neither challenged nor verified."),
+ indicator:t("Indicator","Indicator"), formula:t("Formulă","Formula"), now:t("Acum","Now"),
+ kitH:t("Ce rămâne organizației după training","What the organisation keeps after the training"),
+ kitP1:t("instrumente completabile.","completable instruments."),
+ kitP2:t("finalizate. Fiecare are un timp estimat realist pentru o organizație fără personal IT dedicat.","completed. Each carries a realistic time estimate for an organisation without dedicated IT staff."),
+ todo:t("Necompletat","Not started"), prog:t("În lucru","In progress"), done:t("Finalizat","Completed"),
+ kitNote:t("Starea instrumentelor intră în scorul de pregătire. În platforma completă, fiecare element se completează în interfață și se exportă ca document; aici se poate doar marca, pentru a arăta bucla.","Instrument status feeds the readiness score. In the full platform each item is completed in the interface and exported as a document; here it can only be marked, to show the loop."),
+ cmpH:t("Ce ni se aplică, de fapt","What actually applies to us"),
+ cmpP:t("Separarea dintre cerință legală, cerință de standard și bună practică este ținută strict. Transformarea unei recomandări în obligație este eroarea care compromite un întreg program de conformitate.","The separation between legal requirement, standard requirement and good practice is kept strict. Turning a recommendation into an obligation is the error that compromises an entire compliance programme."),
+ act:t("Act / referință","Instrument / reference"), nature:t("Natura","Nature"), scope:t("Domeniu","Scope"), obs:t("Observație","Note"),
+ legal:t("Cerință legală","Legal requirement"), standard:t("Cerință de standard","Standard requirement"), practice:t("Bună practică","Good practice"),
+ verifyT:t("De verificat înainte de livrare","Verify before delivery"),
+ kind1:t("Incident tehnic","Technical incident"), kind2:t("Lanț de aprovizionare","Supply chain"), kind3:t("Criză și continuitate","Crisis and continuity"),
+ pickScn:t("Alege scenariul","Choose the scenario"),
+ pickScnP:t("Trei scenarii pentru acest sector. Fiecare testează alt lanț de decizie; niciunul nu îl înlocuiește pe celelalte.","Three scenarios for this sector. Each tests a different decision chain; none replaces the others."),
+ completed:t("parcurs","completed"),
+ open:t("Deschide","Open"), backKit:t("Înapoi la seif","Back to the vault"),
+ addRow:t("Adaugă rând","Add row"), removeRow:t("Șterge rândul","Remove row"),
+ save:t("Salvează","Save"), exportMd:t("Exportă","Export"),
+ savedAt:t("Salvat","Saved"), notSaved:t("Modificări nesalvate","Unsaved changes"),
+ shared:t("Datele completate sunt partajate cu toți cei care pot deschide această pagină.","Completed data is shared with everyone who can open this page."),
+ localOnly:t("Stocare partajată indisponibilă în această vizualizare. Datele rămân doar în acest browser.","Shared storage is unavailable in this view. Data stays in this browser only."),
+ dlOff:t("Exportul nu este disponibil în această vizualizare.","Export is not available in this view."),
+ skinDark:t("Mod range","Range mode"), skinBrand:t("Mod site","Site mode"),
+ verifyH:t("Încadrarea se stabilește juridic, nu dintr-un tabel","Scoping is a legal determination, not a table lookup"),
+ verifyP:t("Aplicabilitatea reală depinde de activitatea concretă, de praguri și de legea națională de transpunere. Verifică textul în vigoare în EUR-Lex și la autoritatea națională competentă pentru fiecare organizație în parte.","Actual applicability depends on the concrete activity, on thresholds and on the national transposing law. Verify the text in force in EUR-Lex and with the competent national authority for each organisation.")
+};
+
+/* ---------- stare ---------- */
+const AXK={
+ clin:t("Continuitate clinică","Clinical continuity"), cont:t("Continuitate operațională","Operational continuity"),
+ rev:t("Protejarea veniturilor","Revenue protection"), cli:t("Încrederea clienților","Client trust"),
+ guest:t("Protecția oaspeților","Guest protection"), serv:t("Serviciul public","Public service"),
+ data:t("Protecția datelor","Data protection"), legal:t("Conformitate și notificare","Compliance and notification"),
+ evi:t("Dovezi și investigație","Evidence and investigation")
+};
+const AXC={clin:"var(--ok)",cont:"var(--ok)",rev:"var(--ok)",cli:"var(--ok)",guest:"var(--ok)",serv:"var(--ok)",
+           data:"var(--info)",legal:"var(--sim)",evi:"var(--warn)"};
+const VIEWS=[
+ {id:"mc",k:"mc",roles:["mgmt","tech","hyg"]},
+ {id:"sectors",k:"sectors",roles:["mgmt","tech","hyg"]},
+ {id:"thr",k:"thr",roles:["mgmt","tech"]},
+ {id:"sim",k:"sim",roles:["mgmt","tech","hyg"]},
+ {id:"mat",k:"mat",roles:["mgmt","tech"]},
+ {id:"kit",k:"kit",roles:["mgmt","tech","hyg"]},
+ {id:"cmp",k:"cmp",roles:["mgmt"]}
+];
+const STORE="cbr.v1";
+let S={lang:"ro",skin:"brand",sector:"health",role:"mgmt",view:"mc",threat:0,timerOn:true,kitOpen:null,
+       sim:{scn:0,step:-1,log:[],ax:{},done:false},done:{}};
+try{const r=localStorage.getItem(STORE);if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(S));}catch(e){}}
+const CV=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function applySkin(){
+  const d=S.skin==="dark";
+  if(d)document.documentElement.setAttribute("data-skin","dark");
+  else document.documentElement.removeAttribute("data-skin");
+}
+
+/* Parametri de integrare / integration parameters:
+   ?skin=light|dark  ?embed=1  ?lang=ro|en  ?sector=<id>  ?view=<id>
+   Gazda poate lega direct la un sector sau la un ecran anume. */
+(function(){
+  let q;try{q=new URLSearchParams(location.search);}catch(e){return;}
+  const root=document.documentElement;
+  const skin=q.get("skin"); if(skin==="dark")S.skin="dark"; else if(skin==="brand"||skin==="light")S.skin="brand";
+  if(q.get("embed")==="1")root.setAttribute("data-embed","1");
+  const lg=q.get("lang"); if(lg==="ro"||lg==="en")S.lang=lg;
+  const sc=q.get("sector"); if(sc&&SECTORS.some(x=>x.id===sc)){S.sector=sc;S.threat=0;S.kitOpen=null;
+    S.sim={sector:sc,scn:0,picked:false,step:-1,log:[],ax:{},done:false};}
+  const vw=q.get("view"); if(vw&&VIEWS.some(v=>v.id===vw))S.view=vw;
+  const rl=q.get("role"); if(["mgmt","tech","hyg"].indexOf(rl)>=0)S.role=rl;
+})();
+applySkin();
+
+const L=x=>(x&&typeof x==="object"&&("ro" in x))?(x[S.lang]||x.ro):x;
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sec=()=>SECTORS.find(x=>x.id===S.sector)||SECTORS[0];
+const scnList=()=>[SCENARIOS[S.sector],SCN2[S.sector],SCN3[S.sector]].filter(Boolean);
+const scn=()=>scnList()[S.sim.scn||0];
+function kitsFor(s){return CORE_KITS.concat(s.extraKits||[]);}
+
+/* ---------- stratul de date: db partajat, cu revenire la browser ---------- */
+const KD={};                 /* cache: "sector__kit" -> {status,data} */
+let DB=null,DBST="pending";  /* pending | shared | local */
+const kid=(sid,k)=>sid+"__"+k;
+function lsKey(id){return "cbr.kit."+id;}
+function kitDoc(sid,k){
+  const id=kid(sid,k);
+  if(KD[id])return KD[id];
+  let v=null;
+  try{const r=localStorage.getItem(lsKey(id));if(r)v=JSON.parse(r);}catch(e){}
+  KD[id]=v||{status:"todo",data:{}};
+  return KD[id];
+}
+function kitWrite(sid,k,doc){
+  const id=kid(sid,k);KD[id]=doc;
+  try{localStorage.setItem(lsKey(id),JSON.stringify(doc));}catch(e){}
+  if(DB){ DB.doc("instruments/"+id).set({sector:sid,kit:k,status:doc.status,data:doc.data,updatedAt:Date.now()})
+    .catch(()=>{}); }
+}
+(async function(){
+  try{
+    const d=window.claude&&claude.use?await claude.use("db"):null;
+    if(!d){DBST="local";return;}
+    DB=d;DBST="shared";
+    const rows=await d.collection("instruments").get();
+    (rows||[]).forEach(r=>{const v=r.data||r;if(v&&v.sector&&v.kit)KD[kid(v.sector,v.kit)]={status:v.status||"todo",data:v.data||{}};});
+    render();
+  }catch(e){DBST="local";}
+})();
+
+function kitStatus(sid,k){return kitDoc(sid,k).status;}
+function kitFilled(sid,k){
+  const d=kitDoc(sid,k).data||{},sc=KIT_SCHEMA[k];
+  if(!sc)return 0;
+  if(sc.type==="table")return (d.rows||[]).filter(r=>Object.values(r).some(v=>String(v||"").trim())).length;
+  if(sc.type==="check")return (d.on||[]).filter(Boolean).length;
+  return sc.fields.filter(f=>String(d[f.k]||"").trim()).length;
+}
+function kitTotal(k){const sc=KIT_SCHEMA[k];if(!sc)return 0;
+  return sc.type==="table"?0:sc.type==="check"?sc.items.length:sc.fields.length;}
+
+function readiness(sid){
+  const s=SECTORS.find(x=>x.id===sid)||sec();
+  const base=s.maturity.reduce((a,b)=>a+b,0)/(16*5)*100;
+  const ks=kitsFor(s);
+  const kd=ks.filter(k=>kitStatus(s.id,k.k)==="done").length/ks.length*100;
+  let sv=50;
+  if(s.id===S.sector&&Object.keys(S.sim.ax).length){
+    const v=Object.values(S.sim.ax); sv=v.reduce((a,b)=>a+b,0)/v.length;
+  }
+  return Math.round(base*.55+sv*.25+kd*.20);
+}
+
+/* ---------- atmosferă ---------- */
+const cv=document.getElementById("amb"),cx=cv.getContext("2d");
+const RM=window.matchMedia("(prefers-reduced-motion: reduce)");
+let P=[],W=0,H=0,tick=0,alarm=0,raf=null;
+function hueOf(){return sec().hue;}
+function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;cx.scale(1,1);}
+function seed(){
+  const m=sec().motion, n=m==="mesh"?64:m==="ticker"?110:m==="paper"?34:m==="struct"?70:56;
+  P=[];for(let i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5),vy:(Math.random()-.5),r:Math.random()*2+.7,p:Math.random()*Math.PI*2,s:Math.random()});
+}
+function draw(){
+  const m=sec().motion,h=hueOf(),dp=devicePixelRatio;
+  cx.clearRect(0,0,W,H);
+  const R=getComputedStyle(document.documentElement);
+  const lineL=parseFloat((R.getPropertyValue("--amb-line-l")||"62%").trim())||62;
+  const wantGrid=(R.getPropertyValue("--amb-grid")||"0").trim()==="1";
+  const gain=parseFloat((R.getPropertyValue("--amb-alpha")||"1").trim());
+  const hue=h+alarm*(-h+8), sat=alarm>.3?85:60, al=(.30+alarm*.35)*(isNaN(gain)?1:gain);
+  const col=(a)=>`hsla(${hue},${sat}%,${lineL+alarm*6}%,${a})`;
+  tick+=RM.matches?0:1;
+  const sp=1+alarm*1.8;
+  if(wantGrid){ /* grila site-ului, ca strat de bază sub semnătura sectorului */
+    const g=46*dp;cx.strokeStyle=col(al*.10);cx.lineWidth=dp*.6;
+    for(let gx=0;gx<W;gx+=g){cx.beginPath();cx.moveTo(gx,0);cx.lineTo(gx,H);cx.stroke();}
+    for(let gy=0;gy<H;gy+=g){cx.beginPath();cx.moveTo(0,gy);cx.lineTo(W,gy);cx.stroke();}
+  }
+  if(m==="mesh"){
+    for(const p of P){p.x+=p.vx*.22*sp*dp;p.y+=p.vy*.22*sp*dp;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;}
+    cx.lineWidth=dp*.6;
+    for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){
+      const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.hypot(dx,dy);
+      if(d<170*dp){cx.strokeStyle=col(al*.22*(1-d/(170*dp)));cx.beginPath();cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke();}}
+    for(const p of P){cx.fillStyle=col(al*.6);cx.beginPath();cx.arc(p.x,p.y,p.r*dp,0,7);cx.fill();}
+  }else if(m==="flow"||m==="ticker"){
+    const fast=m==="ticker";
+    for(const p of P){p.x+=(fast?2.4:.9)*sp*dp*(0.5+p.s);
+      if(p.x>W+60*dp)p.x=-60*dp;
+      const len=(fast?26:60)*dp*(0.4+p.s);
+      cx.strokeStyle=col(al*(fast?.5:.35));cx.lineWidth=dp*(fast?.9:.7);
+      cx.beginPath();cx.moveTo(p.x-len,p.y);cx.lineTo(p.x,p.y);cx.stroke();}
+  }else if(m==="grid"||m==="struct"){
+    const g=(m==="grid"?96:120)*dp;
+    cx.strokeStyle=col(al*.14);cx.lineWidth=dp*.6;
+    for(let x=0;x<W;x+=g){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,H);cx.stroke();}
+    for(let y=0;y<H;y+=g){cx.beginPath();cx.moveTo(0,y);cx.lineTo(W,y);cx.stroke();}
+    for(const p of P){p.p+=.006*sp;const t2=(p.p%1);
+      const gx=Math.floor(p.x/g)*g, gy=Math.floor(p.y/g)*g;
+      const cxp=p.s>.5?gx+t2*g:gx, cyp=p.s>.5?gy:gy+t2*g;
+      cx.fillStyle=col(al*.75);cx.beginPath();cx.arc(cxp,cyp,1.7*dp,0,7);cx.fill();}
+  }else if(m==="pulse"){
+    for(const p of P){p.p+=.012*sp;
+      const r=(Math.sin(p.p)*.5+.5);
+      cx.fillStyle=col(al*(.25+r*.5));cx.beginPath();cx.arc(p.x,p.y,(1+r*2.2)*dp,0,7);cx.fill();}
+    const bt=(tick%150)/150, ring=bt*Math.max(W,H)*.6;
+    cx.strokeStyle=col(al*.16*(1-bt));cx.lineWidth=dp*1.4;
+    cx.beginPath();cx.arc(W*.78,H*.12,ring,0,7);cx.stroke();
+  }else if(m==="mech"){
+    for(const p of P){p.p+=.02*sp;
+      const off=Math.sin(p.p)*14*dp;
+      cx.strokeStyle=col(al*.42);cx.lineWidth=dp*1.1;
+      cx.beginPath();cx.moveTo(p.x,p.y+off);cx.lineTo(p.x,p.y+off+16*dp);cx.stroke();}
+  }else if(m==="burst"){
+    for(const p of P){p.p+=.008*sp;const t2=p.p%1;
+      cx.strokeStyle=col(al*.30*(1-t2));cx.lineWidth=dp*.8;
+      cx.beginPath();cx.arc(p.x,p.y,t2*70*dp,0,7);cx.stroke();}
+  }else if(m==="paper"){
+    for(const p of P){p.y+=.35*sp*dp*(.4+p.s);p.p+=.004;
+      if(p.y>H+40*dp)p.y=-40*dp;
+      const w=22*dp*(.6+p.s),hh=30*dp*(.6+p.s);
+      cx.save();cx.translate(p.x,p.y);cx.rotate(Math.sin(p.p)*.25);
+      cx.strokeStyle=col(al*.26);cx.lineWidth=dp*.7;cx.strokeRect(-w/2,-hh/2,w,hh);cx.restore();}
+  }else{ /* drift */
+    for(const p of P){p.x+=p.vx*.14*sp*dp;p.y+=p.vy*.14*sp*dp;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      cx.fillStyle=col(al*.42);cx.beginPath();cx.arc(p.x,p.y,p.r*1.5*dp,0,7);cx.fill();}
+  }
+  if(!RM.matches) raf=requestAnimationFrame(draw); else raf=null;
+}
+function ambient(){
+  const h=hueOf(),R=getComputedStyle(document.documentElement);
+  document.documentElement.style.setProperty("--sector-h",h);
+  const L=(R.getPropertyValue("--amb-line-l")||"62%").trim();
+  const va=parseFloat((R.getPropertyValue("--amb-veil-a")||".09").trim())||.09;
+  document.getElementById("veil").style.background=
+    `radial-gradient(1200px 700px at 78% -10%,hsla(${h},90%,${L},${va}),transparent 60%),`+
+    `radial-gradient(900px 600px at 4% 108%,hsla(${(h+70)%360},80%,${L},${va*.8}),transparent 58%)`;
+}
+function setAlarm(v){alarm=v;}
+addEventListener("resize",()=>{resize();seed();});
+resize();seed();ambient();draw();
+RM.addEventListener&&RM.addEventListener("change",()=>{if(!raf&&!RM.matches)draw();else{cancelAnimationFrame(raf);raf=null;draw();}});
+
+/* ---------- randare ---------- */
+const main=document.getElementById("main"),navEl=document.getElementById("nav");
+
+function chrome(){
+  document.getElementById("secSel").innerHTML=SECTORS.map(s=>
+    `<option value="${s.id}" ${s.id===S.sector?"selected":""}>${esc(L(s.name))}</option>`).join("");
+  document.getElementById("roles").innerHTML=["mgmt","tech","hyg"].map(r=>
+    `<button data-role="${r}" aria-pressed="${S.role===r}">${esc(L(UI[r]))}</button>`).join("");
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===S.lang)));
+  document.getElementById("rdLab").textContent=L(UI.readiness);
+  const sb=document.getElementById("skinBtn");
+  sb.textContent=S.skin==="dark"?L(UI.skinBrand):L(UI.skinDark);
+  sb.setAttribute("aria-pressed",String(S.skin==="dark"));
+  document.getElementById("demoT").textContent=L(UI.demoT);
+  document.getElementById("demoB").textContent=L(UI.demoB);
+  navEl.innerHTML=VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>
+    `<button data-view="${v.id}" aria-current="${S.view===v.id}"><span class="dot"></span>${esc(L(UI[v.k]))}</button>`).join("");
+}
+
+function render(){
+  const ok=VIEWS.filter(v=>v.roles.includes(S.role)).map(v=>v.id);
+  if(!ok.includes(S.view))S.view=ok[0];
+  const inSim=S.view==="sim"&&S.sim.step>=0&&!S.sim.done;
+  document.getElementById("app").classList.toggle("focus",inSim);
+  const esc2=inSim?Math.min(1,(S.sim.step+1)/scn().steps.length):0;
+  setAlarm(esc2);
+  if(FST!=="thinking"&&FST!=="speaking")FST=esc2>.5?"alert":"idle";
+  ambient();
+  document.getElementById("topScore").textContent=readiness(S.sector);
+  chrome();
+  main.innerHTML=({mc:vMC,sectors:vSectors,thr:vThreat,sim:vSim,mat:vMat,kit:vKit,cmp:vCmp})[S.view]();
+  facChrome();
+  window.scrollTo({top:0});
+  if(inSim)startTimer();
+}
+
+/* Mission Control */
+function vMC(){
+  const s=sec(),r=readiness(s.id),C=2*Math.PI*78;
+  const gaps=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i],lv:s.maturity[i]})).sort((a,b)=>b.g-a.g).slice(0,4);
+  const done=S.sim.done&&S.sim.sector===s.id;
+  const nb=done
+    ?{h:L(UI.doneH),p:L(UI.doneP),b:L(UI.openKit),v:"kit",cls:""}
+    :{h:L(UI.runScn),p:L(UI.runScnP),b:L(UI.enterScn),v:"sim",cls:"sim"};
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.mc))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(UI.mcH))}</h1><p>${esc(L(s.lead))}</p></div>
+   <div class="mc">
+    <div class="panel">
+     <svg class="ring" viewBox="0 0 190 190" role="img" aria-label="${esc(L(UI.readiness))} ${r}/100">
+      <circle class="track" cx="95" cy="95" r="78"></circle>
+      <circle class="prog" cx="95" cy="95" r="78" transform="rotate(-90 95 95)" stroke-dasharray="${(C*r/100).toFixed(1)} ${C.toFixed(1)}"></circle>
+      <text class="ring-val" x="95" y="97" text-anchor="middle" dominant-baseline="middle">${r}</text>
+      <text class="ring-lab" x="95" y="122" text-anchor="middle">${esc(L(UI.readiness).toUpperCase())} / 100</text></svg>
+     <div class="segs">${gaps.map(g=>`<div class="seg"><span>${esc(g.d)}</span>
+       <span class="n">${esc(L(UI.gapTo))} ${g.lv} → ${g.lv+g.g}</span>
+       <span class="bar"><i style="width:${g.lv/5*100}%"></i></span></div>`).join("")}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+     <div class="nba"><p class="eyebrow">${esc(L(UI.nextStep))}</p><h3>${esc(nb.h)}</h3><p>${esc(nb.p)}</p>
+      <button class="btn ${nb.cls}" data-go="${nb.v}">${esc(nb.b)} <span aria-hidden="true">→</span></button></div>
+     <div class="panel flush"><div style="padding:16px 18px 2px"><h3>${esc(L(UI.signals))}</h3>
+      <p class="sub">${esc(L(UI.signalsS))}</p></div>
+      <div class="alerts">${s.alerts.map(a=>`<div class="alert"><span class="mark ${a.st}"></span>
+        <div><p>${esc(L(a.n))}</p><p class="meta">${esc(L(a.m))}</p></div></div>`).join("")}</div></div>
+    </div></div>
+   <div><h3 style="font-size:15px;margin-bottom:4px">${esc(L(UI.missions))} ${esc(L(UI[S.role]).toLowerCase())}</h3>
+    <p class="sub" style="color:var(--tx3);font-size:12.5px;margin-bottom:14px">${esc(L(UI.missionsS))}</p>
+    <div class="cards">${missions(s).map(m=>`<button class="card" data-go="${m.v}">
+      <span class="pill ${m.tone}"><span class="mark ${m.tone}"></span>${esc(m.tag)}</span>
+      <h4>${esc(m.n)}</h4><p>${esc(m.p)}</p>
+      <span class="foot"><span class="mono" style="font-size:11.5px;color:var(--tx3)">${m.min} ${esc(L(UI.mins))}</span></span>
+     </button>`).join("")}</div></div>
+  </div>`;
+}
+function missions(s){
+  const g=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i]})).sort((a,b)=>b.g-a.g);
+  const ks=kitsFor(s), crit=s.kpis.filter(k=>k.st==="crit");
+  const out=[];
+  out.push({n:L(scn().title),p:L(scn().brief).slice(0,120)+"…",min:18,tag:L(t("Exercițiu","Exercise")),tone:"sim",v:"sim"});
+  (s.extraKits||[]).forEach(k=>out.push({n:L(k.n),p:L(k.p),min:k.min,tag:L(t("Must have","Must have")),tone:"crit",v:"kit"}));
+  if(crit[0])out.push({n:L(crit[0].n),p:L(t("Indicator critic. Formula și pragul sunt în tabloul de pregătire.","Critical indicator. Formula and threshold are on the readiness board.")),min:20,tag:L(t("Indicator","Indicator")),tone:"warn",v:"mat"});
+  if(S.role==="mgmt")out.push({n:L(UI.cmpH),p:L(t("Ce e cerință legală, ce e standard și ce e bună practică — separat, nu amestecat.","What is legal, what is a standard and what is good practice — separated, not mixed.")),min:20,tag:L(t("Conformitate","Compliance")),tone:"info",v:"cmp"});
+  else out.push({n:L(g[0].d)+" · "+L(t("decalaj","gap"))+" +"+g[0].g,p:L(t("Domeniul cu cel mai mare decalaj față de nivelul-țintă.","The domain with the largest gap to the target level.")),min:15,tag:L(t("Decalaj","Gap")),tone:"warn",v:"mat"});
+  return out.slice(0,4);
+}
+
+/* Sectors */
+function vSectors(){
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.sectors))}</p><h1>${esc(L(UI.secH))}</h1><p>${esc(L(UI.secP))}</p></div>
+   <div class="sgrid">${SECTORS.map(s=>{const r=readiness(s.id);
+     return `<button class="scard" data-sec="${s.id}" aria-current="${s.id===S.sector}" style="--sc:hsl(${s.hue},88%,62%)">
+      <span class="foot" style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+        <h4>${esc(L(s.name))}</h4><span class="rd">${r}</span></span>
+      <p>${esc(L(s.sub))}</p>
+      <span class="pill idle"><span class="mark idle"></span>${esc(L(UI.nis2))}: ${esc(L(s.nis2))}</span>
+     </button>`;}).join("")}</div>
+   <p class="note">${esc(L(UI.verifyP))}</p></div>`;
+}
+
+/* Threat Landscape */
+function vThreat(){
+  const s=sec(),T=s.threats,i=Math.min(S.threat,T.length-1),th=T[i];
+  const X=v=>78+(v-1)*108,Y=v=>300-(v-1)*62;
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.thr))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(UI.thrH))}</h1><p>${esc(L(UI.thrP))}</p></div>
+   <div class="tmap">
+    <div class="panel"><h3>${esc(L(UI.plotT))}</h3><p class="sub">${esc(L(UI.plotS))}</p>
+     <svg class="plot" viewBox="0 0 640 360" role="img" aria-label="${esc(L(UI.plotT))}">
+      ${[1,2,3,4,5].map(v=>`<line class="gl" x1="${X(v)}" y1="42" x2="${X(v)}" y2="300"/>`).join("")}
+      ${[1,2,3,4,5].map(v=>`<line class="gl" x1="70" y1="${Y(v)}" x2="${X(5)+22}" y2="${Y(v)}"/>`).join("")}
+      <line class="axis" x1="70" y1="300" x2="${X(5)+22}" y2="300"/><line class="axis" x1="70" y1="42" x2="70" y2="300"/>
+      ${[1,2,3,4,5].map(v=>`<text x="${X(v)}" y="318" text-anchor="middle">${v}</text>`).join("")}
+      ${[1,2,3,4,5].map(v=>`<text x="60" y="${Y(v)+3}" text-anchor="end">${v}</text>`).join("")}
+      <text x="${(70+X(5))/2}" y="340" text-anchor="middle" style="letter-spacing:.10em">${esc(L(UI.lk))}</text>
+      <text x="22" y="171" text-anchor="middle" transform="rotate(-90 22 171)" style="letter-spacing:.10em">${esc(L(UI.im))}</text>
+      ${T.map((x,j)=>{const on=j===i,c=x.im>=5?CV("--crit"):x.im>=4?CV("--warn"):x.lk>=4?CV("--info"):CV("--idle");
+        return `<g class="node" data-thr="${j}" role="button" tabindex="0" aria-pressed="${on}" aria-label="${esc(L(x.n))}">
+         <circle cx="${X(x.lk)}" cy="${Y(x.im)}" r="${9+x.im*2.6}" fill="${c}" fill-opacity="${on?.46:.18}" stroke="${c}" stroke-width="${on?2.4:1.4}"/>
+         <text x="${X(x.lk)}" y="${Y(x.im)+3.5}" text-anchor="middle" style="fill:${on?CV("--tx"):c};font-size:11px;font-weight:600">${j+1}</text></g>`;}).join("")}
+     </svg>
+     <ol class="tlegend">${T.map((x,j)=>{const on=j===i,tn=x.im>=5?"crit":x.im>=4?"warn":x.lk>=4?"info":"idle";
+       return `<li><button data-thr="${j}" aria-pressed="${on}"><span class="tn">${j+1}</span>
+        <span class="mark ${tn}"></span><span class="tl">${esc(L(x.n))}</span></button></li>`;}).join("")}</ol>
+    </div>
+    <div class="panel">
+     <span class="pill ${th.im>=5?"crit":th.im>=4?"warn":"info"}"><span class="mark ${th.im>=5?"crit":th.im>=4?"warn":"info"}"></span>${esc(L(UI.impact))} ${th.im}/5 · ${esc(L(UI.likeli))} ${th.lk}/5</span>
+     <h3 style="margin-top:12px;font-size:17px">${esc(L(th.n))}</h3>
+     <dl style="margin:14px 0 0;display:grid;gap:11px;font-size:13px">
+      <div><dt class="eyebrow">${esc(L(UI.actor))}</dt><dd style="margin:2px 0 0">${esc(L(th.actor))}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.vector))}</dt><dd style="margin:2px 0 0">${esc(L(th.vec))}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.affected))}</dt><dd style="margin:2px 0 0">${esc(L(th.asset))}</dd></div>
+      <div><dt class="eyebrow">MITRE ATT&amp;CK</dt><dd style="margin:4px 0 0;display:flex;gap:5px;flex-wrap:wrap">
+       ${th.mitre.length?th.mitre.map(m=>`<span class="pill">${esc(m)}</span>`).join(""):`<span style="color:var(--tx3);font-size:12.5px">${esc(L(UI.noMitre))}</span>`}</dd></div>
+      <div><dt class="eyebrow">${esc(L(UI.early))}</dt><dd style="margin:2px 0 0;color:var(--tx2)">${esc(L(th.ind))}</dd></div>
+     </dl></div></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.assetsH))}</h3><p class="sub">${esc(L(UI.assetsS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.asset))}</th><th>${esc(L(UI.importance))}</th><th>${esc(L(UI.vuln))}</th><th>${esc(L(UI.potImp))}</th></tr></thead>
+     <tbody>${s.assets.map(a=>`<tr><td><strong>${esc(L(a.n))}</strong></td>
+      <td><span class="pill ${a.imp===1?"crit":"warn"}"><span class="mark ${a.imp===1?"crit":"warn"}"></span>${esc(a.imp===1?L(UI.critical):L(UI.high))}</span></td>
+      <td style="color:var(--tx2)">${esc(L(a.vuln))}</td><td style="color:var(--tx2)">${esc(L(a.impact))}</td></tr>`).join("")}</tbody></table></div></div>
+  </div>`;
+}
+
+/* Simulation */
+function axKeys(){const o=scn().steps[0].o[0].d;return Object.keys(o);}
+const KINDS=[UI.kind1,UI.kind2,UI.kind3];
+function vSim(){
+  if(S.sim.sector!==S.sector)return simPick();
+  if(S.sim.done)return simDeb();
+  if(S.sim.step<0)return S.sim.picked?simIntro():simPick();
+  return simStep();
+}
+function simPick(){
+  const list=scnList();
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.sim))} · ${esc(L(sec().name))}</p>
+    <h1>${esc(L(UI.pickScn))}</h1><p>${esc(L(UI.pickScnP))}</p></div>
+   <div class="scn-pick">${list.map((sp,i)=>{
+     const seen=(S.done[S.sector]||[]).indexOf(i)>=0;
+     return `<button class="card" data-scn="${i}">
+      <span class="pill ${seen?"ok":"sim"}"><span class="mark ${seen?"ok":"sim"}"></span>${esc(L(KINDS[i]))}</span>
+      <h4>${esc(L(sp.title))}</h4><p>${esc(L(sp.brief))}</p>
+      <span class="foot" style="justify-content:space-between">
+       <span class="mono" style="font-size:11.5px;color:var(--tx3)">${sp.steps.length} ${esc(L(UI.points))}</span>
+       ${seen?`<span class="mono" style="font-size:11.5px;color:var(--ok)">${esc(L(UI.completed))}</span>`:""}</span>
+     </button>`;}).join("")}</div>
+   <p class="note">${esc(L(UI.noSol))}</p></div>`;
+}
+function simIntro(){
+  const sp=scn(),ks=axKeys();
+  return `<div class="view sim-stage">
+   <div class="head"><p class="eyebrow">${esc(L(KINDS[S.sim.scn]))} · ${esc(L(sec().name))}</p>
+    <h1>${esc(L(sp.title))}</h1><p>${esc(L(sec().org))}</p></div>
+   <div class="panel" style="border-color:rgba(155,107,255,.30)">
+    <p style="margin:0 0 16px;font-size:16px;line-height:1.7">${esc(L(sp.brief))}</p>
+    <div class="grid g3" style="margin-bottom:18px">
+     <div><p class="eyebrow">${esc(L(UI.duration))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">≈ 15 ${esc(L(UI.mins))}</p></div>
+     <div><p class="eyebrow">${esc(L(UI.decisions))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">${sp.steps.length} ${esc(L(UI.points))}</p></div>
+     <div><p class="eyebrow">${esc(L(UI.evalAx))}</p><p class="mono" style="margin:2px 0 0;font-size:15px">4 ${esc(L(UI.axesW))}</p></div></div>
+    <p class="note">${esc(L(UI.noSol))}</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+     <button class="btn sim" data-sim="start">${esc(L(UI.start))} <span aria-hidden="true">→</span></button>
+     <button class="btn ghost" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button>
+     <button class="btn ghost" data-sim="pick">← ${esc(L(UI.pickScn))}</button></div></div>
+   <div class="panel"><h3>${esc(L(UI.whatEval))}</h3><p class="sub">${esc(L(UI.whatEvalS))}</p>
+    <div class="axes">${ks.map(k=>`<div class="ax"><span>${esc(L(AXK[k]))}</span><span class="n">50</span>
+      <span class="bar"><i style="width:50%;background:${AXC[k]}"></i></span></div>`).join("")}</div></div></div>`;
+}
+function simStep(){
+  const sp=scn(),st=sp.steps[S.sim.step],last=S.sim.log[S.sim.log.length-1],show=last&&last.step===S.sim.step;
+  return `<div class="view sim-stage">
+   <div class="sim-bar"><span class="tplus">${esc(L(st.tp))}</span><span class="clock">${esc(L(st.ck))}</span>
+    <span class="rt" aria-hidden="true">${sp.steps.map((_,i)=>`<i class="${i<S.sim.step?"done":i===S.sim.step?"now":""}"></i>`).join("")}</span>
+    <span class="spacer"></span>
+    <span class="timer ${S.timerOn?"":"off"}" id="tmr">${S.timerOn?"90s":esc(L(UI.clockOff))}</span>
+    <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="tt">${esc(S.timerOn?L(UI.stopClock):L(UI.startClock))}</button>
+    <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" data-sim="abort">${esc(L(UI.exit))}</button></div>
+   <div class="inject"><div class="inject-h"><span class="mark sim"></span>
+     <span class="eyebrow" style="color:var(--tx2)">${esc(L(UI.inject))} ${S.sim.step+1} / ${sp.steps.length}</span>
+     <span class="spacer"></span><span class="eyebrow">${esc(L(UI.source))}: ${esc(L(st.src))}</span></div>
+    <div class="inject-b"><p class="msg">${esc(L(st.msg))}</p><p class="q">${esc(L(st.q))}</p>
+     <div class="opts">${st.o.map((o,j)=>{const pick=show&&last.opt===j;
+      return `<button class="opt ${pick?"chosen":""}" data-opt="${j}" ${show?"disabled":""}>
+      <span class="k">${String.fromCharCode(65+j)}${pick?'<span class="mark sim"></span>':""}</span>
+      <span>${esc(L(o.t))}</span></button>`;}).join("")}</div></div></div>
+   ${show?`<div class="consq"><p class="eyebrow">${esc(L(UI.consq))}</p><p class="lead">${esc(last.c)}</p>
+    ${last.alt?`<p class="alt"><strong>${esc(L(UI.altern))}:</strong> ${esc(last.alt)}</p>`:""}
+    <div class="deltas">${Object.keys(last.d).map(k=>{const v=last.d[k];
+      return `<span class="dlt ${v>0?"up":v<0?"dn":"z"}">${esc(L(AXK[k]).split(" ")[0])} ${v>0?"+":""}${v*5}</span>`;}).join("")}</div>
+    <button class="btn sim" data-sim="next" style="align-self:flex-start">
+     ${esc(S.sim.step+1<sp.steps.length?L(UI.nextInj):L(UI.seeDeb))} <span aria-hidden="true">→</span></button></div>`
+    :`<p class="note">${esc(L(UI.decide))}</p>`}</div>`;
+}
+function simDeb(){
+  const sp=scn(),ks=axKeys(),s=sec();
+  const worst=ks.slice().sort((a,b)=>S.sim.ax[a]-S.sim.ax[b])[0];
+  /* instrumentele recomandate sunt cele care acoperă efectiv axa cea mai slabă */
+  const BYAX={data:["ph","acl","pol"],legal:["not","ir","com"],evi:["rw","vnd","acl"]};
+  const want=BYAX[worst]||["deg","bc","ir"];
+  const all=kitsFor(s);
+  const recs=want.map(w=>all.find(k=>k.k===w)).filter(Boolean).slice(0,2)
+    .concat((s.extraKits||[]).slice(0,1));
+  return `<div class="view sim-stage">
+   <div class="head"><p class="eyebrow">${esc(L(UI.debrief))} · ${esc(L(sp.title))}</p>
+    <h1>${esc(L(UI.debH))}</h1><p>${esc(L(UI.debP))}</p></div>
+   <div class="panel"><h3>${esc(L(UI.fourAx))}</h3><p class="sub">${esc(L(UI.startedAt))}</p>
+    <div class="axes">${ks.map(k=>`<div class="ax"><span>${esc(L(AXK[k]))}</span><span class="n">${S.sim.ax[k]}</span>
+      <span class="bar"><i style="width:${S.sim.ax[k]}%;background:${AXC[k]}"></i></span></div>`).join("")}</div></div>
+   <div class="panel" style="border-color:rgba(255,181,71,.30)"><p class="eyebrow">${esc(L(UI.weakest))}</p>
+    <h3 style="font-size:18px;margin:6px 0 8px">${esc(L(AXK[worst]))} · ${S.sim.ax[worst]}/100</h3>
+    <p style="margin:0 0 14px;color:var(--tx2)">${esc(L(UI.weakP))}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+     ${recs.map(r=>`<span class="pill warn"><span class="mark warn"></span>${esc(L(r.n))}</span>`).join("")}</div>
+    <button class="btn" data-go="kit">${esc(L(UI.openKit))} <span aria-hidden="true">→</span></button></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.log))}</h3><p class="sub">${esc(L(UI.logS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.moment))}</th><th>${esc(L(UI.decision))}</th><th>${esc(L(UI.conseq))}</th></tr></thead>
+     <tbody>${S.sim.log.map(l=>`<tr><td class="num">${esc(L(sp.steps[l.step].tp))}<br><span style="color:var(--tx3)">${esc(L(sp.steps[l.step].ck))}</span></td>
+      <td style="max-width:280px">${esc(l.t)}</td><td style="color:var(--tx2);max-width:360px">${esc(l.c)}</td></tr>`).join("")}</tbody></table></div></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn ghost" data-sim="reset">${esc(L(UI.again))}</button>
+    <button class="btn ghost" data-sim="pick">${esc(L(UI.pickScn))}</button>
+    <button class="btn ghost" data-go="mc">${esc(L(UI.backMc))}</button></div></div>`;
+}
+
+/* Readiness */
+function vMat(){
+  const s=sec(),cols=[CV("--m0"),CV("--m1"),CV("--m2"),CV("--m3"),CV("--m4"),CV("--m5")];
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.mat))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.matH))}</h1><p>${esc(L(UI.matP))}</p></div>
+   <div class="panel flush"><div class="tw mx"><table>
+    <thead><tr><th>${esc(L(UI.domain))}</th><th>0 → 5</th><th>${esc(L(UI.current))}</th><th>${esc(L(UI.target))}</th><th>${esc(L(UI.gap))}</th></tr></thead>
+    <tbody>${DOMAINS.map((d,i)=>{const c=s.maturity[i],g=s.target[i]-c;
+      return `<tr><td><strong>${esc(L(d))}</strong></td>
+       <td><span class="cell">${cols.map((cc,l)=>`<span class="lv ${l<=c?"on":""} ${l===c?"cur":""} ${l===s.target[i]?"tgt":""}" style="${l<=c?`background:${cc}`:""}"></span>`).join("")}</span></td>
+       <td class="num">${c}</td><td class="num">${s.target[i]}</td>
+       <td class="num"><span class="pill ${g>=3?"crit":g===2?"warn":"ok"}"><span class="mark ${g>=3?"crit":g===2?"warn":"ok"}"></span>+${g}</span></td></tr>`;}).join("")}</tbody></table></div>
+    <div class="legend"><span><span class="lv on cur" style="background:var(--m3)"></span> ${esc(L(UI.curLvl))}</span>
+     <span><span class="lv tgt"></span> ${esc(L(UI.tgtLvl))}</span><span>${esc(L(UI.lvlNames))}</span></div></div>
+   <div class="panel flush"><div style="padding:18px 20px 4px"><h3>${esc(L(UI.kpiH))}</h3><p class="sub">${esc(L(UI.kpiS))}</p></div>
+    <div class="tw"><table><thead><tr><th>${esc(L(UI.indicator))}</th><th>${esc(L(UI.formula))}</th><th>${esc(L(UI.now))}</th><th>${esc(L(UI.target))}</th></tr></thead>
+     <tbody>${s.kpis.map(k=>`<tr><td><span class="pill ${k.st}"><span class="mark ${k.st}"></span></span> <strong>${esc(L(k.n))}</strong></td>
+      <td class="mono" style="font-size:11.5px;color:var(--tx3)">${esc(L(k.f))}</td>
+      <td class="num"><strong>${esc(L(k.now))}</strong></td><td class="num" style="color:var(--tx3)">${esc(L(k.tgt))}</td></tr>`).join("")}</tbody></table></div></div>
+  </div>`;
+}
+
+/* Toolkit */
+const KLAB=()=>({todo:L(UI.todo),prog:L(UI.prog),done:L(UI.done)});
+const KTONE={todo:"idle",prog:"warn",done:"ok"};
+function vKit(){
+  if(S.kitOpen)return vKitEd();
+  const s=sec(),ks=kitsFor(s),lab=KLAB();
+  const d=ks.filter(k=>kitStatus(s.id,k.k)==="done").length;
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.kit))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.kitH))}</h1>
+    <p>${ks.length} ${esc(L(UI.kitP1))} ${d}/${ks.length} ${esc(L(UI.kitP2))}</p></div>
+   <div class="cards">${ks.map(k=>{const st=kitStatus(s.id,k.k),f=kitFilled(s.id,k.k),tot=kitTotal(k.k);
+     return `<button class="card" data-kit="${k.k}"><h4>${esc(L(k.n))}</h4><p>${esc(L(k.p))}</p>
+      <span class="foot" style="justify-content:space-between"><span class="pill ${KTONE[st]}"><span class="mark ${KTONE[st]}"></span>${esc(lab[st])}</span>
+      <span class="mono" style="font-size:11.5px;color:var(--tx3)">${f>0?(tot?f+"/"+tot:f+" ×"):k.min+" "+L(UI.mins)}</span></span></button>`;}).join("")}</div>
+   <p class="note">${esc(DBST==="local"?L(UI.localOnly):L(UI.shared))}</p></div>`;
+}
+function vKitEd(){
+  const s=sec(),k=kitsFor(s).find(x=>x.k===S.kitOpen);
+  if(!k){S.kitOpen=null;return vKit();}
+  const sc=KIT_SCHEMA[k.k],doc=kitDoc(s.id,k.k),d=doc.data||{},lab=KLAB();
+  let body="";
+  if(!sc){ body=`<p class="note">${esc(L(k.p))}</p>`; }
+  else if(sc.type==="form"){
+    body=sc.fields.map(f=>`<div class="fld"><label for="f_${f.k}">${esc(L(f.n))}</label>
+      ${f.hint?`<span class="hint">${esc(L(f.hint))}</span>`:""}
+      ${f.long?`<textarea id="f_${f.k}" data-f="${f.k}">${esc(d[f.k]||"")}</textarea>`
+               :`<input type="text" id="f_${f.k}" data-f="${f.k}" value="${esc(d[f.k]||"")}">`}</div>`).join("");
+  } else if(sc.type==="check"){
+    const on=d.on||[];
+    body=`<div class="cks">${sc.items.map((it,i)=>`<div class="ck ${on[i]?"on":""}" data-ck="${i}" role="checkbox"
+      aria-checked="${!!on[i]}" tabindex="0"><span class="bx"></span><span class="tx">${esc(L(it))}</span></div>`).join("")}</div>`;
+  } else {
+    const rows=d.rows&&d.rows.length?d.rows:[{}];
+    body=`<div class="tw"><table class="etab"><thead><tr>${sc.cols.map(c=>`<th>${esc(L(c.n))}</th>`).join("")}<th></th></tr></thead>
+     <tbody>${rows.map((r,i)=>`<tr>${sc.cols.map(c=>`<td><input type="text" data-r="${i}" data-c="${c.k}" value="${esc(r[c.k]||"")}"></td>`).join("")}
+      <td class="del"><button class="rmv" data-rm="${i}" aria-label="${esc(L(UI.removeRow))}">×</button></td></tr>`).join("")}</tbody></table></div>
+     <button class="btn ghost" data-add="1" style="margin-top:12px;padding:7px 14px;font-size:13px">+ ${esc(L(UI.addRow))}</button>`;
+  }
+  return `<div class="view ed">
+   <div class="head"><p class="eyebrow">${esc(L(UI.kit))} · ${esc(L(s.name))}</p>
+    <h1>${esc(L(k.n))}</h1><p>${esc(L(k.p))}</p></div>
+   <div class="panel">${body}</div>
+   <div class="edbar">
+    <button class="btn ghost" data-kback="1">← ${esc(L(UI.backKit))}</button>
+    <div class="stsel" role="group">${["todo","prog","done"].map(st=>
+      `<button data-st="${st}" aria-pressed="${doc.status===st}">${esc(lab[st])}</button>`).join("")}</div>
+    <span class="spacer"></span>
+    <span class="saved" id="savedMsg"></span>
+    <button class="btn" data-exp="1">${esc(L(UI.exportMd))}</button>
+   </div></div>`;
+}
+
+/* export: Markdown pentru formular/checklist, CSV pentru tabel */
+function kitExport(){
+  const s=sec(),k=kitsFor(s).find(x=>x.k===S.kitOpen),sc=KIT_SCHEMA[k.k],d=kitDoc(s.id,k.k).data||{};
+  const stamp=new Date().toISOString().slice(0,10);
+  const safe=L(k.n).replace(/[^\p{L}\p{N}]+/gu,"-").replace(/^-|-$/g,"").toLowerCase();
+  if(sc&&sc.type==="table"){
+    const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+    const lines=[sc.cols.map(c=>q(L(c.n))).join(",")];
+    (d.rows||[]).forEach(r=>{ if(Object.values(r).some(v=>String(v||"").trim()))
+      lines.push(sc.cols.map(c=>q(r[c.k])).join(",")); });
+    return {filename:safe+"-"+stamp+".csv",data:lines.join("\r\n")};
+  }
+  let md="# "+L(k.n)+"\n\n"+L(s.name)+" · "+L(s.org)+"\n\n";
+  if(sc&&sc.type==="check"){const on=d.on||[];
+    sc.items.forEach((it,i)=>{md+="- ["+(on[i]?"x":" ")+"] "+L(it)+"\n";});}
+  else if(sc){sc.fields.forEach(f=>{md+="## "+L(f.n)+"\n\n"+(d[f.k]||"—")+"\n\n";});}
+  md+="\n---\n"+stamp+" · Cyber-Bridge Range\n";
+  return {filename:safe+"-"+stamp+".md",data:md};
+}
+
+/* Compliance */
+function vCmp(){
+  const s=sec(),lab={legal:L(UI.legal),standard:L(UI.standard),practice:L(UI.practice)},tone={legal:"crit",standard:"info",practice:"idle"};
+  return `<div class="view">
+   <div class="head"><p class="eyebrow">${esc(L(UI.cmp))} · ${esc(L(s.name))}</p><h1>${esc(L(UI.cmpH))}</h1><p>${esc(L(UI.cmpP))}</p></div>
+   <div class="panel flush"><div class="tw"><table>
+    <thead><tr><th>${esc(L(UI.act))}</th><th>${esc(L(UI.nature))}</th><th>${esc(L(UI.scope))}</th><th>${esc(L(UI.obs))}</th></tr></thead>
+    <tbody>${s.compliance.map(c=>`<tr><td><strong>${esc(L(c.act))}</strong></td>
+     <td><span class="pill ${tone[c.kind]}"><span class="mark ${tone[c.kind]}"></span>${esc(lab[c.kind])}</span></td>
+     <td style="color:var(--tx2)">${esc(L(c.scope))}</td><td style="color:var(--tx2);max-width:420px">${esc(L(c.note))}</td></tr>`).join("")}</tbody></table></div></div>
+   <div class="panel" style="border-color:rgba(255,181,71,.28)"><span class="pill warn"><span class="mark warn"></span>${esc(L(UI.verifyT))}</span>
+    <h3 style="margin:12px 0 8px;font-size:16px">${esc(L(UI.verifyH))}</h3>
+    <p style="margin:0;color:var(--tx2);max-width:74ch">${esc(L(UI.verifyP))}</p></div></div>`;
+}
+
+/* ---------- interacțiune ---------- */
+let tid=null,left=90;
+function stopTimer(){if(tid){clearInterval(tid);tid=null;}}
+function startTimer(){
+  stopTimer();const el=document.getElementById("tmr");if(!el)return;
+  const answered=S.sim.log.some(l=>l.step===S.sim.step);
+  if(!S.timerOn||answered){el.textContent=S.timerOn?L(UI.decided):L(UI.clockOff);el.classList.toggle("off",!S.timerOn);return;}
+  left=90;el.classList.remove("off");el.textContent=left+"s";
+  tid=setInterval(()=>{left--;const e=document.getElementById("tmr");if(!e){stopTimer();return;}
+    e.textContent=left>0?left+"s":L(UI.expired);
+    if(left<=0){stopTimer();e.style.color="var(--crit)";}},1000);
+}
+function choose(j){
+  const st=scn().steps[S.sim.step],o=st.o[j];
+  if(!Object.keys(S.sim.ax).length)axKeys().forEach(k=>S.sim.ax[k]=50);
+  for(const k in o.d)S.sim.ax[k]=Math.max(0,Math.min(100,(S.sim.ax[k]||50)+o.d[k]*5));
+  S.sim.log.push({step:S.sim.step,opt:j,t:L(o.t),c:L(o.c),alt:o.alt?L(o.alt):null,d:o.d});
+  stopTimer();save();render();
+}
+function resetSim(start){
+  const n=S.sim&&S.sim.scn||0,p=S.sim&&S.sim.picked;
+  S.sim={sector:S.sector,scn:n,picked:p,step:start?0:-1,log:[],ax:{},done:false};
+  axKeys().forEach(k=>S.sim.ax[k]=50);
+}
+function switchSector(id){
+  S.sector=id;S.threat=0;S.kitOpen=null;
+  S.sim={sector:id,scn:0,picked:false,step:-1,log:[],ax:{},done:false};
+  seed();save();render();
+}
+
+document.addEventListener("click",e=>{
+  const v=e.target.closest("[data-view]");if(v){S.view=v.dataset.view;stopTimer();save();render();return;}
+  const g=e.target.closest("[data-go]");if(g){S.view=g.dataset.go;save();render();return;}
+  const r=e.target.closest("[data-role]");if(r){S.role=r.dataset.role;save();render();return;}
+  const la=e.target.closest("[data-lang]");if(la){S.lang=la.dataset.lang;save();render();return;}
+  if(e.target.closest("#skinBtn")){S.skin=S.skin==="dark"?"brand":"dark";applySkin();save();render();return;}
+  const sc=e.target.closest("[data-sec]");if(sc){switchSector(sc.dataset.sec);return;}
+  const th=e.target.closest("[data-thr]");if(th){S.threat=+th.dataset.thr;save();render();return;}
+  const op=e.target.closest("[data-opt]");if(op&&!op.disabled){choose(+op.dataset.opt);return;}
+  const k=e.target.closest("[data-kit]");if(k){S.kitOpen=k.dataset.kit;save();render();return;}
+  if(e.target.closest("[data-kback]")){S.kitOpen=null;save();render();return;}
+  const st=e.target.closest("[data-st]");if(st){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen);
+    kitWrite(s.id,S.kitOpen,{status:st.dataset.st,data:doc.data});save();render();return;}
+  const add=e.target.closest("[data-add]");if(add){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+    d.rows=(d.rows&&d.rows.length?d.rows:[{}]).concat([{}]);
+    kitWrite(s.id,S.kitOpen,{status:doc.status,data:d});render();return;}
+  const rm=e.target.closest("[data-rm]");if(rm){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+    const rows=(d.rows&&d.rows.length?d.rows:[{}]).slice();
+    rows.splice(+rm.dataset.rm,1); d.rows=rows.length?rows:[{}];
+    kitWrite(s.id,S.kitOpen,{status:doc.status,data:d});render();return;}
+  const ck=e.target.closest("[data-ck]");if(ck){
+    const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{},i=+ck.dataset.ck;
+    d.on=d.on||[]; d.on[i]=!d.on[i];
+    ck.classList.toggle("on",!!d.on[i]); ck.setAttribute("aria-checked",String(!!d.on[i]));
+    kitWrite(s.id,S.kitOpen,{status:doc.status==="todo"?"prog":doc.status,data:d});flash();return;}
+  if(e.target.closest("[data-exp]")){doExport();return;}
+  const sp=e.target.closest("[data-scn]");if(sp){
+    S.sim.scn=+sp.dataset.scn;resetSim(false);S.sim.picked=true;save();render();return;}
+  const sm=e.target.closest("[data-sim]");if(sm){
+    const a=sm.dataset.sim;
+    if(a==="start"||a==="reset"){resetSim(true);S.sim.picked=true;}
+    if(a==="next"){if(S.sim.step+1<scn().steps.length)S.sim.step++;else{
+      S.sim.done=true;S.sim.step=-1;
+      const l=S.done[S.sector]||[];if(l.indexOf(S.sim.scn)<0)l.push(S.sim.scn);S.done[S.sector]=l;}}
+    if(a==="tt")S.timerOn=!S.timerOn;
+    if(a==="abort"||a==="pick"){resetSim(false);S.sim.picked=false;stopTimer();}
+    save();render();return;}
+});
+
+/* editare de câmpuri: fără re-randare, ca să nu se piardă cursorul */
+let flashT=null;
+function flash(msg,warn){
+  const el=document.getElementById("savedMsg");if(!el)return;
+  el.textContent=msg||(L(UI.savedAt)+" "+new Date().toLocaleTimeString(S.lang==="ro"?"ro-RO":"en-GB",{hour:"2-digit",minute:"2-digit"}));
+  el.classList.toggle("warn",!!warn);
+  clearTimeout(flashT);flashT=setTimeout(()=>{if(el)el.textContent="";},4000);
+}
+let wT=null;
+document.addEventListener("input",e=>{
+  const el=e.target;if(!S.kitOpen)return;
+  const s=sec(),doc=kitDoc(s.id,S.kitOpen),d=doc.data||{};
+  if(el.dataset.f!=null){ d[el.dataset.f]=el.value; }
+  else if(el.dataset.r!=null){
+    d.rows=d.rows&&d.rows.length?d.rows:[{}];
+    const i=+el.dataset.r; d.rows[i]=d.rows[i]||{}; d.rows[i][el.dataset.c]=el.value;
+  } else return;
+  clearTimeout(wT);
+  wT=setTimeout(()=>{
+    const st=doc.status==="todo"?"prog":doc.status;
+    kitWrite(s.id,S.kitOpen,{status:st,data:d});
+    document.querySelectorAll("[data-st]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.st===st)));
+    flash();},600);
+});
+
+async function doExport(){
+  const f=kitExport();
+  try{
+    const dl=window.claude&&claude.use?await claude.use("downloads"):null;
+    if(!dl){flash(L(UI.dlOff),true);return;}
+    await dl.save(f);flash();
+  }catch(err){ if(err&&err.code==="declined")return; flash(L(UI.dlOff),true); }
+}
+document.getElementById("secSel").addEventListener("change",e=>{switchSector(e.target.value);});
+document.addEventListener("keydown",e=>{
+  const n=e.target.closest("[data-thr]");
+  if(n&&(e.key==="Enter"||e.key===" ")){e.preventDefault();S.threat=+n.dataset.thr;save();render();return;}
+  const c=e.target.closest("[data-ck]");
+  if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();c.click();}});
+
+if(!S.sim.sector)resetSim(false);
+
+/* ================= FACILITATOR =================
+   Rolul de facilitator din metodologie (Etapa 9), implementat în platformă.
+   Regula de bază: nu evaluează opțiunile înainte ca participantul să decidă. */
+const FUI={
+ role:t("Conduce exercițiul","Runs the exercise"),
+ ask:t("Întreabă facilitatorul","Ask the facilitator"),
+ ph:t("Scrie o întrebare…","Type a question…"),
+ thinking:t("Se gândește…","Thinking…"),
+ hello:t("Sunt facilitatorul acestui exercițiu. Pot explica de ce contează ceva pentru sectorul tău, te pot ajuta să completezi un instrument sau să reformulăm o decizie. Nu îți dau răspunsul unui inject înainte să decizi — asta ar strica exercițiul.","I run this exercise. I can explain why something matters for your sector, help you fill in an instrument, or reframe a decision with you. I will not give you an inject's answer before you decide — that would ruin the exercise."),
+ speak:t("Citește cu voce tare","Read aloud"),
+ cost:t("Răspunsurile sunt generate de Claude, pe contul tău. Prima întrebare cere acordul tău.","Answers are generated by Claude, on your own account. The first question asks for your consent."),
+ off:t("Facilitatorul nu este disponibil în această vizualizare.","The facilitator is not available in this view."),
+ errRate:t("Prea multe întrebări deodată. Încearcă din nou peste puțin.","Too many questions at once. Try again shortly."),
+ errGen:t("Nu am putut răspunde acum. Încearcă din nou.","I could not answer just now. Try again."),
+ stop:t("Oprește","Stop"),
+ draftBtn:t("Propune un draft","Propose a draft"),
+ drafted:t("Am propus un draft. Verifică-l și modifică-l — este un punct de plecare, nu un răspuns.","I have proposed a draft. Check it and change it — it is a starting point, not an answer.")
+};
+const SUG={
+ mc:[t("Care este cel mai mare risc al nostru, în cuvinte simple?","What is our biggest risk, in plain words?"),
+     t("De unde încep, dacă am o singură zi?","Where do I start if I have one day?")],
+ thr:[t("Explică-mi amenințarea selectată fără jargon","Explain the selected threat without jargon"),
+      t("Cum aș observa asta devreme, fără instrumente scumpe?","How would I spot this early, without expensive tooling?")],
+ sim:[t("Ce ar întreba un facilitator bun aici?","What would a good facilitator ask here?"),
+      t("Ce informație îmi lipsește ca să decid?","What information am I missing in order to decide?")],
+ mat:[t("Ce înseamnă concret să trec de la nivelul 1 la 3?","What does moving from level 1 to 3 actually involve?"),
+      t("Care decalaj merită închis primul și de ce?","Which gap is worth closing first, and why?")],
+ kit:[t("Ce pun în acest instrument, pentru organizația mea?","What do I put in this instrument, for my organisation?"),
+      t("Dă-mi un exemplu de rând completat corect","Give me an example of a correctly filled row")],
+ cmp:[t("Ni se aplică asta, în cazul nostru?","Does this apply to us, in our case?"),
+      t("Ce e obligație legală și ce e doar recomandare?","What is a legal obligation and what is only a recommendation?")],
+ sectors:[t("Ce sector seamănă cel mai mult cu organizația mea?","Which sector most resembles my organisation?")]
+};
+
+let SAMPLE=null,FACON=false,FTURNS=[],FBUSY=false,FCTL=null,FSPK=false,FST="idle";
+const $=id=>document.getElementById(id);
+
+/* --- prezența vizuală: stări, nu un chip --- */
+function mix(c,a){c=String(c).trim();
+  if(c[0]==="#"){const n=c.length===4?c.replace(/#(.)(.)(.)/,"#$1$1$2$2$3$3"):c;
+    return "rgba("+parseInt(n.slice(1,3),16)+","+parseInt(n.slice(3,5),16)+","+parseInt(n.slice(5,7),16)+","+a+")";}
+  const m=c.match(/[\d.]+/g); return m?"rgba("+m[0]+","+m[1]+","+m[2]+","+a+")":c;}
+function drawAv(cv,size){
+  const x=cv.getContext("2d"),w=cv.width,h=cv.height,cxp=w/2,cyp=h/2,ts=performance.now()/1000;
+  x.clearRect(0,0,w,h);
+  const col=FST==="alert"?CV("--crit"):FST==="thinking"?CV("--sim"):FST==="speaking"?CV("--info"):CV("--sim");
+  const sp=FST==="thinking"?2.6:FST==="speaking"?1.5:.45;
+  for(let i=0;i<3;i++){
+    const r=(size*.26)+i*(size*.13), a=ts*sp*(i%2?-1:1)+i*2;
+    x.strokeStyle=mix(col,.5-i*.11);x.lineWidth=Math.max(1,size*.022);
+    x.beginPath();x.arc(cxp,cyp,r,a,a+Math.PI*(1.1-i*.22));x.stroke();
+  }
+  const puls=FST==="speaking"?(.5+Math.abs(Math.sin(ts*7))*.5):FST==="thinking"?(.6+Math.sin(ts*4)*.2):(.55+Math.sin(ts*1.3)*.18);
+  const g=x.createRadialGradient(cxp,cyp,0,cxp,cyp,size*.22);
+  g.addColorStop(0,mix(col,.85*puls));g.addColorStop(1,mix(col,0));
+  x.fillStyle=g;x.beginPath();x.arc(cxp,cyp,size*.22,0,7);x.fill();
+}
+function avLoop(){
+  if(RM.matches){FST==="idle";}
+  const a=$("facAv"),d=$("facDot");
+  if(a)drawAv(a,88); if(d)drawAv(d,36);
+  requestAnimationFrame(avLoop);
+}
+
+/* --- contextul pe care îl vede facilitatorul --- */
+function facCtx(){
+  const s=sec(),ro=S.lang==="ro";
+  let c=(ro?"CONTEXT\nSector: ":"CONTEXT\nSector: ")+L(s.name)+" — "+L(s.sub)
+   +(ro?"\nOrganizația-tip: ":"\nTypical organisation: ")+L(s.org)
+   +(ro?"\nÎncadrare NIS2 (orientativ): ":"\nNIS2 scoping (indicative): ")+L(s.nis2)
+   +(ro?"\nScor de pregătire: ":"\nReadiness score: ")+readiness(s.id)+"/100"
+   +(ro?"\nTraseul utilizatorului: ":"\nUser track: ")+L(UI[S.role])
+   +(ro?"\nEcranul curent: ":"\nCurrent screen: ")+L(UI[VIEWS.find(v=>v.id===S.view)?VIEWS.find(v=>v.id===S.view).k:"mc"]);
+  const gaps=DOMAINS.map((d,i)=>({d:L(d),g:s.target[i]-s.maturity[i],lv:s.maturity[i]})).sort((a,b)=>b.g-a.g).slice(0,4);
+  c+=(ro?"\nDecalajele cele mai mari: ":"\nLargest gaps: ")+gaps.map(g=>g.d+" ("+g.lv+"→"+(g.lv+g.g)+")").join(", ");
+  c+=(ro?"\nIndicatori critici: ":"\nCritical indicators: ")+s.kpis.filter(k=>k.st==="crit").map(k=>L(k.n)+" = "+L(k.now)+" (țintă "+L(k.tgt)+")").join("; ");
+  if(S.view==="thr"){const th=s.threats[Math.min(S.threat,s.threats.length-1)];
+    c+=(ro?"\nAmenințarea selectată: ":"\nSelected threat: ")+L(th.n)+" — "+L(th.vec)+"; "+(ro?"indicatori: ":"indicators: ")+L(th.ind);}
+  if(S.view==="cmp")c+=(ro?"\nCadrul aplicabil: ":"\nApplicable framework: ")+s.compliance.map(x=>L(x.act)+" ["+L(UI[x.kind])+"]").join("; ");
+  if(S.view==="kit"&&S.kitOpen){
+    const k=kitsFor(s).find(z=>z.k===S.kitOpen),sc=KIT_SCHEMA[S.kitOpen],d=kitDoc(s.id,S.kitOpen).data||{};
+    c+=(ro?"\nInstrument deschis: ":"\nOpen instrument: ")+L(k.n)+" — "+L(k.p);
+    if(sc)c+=(ro?"\nStructura: ":"\nStructure: ")+(sc.type==="table"?sc.cols.map(x=>L(x.n)).join(" | ")
+      :sc.type==="check"?sc.items.map(x=>L(x)).join(" / "):sc.fields.map(x=>L(x.n)).join(" | "));
+    c+=(ro?"\nCompletat până acum: ":"\nFilled so far: ")+JSON.stringify(d).slice(0,1400);
+  }
+  if(S.view==="sim"&&S.sim.step>=0&&!S.sim.done){
+    const sp=scn(),st=sp.steps[S.sim.step],ans=S.sim.log.some(l=>l.step===S.sim.step);
+    c+=(ro?"\nScenariu: ":"\nScenario: ")+L(sp.title)+" — "+L(sp.brief)
+     +(ro?"\nMomentul: ":"\nMoment: ")+L(st.tp)+" "+L(st.ck)+" — "+L(st.msg)
+     +(ro?"\nÎntrebarea pusă participantului: ":"\nQuestion put to the participant: ")+L(st.q);
+    c+=ans?(ro?"\nParticipantul A DECIS deja la acest inject. Poți discuta liber opțiunile și consecințele."
+              :"\nThe participant HAS ALREADY decided on this inject. You may discuss the options and consequences freely.")
+          :(ro?"\nATENȚIE: participantul NU a decis încă. NU evalua opțiunile, NU sugera care e bună, NU anticipa consecința. Reformulează situația, întreabă ce informație îi lipsește, amintește-i ce e în joc. Atât."
+              :"\nIMPORTANT: the participant has NOT decided yet. Do NOT evaluate the options, do NOT hint at which is right, do NOT preview the consequence. Reframe the situation, ask what information they are missing, remind them what is at stake. Nothing more.");
+  }
+  if(S.sim.done){c+=(ro?"\nDebrief: ":"\nDebrief: ")+axKeys().map(k=>L(AXK[k])+" "+S.sim.ax[k]).join(", ");}
+  return c;
+}
+function facRules(){
+  const ro=S.lang==="ro";
+  return (ro
+   ?`Ești facilitatorul unui exercițiu de reziliență cibernetică, în platforma Cyber-Bridge Range. Nu ești un asistent general.
+REGULI:
+1. Răspunde în română. Scurt: 2-5 propoziții, maximum 120 de cuvinte. Un facilitator nu ține prelegeri.
+2. Vorbește concret, pentru organizația din context, nu în general. Folosește cifrele și decalajele reale de mai jos.
+3. Nu presupune că există CISO, SOC, SIEM sau buget. Dacă recomanzi ceva, spune cine îl face într-o organizație de această dimensiune.
+4. Separă strict: cerință legală / cerință de standard / bună practică. Nu transforma niciodată o recomandare în obligație.
+5. Pentru orice referință legală spune că se verifică în textul în vigoare, la EUR-Lex și la autoritatea națională. Nu inventa articole, termene sau cifre. Dacă nu știi, spune.
+6. Fără statistici inventate. Fără exclamații. Fără laude.
+7. Dacă întrebarea nu are legătură cu exercițiul sau cu securitatea organizației, spune asta într-o propoziție și readu discuția la ecranul curent.`
+   :`You are the facilitator of a cyber resilience exercise, inside the Cyber-Bridge Range platform. You are not a general assistant.
+RULES:
+1. Answer in English. Short: 2-5 sentences, 120 words maximum. A facilitator does not lecture.
+2. Be concrete about the organisation in the context below, not generic. Use its real numbers and gaps.
+3. Do not assume a CISO, SOC, SIEM or budget exists. If you recommend something, say who does it in an organisation of this size.
+4. Keep strictly separate: legal requirement / standard requirement / good practice. Never turn a recommendation into an obligation.
+5. For any legal reference, say it must be verified against the text in force, in EUR-Lex and with the national authority. Never invent articles, deadlines or figures. If you do not know, say so.
+6. No invented statistics. No exclamations. No praise.
+7. If the question is unrelated to the exercise or to the organisation's security, say so in one sentence and bring it back to the current screen.`)
+  +"\n\n"+facCtx();
+}
+
+function facRender(){
+  const log=$("facLog");if(!log)return;
+  log.innerHTML=FTURNS.map(m=>m.role==="user"
+    ?`<div class="fmsg me">${esc(m.content)}</div>`
+    :`<div class="fmsg it">${esc(m.content)}</div>`).join("")
+    ||`<div class="fmsg it">${esc(L(FUI.hello))}</div>`;
+  log.scrollTop=log.scrollHeight;
+}
+function facSug(){
+  const el=$("facSug");if(!el)return;
+  let list=SUG[S.view]||SUG.mc;
+  if(S.view==="kit"&&S.kitOpen)list=SUG.kit;
+  el.innerHTML=(FBUSY?"":list.map(q=>`<button data-fq="${esc(L(q))}">${esc(L(q))}</button>`).join(""))
+   +((!FBUSY&&S.view==="kit"&&S.kitOpen&&KIT_SCHEMA[S.kitOpen])
+     ?`<button data-fdraft="1" style="border-color:rgba(155,107,255,.42);color:#D2BCFF">✦ ${esc(L(FUI.draftBtn))}</button>`:"");
+}
+function facChrome(){
+  const b=$("facBtn");if(!b)return;
+  b.hidden=!SAMPLE;
+  $("facBtnLab").textContent=L(FUI.ask);
+  $("facRole").textContent=L(FUI.role).toUpperCase();
+  $("facIn").placeholder=L(FUI.ph);
+  $("facNote").textContent=L(FUI.cost);
+  $("facSpk").title=L(FUI.speak);
+  facSug();
+}
+function facOpen(v){
+  FACON=v;const p=$("fac");p.hidden=!v;p.classList.toggle("on",v);
+  $("facBtn").setAttribute("aria-expanded",String(v));
+  if(v){facRender();facSug();setTimeout(()=>$("facIn").focus(),260);}
+}
+function say(txt){
+  if(!FSPK||!window.speechSynthesis)return;
+  try{speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(txt);u.lang=S.lang==="ro"?"ro-RO":"en-GB";u.rate=1.02;
+    speechSynthesis.speak(u);}catch(e){}
+}
+async function facAsk(q){
+  if(FBUSY||!SAMPLE||!q.trim())return;
+  FBUSY=true;FST="thinking";FTURNS.push({role:"user",content:q.trim()});facRender();facSug();
+  const log=$("facLog");
+  const bub=document.createElement("div");bub.className="fthink";bub.textContent=L(FUI.thinking);
+  log.appendChild(bub);log.scrollTop=log.scrollHeight;
+  FCTL=new AbortController();
+  const turns=[{role:"user",content:facRules()}].concat(FTURNS.slice(-8));
+  try{
+    const r=await SAMPLE(turns,{signal:FCTL.signal,cache:false,modelTier:"default",
+      onText:({text})=>{FST="speaking";bub.className="fmsg it";bub.textContent=text;log.scrollTop=log.scrollHeight;}});
+    FTURNS.push({role:"assistant",content:r.text});say(r.text);
+  }catch(e){
+    const code=e&&e.code;
+    if(code==="cancelled"){ if(e.text)FTURNS.push({role:"assistant",content:e.text}); }
+    else{
+      const m=code==="rate_limited"?L(FUI.errRate)
+        :(code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled")?L(FUI.off)
+        :L(FUI.errGen);
+      if(code==="not_granted"||code==="sampling_disabled"||code==="not_declared"||code==="capability_disabled"){SAMPLE=null;facChrome();}
+      bub.className="fmsg err";bub.textContent=m;
+      FBUSY=false;FST="idle";facSug();return;
+    }
+  }
+  FBUSY=false;FST="idle";facRender();facSug();
+}
+async function facDraft(){
+  if(FBUSY||!SAMPLE||!S.kitOpen)return;
+  const s=sec(),sc=KIT_SCHEMA[S.kitOpen],k=kitsFor(s).find(z=>z.k===S.kitOpen),ro=S.lang==="ro";
+  FBUSY=true;FST="thinking";facSug();
+  const log=$("facLog");const bub=document.createElement("div");bub.className="fthink";
+  bub.textContent=L(FUI.thinking);log.appendChild(bub);log.scrollTop=log.scrollHeight;
+  let ask,shape;
+  if(sc.type==="table"){shape='{"rows":[{'+sc.cols.map(c=>'"'+c.k+'":"…"').join(",")+'}]}';
+    ask=(ro?"Propune 5 rânduri plauzibile pentru acest tabel, specifice organizației din context. Coloane: "
+           :"Propose 5 plausible rows for this table, specific to the organisation in the context. Columns: ")
+      +sc.cols.map(c=>c.k+" = "+L(c.n)).join("; ");}
+  else if(sc.type==="check"){FBUSY=false;FST="idle";bub.remove();facSug();return;}
+  else{shape='{'+sc.fields.map(f=>'"'+f.k+'":"…"').join(",")+'}';
+    ask=(ro?"Propune un conținut scurt și concret pentru fiecare câmp, specific organizației din context. Câmpuri: "
+           :"Propose short, concrete content for each field, specific to the organisation in the context. Fields: ")
+      +sc.fields.map(f=>f.k+" = "+L(f.n)).join("; ");}
+  const p=facRules()+"\n\n"+ask+(ro
+    ?"\n\nRăspunde DOAR cu JSON de forma "+shape+". Fără text în jur. Scurt în fiecare celulă. Nu inventa cifre exacte pe care nu le poți susține; unde nu știi, scrie ce trebuie stabilit."
+    :"\n\nReply with ONLY JSON of the form "+shape+". No surrounding text. Keep each cell short. Do not invent exact figures you cannot support; where unknown, write what must be established.");
+  try{
+    const d=await SAMPLE.json(p,{cache:false,modelTier:"default"});
+    const doc=kitDoc(s.id,S.kitOpen),cur=doc.data||{};
+    if(sc.type==="table"&&d&&Array.isArray(d.rows)){
+      const keep=(cur.rows||[]).filter(r=>Object.values(r).some(v=>String(v||"").trim()));
+      cur.rows=keep.concat(d.rows.slice(0,8).map(r=>{const o={};sc.cols.forEach(c=>o[c.k]=String(r[c.k]==null?"":r[c.k]));return o;}));
+    } else if(sc.type==="form"&&d&&typeof d==="object"){
+      sc.fields.forEach(f=>{if(!String(cur[f.k]||"").trim()&&d[f.k]!=null)cur[f.k]=String(d[f.k]);});
+    }
+    kitWrite(s.id,S.kitOpen,{status:doc.status==="todo"?"prog":doc.status,data:cur});
+    bub.className="fmsg it";bub.textContent=L(FUI.drafted);
+    FTURNS.push({role:"assistant",content:L(FUI.drafted)});
+    FBUSY=false;FST="idle";render();facOpen(true);return;
+  }catch(e){
+    bub.className="fmsg err";bub.textContent=(e&&e.code==="rate_limited")?L(FUI.errRate):L(FUI.errGen);
+  }
+  FBUSY=false;FST="idle";facSug();
+}
+
+(async function(){
+  try{ SAMPLE=window.claude&&claude.use?await claude.use("sample"):null; }catch(e){ SAMPLE=null; }
+  facChrome();avLoop();
+})();
+$("facBtn").addEventListener("click",()=>facOpen(!FACON));
+$("facX").addEventListener("click",()=>{if(FCTL&&FBUSY)FCTL.abort();facOpen(false);});
+$("facSend").addEventListener("click",()=>{const i=$("facIn");const v=i.value;i.value="";facAsk(v);});
+$("facIn").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("facSend").click();}});
+$("facSpk").addEventListener("click",e=>{FSPK=!FSPK;e.currentTarget.setAttribute("aria-pressed",String(FSPK));
+  if(!FSPK&&window.speechSynthesis)try{speechSynthesis.cancel();}catch(x){}});
+$("facSug").addEventListener("click",e=>{
+  const q=e.target.closest("[data-fq]");if(q){facAsk(q.dataset.fq);return;}
+  if(e.target.closest("[data-fdraft]"))facDraft();});
+
+render();
+</script>
