@@ -1,0 +1,211 @@
+/* ============================================================
+   Cyber-Bridge Range — stratul de identitate vizuală
+   Visual identity layer
+
+   Tema implicită reproduce identitatea site-ului cyber-bridge.eu:
+   fundal deschis albastru-rece, motiv de grilă, albastru instituțional
+   ca unică culoare de acțiune, titluri grele cu letterspacing.
+
+   Valorile de culoare sunt citite dintr-o captură a site-ului, deci
+   sunt apropiate, nu extrase din CSS-ul lui. Dacă aveți valorile
+   oficiale (sau un ghid de brand), se înlocuiesc doar în blocul BRAND
+   de mai jos — nimic altceva din platformă nu conține culori literale.
+
+   The default theme reproduces the cyber-bridge.eu identity. Colour
+   values are read from a screenshot, so they are close but not taken
+   from its stylesheet. With the official values, replace only the
+   BRAND block below.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   BRAND — singurul loc de schimbat / the only place to change
+   ------------------------------------------------------------ */
+:root{
+  /* Fonturi. Sunt încărcate în <head>. */
+  --font-display:"Montserrat",-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  /* Albastrul de acțiune al site-ului: butonul primar, cifrele, tagline-ul. */
+  --brand:#2563EB;
+  --brand-soft:#3B82F6;
+  --brand-deep:#1D4ED8;
+
+  /* Fundaluri și suprafețe */
+  --bg-deep:#EAF0F8;
+  --bg-base:#F7FAFD;
+  --bg-raised:#FFFFFF;
+  --bg-overlay:#FFFFFF;
+  --glass:rgba(255,255,255,.90);
+
+  /* Text */
+  --tx:#1B2A41;        /* titlurile site-ului: navy închis */
+  --tx2:#475569;
+  --tx3:#5A6880;
+  --tx-inv:#FFFFFF;
+
+  /* Contururi */
+  --bd:rgba(30,58,95,.13);
+  --bd-strong:rgba(30,58,95,.26);
+
+  /* Grila din fundalul site-ului */
+  --grid-line:rgba(37,99,235,.07);
+  --grid-size:46px;
+}
+
+/* ------------------------------------------------------------
+   SEMANTIC — starea, nu brandul.
+   Fiecare stare are și o formă, definită în index.html, ca
+   informația să nu depindă niciodată numai de culoare.
+   ------------------------------------------------------------ */
+:root{
+  --info:var(--brand);
+  --ok:#0E7C66;
+  --sim:#4F46E5;
+  --warn:#B45309;
+  --crit:#C2410C;
+  --idle:#5A6880;
+
+  --m0:#CFD8E6; --m1:#A3B6D0; --m2:#6A9BC8;
+  --m3:#3D7FC1; --m4:#1F6FB2; --m5:#1D4ED8;
+
+  /* sectorul curent dă doar atmosfera din fundal; culoarea de acțiune
+     rămâne albastrul brandului, ca platforma să nu-și schimbe identitatea
+     de la un sector la altul */
+  --sector-h:219;
+  --amb:var(--brand);
+
+  --amb-alpha:.85;
+  --amb-line-l:52%;
+  --amb-veil-a:.05;
+  --amb-grid:1;
+
+  /* suprafețe derivate */
+  --sunk:#F2F6FC;
+  --solid-raised:#FFFFFF;
+  --drawer:rgba(255,255,255,.97);
+  --hover:rgba(37,99,235,.06);
+  --track:rgba(30,58,95,.11);
+  --sel:rgba(37,99,235,.11);
+  --lvbd:rgba(30,58,95,.20);
+  --dash:rgba(27,42,65,.62);
+
+  --info-tx:var(--brand-deep); --ok-tx:var(--ok); --sim-tx:var(--sim);
+  --warn-tx:var(--warn); --crit-tx:var(--crit);
+
+  /* formă — site-ul folosește colțuri moderate și umbre discrete */
+  --r-sm:8px; --r-md:12px; --r-lg:16px;
+  --rail:252px;
+
+  --elev-1:0 1px 2px rgba(30,58,95,.06), 0 8px 22px rgba(30,58,95,.07);
+  --glow:0 6px 18px rgba(37,99,235,.26);
+  --ring-glow:none;
+  --surface-blur:none;
+  --panel-shadow:var(--elev-1);
+
+  /* accentul de titlu: bara scurtă în degrade de sub „CYBER-BRIDGE” */
+  --rule:linear-gradient(90deg,var(--brand),rgba(37,99,235,0));
+  --rule-w:84px;
+}
+
+/* ------------------------------------------------------------
+   SKIN CYBER RANGE — modul întunecat de centru de comandă.
+   Pentru Simulation Lab și pentru livrarea în sală, unde tensiunea
+   și lizibilitatea sub presiune contează mai mult decât integrarea
+   în site. Se activează cu ?skin=dark sau din comutatorul din bară.
+   ------------------------------------------------------------ */
+:root[data-skin="dark"]{
+  --bg-deep:#05070D;
+  --bg-base:#0A0E17;
+  --bg-raised:rgba(17,23,38,.80);
+  --bg-overlay:rgba(22,30,48,.78);
+  --glass:rgba(11,15,25,.78);
+
+  --tx:#E8EEF9;
+  --tx2:#A9B6CC;
+  --tx3:#7C8AA3;
+  --tx-inv:#05070D;
+
+  --bd:rgba(145,175,220,.14);
+  --bd-strong:rgba(145,175,220,.30);
+
+  --info:#38E1FF;
+  --ok:#2EE6C4;
+  --sim:#9B6BFF;
+  --warn:#FFB547;
+  --crit:#FF6B4A;
+  --idle:#7C8AA3;
+
+  --m0:#3A4356; --m1:#4E5C7A; --m2:#3E7FA8;
+  --m3:#2E9FB5; --m4:#2EC5A8; --m5:#2EE6C4;
+
+  /* aici sectorul colorează și interfața, nu doar fundalul */
+  --amb:hsl(var(--sector-h),92%,62%);
+  --amb-alpha:1;
+  --amb-line-l:62%;
+  --amb-veil-a:.09;
+  --amb-grid:0;
+
+  --sunk:rgba(5,7,13,.58);
+  --solid-raised:#111726;
+  --drawer:rgba(8,11,19,.94);
+  --hover:rgba(145,175,220,.07);
+  --track:rgba(145,175,220,.13);
+  --sel:rgba(232,238,249,.12);
+  --lvbd:rgba(232,238,249,.22);
+  --dash:rgba(232,238,249,.70);
+
+  --info-tx:#B3EEFB; --ok-tx:#A8F2E3; --sim-tx:#D2BCFF;
+  --warn-tx:#FFD79B; --crit-tx:#FFC2B1;
+
+  --r-sm:6px; --r-md:12px; --r-lg:20px;
+
+  --elev-1:0 1px 0 rgba(255,255,255,.05) inset, 0 8px 24px rgba(0,0,0,.45);
+  --glow:0 8px 24px color-mix(in srgb,var(--amb) 30%,transparent);
+  --ring-glow:drop-shadow(0 0 7px color-mix(in srgb,var(--amb) 55%,transparent));
+  --surface-blur:blur(10px);
+  --panel-shadow:none;
+  --rule:linear-gradient(90deg,var(--amb),transparent);
+}
+
+/* ------------------------------------------------------------
+   Ecouri ale site-ului: grila de fundal, bara de sub titlu,
+   antetul alb, titlurile grele cu letterspacing.
+   ------------------------------------------------------------ */
+:root:not([data-skin="dark"]) body{
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:var(--grid-size) var(--grid-size);
+  background-attachment:fixed;
+}
+:root:not([data-skin="dark"]) .topbar{background:#FFFFFF}
+:root:not([data-skin="dark"]) .rail{background:#FFFFFF}
+:root:not([data-skin="dark"]) .panel{box-shadow:var(--panel-shadow)}
+:root:not([data-skin="dark"]) .brand b{letter-spacing:.06em}
+/* pe site acțiunea primară este albastră: violetul rămâne doar marcaj de
+   stare pentru simulare, nu culoare de buton */
+:root:not([data-skin="dark"]) .btn.sim{background:var(--brand);color:var(--tx-inv)}
+:root:not([data-skin="dark"]) .btn.sim:hover{box-shadow:var(--glow)}
+:root:not([data-skin="dark"]) .nba{
+  background:linear-gradient(135deg,rgba(37,99,235,.07),rgba(37,99,235,.02));
+  border-color:rgba(37,99,235,.24)}
+:root:not([data-skin="dark"]) .sim-bar{
+  background:linear-gradient(90deg,rgba(79,70,229,.09),rgba(255,255,255,.6));
+  border-color:rgba(79,70,229,.26)}
+
+.head h1{position:relative;padding-bottom:12px}
+.head h1::after{content:"";position:absolute;left:0;bottom:0;width:var(--rule-w);height:3px;
+  background:var(--rule);border-radius:2px}
+:root[data-skin="dark"] .head h1{padding-bottom:0}
+:root[data-skin="dark"] .head h1::after{display:none}
+
+/* ------------------------------------------------------------
+   MOD ÎNCORPORAT — platforma rulează într-o pagină gazdă care
+   are deja antet și logo.
+   ------------------------------------------------------------ */
+:root[data-embed="1"] .brand{display:none}
+:root[data-embed="1"] .rail{padding-top:14px}
+:root[data-embed="1"] main{padding-top:18px}
+:root[data-embed="1"] .rail-foot{display:none}
+:root[data-embed="1"] body{background-attachment:scroll}

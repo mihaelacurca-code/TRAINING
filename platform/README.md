@@ -4,9 +4,47 @@ Platformă bilingvă (RO/EN) de training și simulare pentru **toate cele zece s
 
 `index.html` plus patru fișiere de date în `data/`. Fără build, fără dependențe, fără back-end.
 
+## Integrare în cyber-bridge.eu
+
+Identitatea vizuală implicită este cea a site-ului: fundal deschis albastru-rece, motivul de grilă din hero, albastrul de acțiune, titluri grele cu bara scurtă în degrade dedesubt.
+
+**Tot ce ține de brand este în `theme.css`.** Componentele din `index.html` nu conțin nicio culoare sau font literal — folosesc numai variabile. Ca să treci de la valorile citite dintr-o captură la cele oficiale, schimbi blocul BRAND din `theme.css` și nimic altceva.
+
+### Parametri de integrare
+
+| Parametru | Valori | Efect |
+|---|---|---|
+| `?skin=` | `brand` (implicit), `dark` | Identitatea site-ului sau modul cyber range întunecat |
+| `?embed=1` | | Ascunde lockup-ul propriu de brand și strânge spațierea, pentru o pagină gazdă care are deja antet |
+| `?lang=` | `ro`, `en` | Limba de pornire |
+| `?sector=` | `health`, `transport`, `energy`, `manufacturing`, `finance`, `retail`, `digital`, `tourism`, `professional`, `public` | Sectorul încărcat |
+| `?view=` | `mc`, `sectors`, `thr`, `sim`, `mat`, `kit`, `cmp` | Ecranul de pornire |
+| `?role=` | `mgmt`, `tech`, `hyg` | Traseul |
+
+Se combină. Exemplu — pagina „Use Cases" poate lega direct peisajul de amenințări din energie, în engleză, fără antetul platformei:
+
+```
+…/index.html?embed=1&lang=en&sector=energy&view=thr
+```
+
+### Încorporare
+
+```html
+<iframe src="…/index.html?embed=1&lang=ro"
+        style="width:100%;height:82vh;border:0;border-radius:16px"
+        title="Cyber-Bridge Range"
+        allow="clipboard-write"></iframe>
+```
+
+Platforma se redimensionează singură și nu iese niciodată în scroll orizontal sub 400px.
+
+### Cele două skin-uri
+
+Implicit rulează în identitatea site-ului. Modul **range**, întunecat, rămâne disponibil din comutatorul din bară sau cu `?skin=dark`: pentru Simulation Lab pe proiector și pentru livrarea în sală, unde tensiunea și lizibilitatea sub presiune contează mai mult decât integrarea în pagină.
+
 ## Atmosferă per sector
 
-Accentul UI rămâne constant, ca semantica risc/alertă să nu se strice. Se schimbă **atmosfera**: fiecare sector are o semnătură proprie de mișcare în fundal — puls de monitor la sănătate, flux liniar la transport, rețea cu impulsuri de curent la energie, ritm mecanic la producție, ticker rapid la finanțe, unde de trafic la retail, mesh la servicii digitale, derivă lentă la turism, foi care cad la servicii profesionale, grilă structurată la administrație. În timpul simulării, fundalul escaladează spre roșu pe măsură ce scenariul avansează: tensiunea este informație, nu decor. Totul se oprește la `prefers-reduced-motion`.
+În identitatea site-ului, culoarea de acțiune rămâne albastrul brandului în toate sectoarele, ca platforma să nu-și schimbe identitatea de la un sector la altul. Se schimbă doar **atmosfera** din fundal, peste grila site-ului: fiecare sector are o semnătură proprie de mișcare în fundal — puls de monitor la sănătate, flux liniar la transport, rețea cu impulsuri de curent la energie, ritm mecanic la producție, ticker rapid la finanțe, unde de trafic la retail, mesh la servicii digitale, derivă lentă la turism, foi care cad la servicii profesionale, grilă structurată la administrație. În timpul simulării, fundalul escaladează spre roșu pe măsură ce scenariul avansează: tensiunea este informație, nu decor. Totul se oprește la `prefers-reduced-motion`.
 
 ## Ce funcționează
 
