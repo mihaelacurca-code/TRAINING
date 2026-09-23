@@ -8,6 +8,13 @@ Platformă bilingvă (RO/EN) de training și simulare pentru **toate cele zece s
 
 Identitatea vizuală implicită este cea a site-ului: fundal deschis albastru-rece, motivul de grilă din hero, albastrul de acțiune, titluri grele cu bara scurtă în degrade dedesubt.
 
+**Logo-ul** este cel oficial, furnizat ca fișier, nu redesenat. Două variante, ambele derivate din același original transparent:
+
+- `logo.webp` — lockup-ul complet, folosit în identitatea site-ului;
+- `logo-mark.webp` — doar scutul, folosit în skin-ul dark, unde wordmark-ul navy nu s-ar citi pe fundal închis. Acolo numele e cules tipografic.
+
+Sub lockup apare `RANGE`, ca sub-brand al platformei față de site.
+
 **Tot ce ține de brand este în `theme.css`.** Componentele din `index.html` nu conțin nicio culoare sau font literal — folosesc numai variabile. Ca să treci de la valorile citite dintr-o captură la cele oficiale, schimbi blocul BRAND din `theme.css` și nimic altceva.
 
 ### Parametri de integrare

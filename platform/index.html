@@ -28,10 +28,19 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 .rail{border-right:1px solid var(--bd);background:var(--glass);backdrop-filter:blur(14px);
   padding:20px 14px;display:flex;flex-direction:column;gap:20px;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow-y:auto}
-.brand{display:flex;align-items:center;gap:10px;padding:0 6px}
-.brand svg{width:28px;height:28px;flex:none}
-.brand b{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:.05em;display:block;line-height:1.15}
+.brand{display:flex;align-items:center;gap:10px;padding:0 6px;min-width:0}
+.brand img{display:block;height:auto;max-width:100%}
+.brand .lock{width:190px}
+.brand .mk{width:30px;flex:none}
+.brand b{font-family:var(--disp);font-size:15px;font-weight:800;letter-spacing:.05em;display:block;line-height:1.15;color:var(--tx)}
 .brand span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--tx3);text-transform:uppercase}
+/* identitatea site-ului: lockup-ul real, cu sub-brandul dedesubt */
+:root:not([data-skin="dark"]) .brand{flex-direction:column;align-items:flex-start;gap:5px}
+:root:not([data-skin="dark"]) .brand .mk,
+:root:not([data-skin="dark"]) .brand .bt b{display:none}
+:root:not([data-skin="dark"]) .brand .bt{padding-left:2px}
+/* skin dark: wordmark-ul navy nu s-ar citi, deci rămâne scutul plus tipografia */
+:root[data-skin="dark"] .brand .lock{display:none}
 .nav{display:flex;flex-direction:column;gap:2px}
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:var(--r-sm);
   color:var(--tx2);font-size:13.5px;border:1px solid transparent;transition:background .12s,color .12s}
@@ -272,6 +281,9 @@ textarea{min-height:76px;line-height:1.55}
   .app{grid-template-columns:1fr}
   .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;overflow-x:auto;padding:12px 16px}
   .rail .brand{flex:none}
+  :root:not([data-skin="dark"]) .rail .brand{flex-direction:row;align-items:center;gap:9px}
+  :root:not([data-skin="dark"]) .rail .brand .lock{width:132px}
+  :root:not([data-skin="dark"]) .rail .brand .bt{display:none}
   .nav{flex-direction:row;gap:4px}
   .nav button{white-space:nowrap;padding:7px 11px;font-size:13px}
   .rail-foot{display:none}
@@ -289,15 +301,9 @@ textarea{min-height:76px;line-height:1.55}
 <div class="app" id="app">
   <aside class="rail">
     <div class="brand">
-      <svg viewBox="0 0 28 28" aria-hidden="true">
-        <path d="M14 2 4 6.5v7c0 6 4.4 10.4 10 11.5 5.6-1.1 10-5.5 10-11.5v-7z" fill="none"
-              stroke="var(--amb)" stroke-width="1.4"/>
-        <path d="M7 17.5h14" stroke="var(--amb)" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M10 17.5V9M18 17.5V9" stroke="var(--sim)" stroke-width="1.3" stroke-linecap="round"/>
-        <path d="M10 9c2.4 2.6 5.6 2.6 8 0" fill="none" stroke="var(--sim)" stroke-width="1.3" stroke-linecap="round"/>
-        <path d="M10 9 14 17.5 18 9" fill="none" stroke="var(--amb)" stroke-width="1" opacity=".65"/>
-      </svg>
-      <div><b>CYBER-BRIDGE</b><span>Range</span></div>
+      <img class="lock" src="logo.webp" alt="Cyber-Bridge" width="1977" height="621">
+      <img class="mk" src="logo-mark.webp" alt="" aria-hidden="true" width="568" height="621">
+      <div class="bt"><b>CYBER-BRIDGE</b><span>Range</span></div>
     </div>
     <nav class="nav" id="nav"></nav>
     <div class="rail-foot">
