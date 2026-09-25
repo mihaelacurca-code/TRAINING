@@ -1,0 +1,15 @@
+{
+ "_note": "Recorded state of the change-monitoring run, as shown in the original demonstrator. Coverage counts are computed by the toolkit from the catalogue.",
+ "checked": "2026-09-20",
+ "sources": [
+  {"id": "nis2", "title": "Directive (EU) 2022/2555 (NIS2)", "eli": "http://data.europa.eu/eli/dir/2022/2555/oj", "version": "consolidated-2024-10-17", "state": "unchanged", "covers": {"regime": "NIS2"}},
+  {"id": "cra", "title": "Regulation (EU) 2024/2847 (Cyber Resilience Act)", "eli": "http://data.europa.eu/eli/reg/2024/2847/oj", "version": "oj-2024-11-20", "state": "unchanged", "covers": {"regime": "CRA"}},
+  {"id": "cir2690", "title": "Commission Implementing Regulation (EU) 2024/2690", "eli": "http://data.europa.eu/eli/reg_impl/2024/2690/oj", "version": "corrigendum-2026-08-14", "state": "changed", "covers": {"none": true}, "remark": "Layer not yet authored. The change cannot propagate until it is."},
+  {"id": "enisa-cra", "title": "ENISA technical guidance on CRA reporting", "eli": "urn:enisa:guidance:cra-reporting", "version": "2026-08", "state": "changed", "covers": {"ids": ["cra.art14.2.b", "cra.art14.4.b"]}}
+ ],
+ "changes": [
+  {"id": "chg-01", "req": "cra.art14.2.b", "source": "enisa-cra", "kind": "amended", "field": "required content", "added": "affected_versions", "date": "2026-09-20"},
+  {"id": "chg-02", "req": "cra.art14.4.b", "source": "enisa-cra", "kind": "amended", "field": "required content", "added": "affected_versions", "date": "2026-09-20"},
+  {"id": "chg-03", "req": "nis2.art23.4.d", "source": "catalogue", "kind": "amended", "field": "required content", "added": "recurrence_prevention", "date": "2026-09-20"}
+ ]
+}

@@ -1,0 +1,270 @@
+{
+ "sbom-rtu400-cyclonedx.json": {
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+   "timestamp": "2026-08-14T04:34:39Z",
+   "component": {
+    "bom-ref": "rtu400",
+    "type": "device",
+    "name": "RTU-400",
+    "version": "4.2.1"
+   }
+  },
+  "components": [
+   {
+    "bom-ref": "fw",
+    "type": "firmware",
+    "name": "rtu400-firmware",
+    "version": "4.2.1",
+    "licenses": [
+     {
+      "license": {
+       "id": "LicenseRef-proprietary"
+      }
+     }
+    ]
+   },
+   {
+    "bom-ref": "openssl",
+    "type": "library",
+    "name": "openssl",
+    "version": "3.0.14",
+    "purl": "pkg:generic/openssl@3.0.14",
+    "licenses": [
+     {
+      "license": {
+       "id": "Apache-2.0"
+      }
+     }
+    ]
+   },
+   {
+    "bom-ref": "busybox",
+    "type": "library",
+    "name": "busybox",
+    "version": "1.36.1",
+    "licenses": [
+     {
+      "license": {
+       "id": "GPL-2.0-only"
+      }
+     }
+    ]
+   },
+   {
+    "bom-ref": "modbus",
+    "type": "library",
+    "name": "libmodbus",
+    "version": "3.1.10",
+    "licenses": [
+     {
+      "license": {
+       "id": "LGPL-2.1-or-later"
+      }
+     }
+    ]
+   },
+   {
+    "bom-ref": "zlib",
+    "type": "library",
+    "name": "zlib",
+    "version": "1.3.1",
+    "licenses": [
+     {
+      "license": {
+       "id": "Zlib"
+      }
+     }
+    ]
+   }
+  ],
+  "dependencies": [
+   {
+    "ref": "rtu400",
+    "dependsOn": [
+     "fw",
+     "openssl",
+     "busybox",
+     "modbus"
+    ]
+   },
+   {
+    "ref": "openssl",
+    "dependsOn": [
+     "zlib"
+    ]
+   }
+  ]
+ },
+ "sbom-updservice-spdx.json": {
+  "spdxVersion": "SPDX-2.3",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "update-service",
+  "creationInfo": {
+   "created": "2025-10-20T04:34:39Z",
+   "creators": [
+    "Tool: example"
+   ]
+  },
+  "packages": [
+   {
+    "SPDXID": "SPDXRef-updsvc",
+    "name": "update-service",
+    "versionInfo": "2.0.0",
+    "licenseConcluded": "LicenseRef-proprietary"
+   },
+   {
+    "SPDXID": "SPDXRef-express",
+    "name": "express",
+    "versionInfo": "4.19.2",
+    "licenseConcluded": "MIT"
+   },
+   {
+    "SPDXID": "SPDXRef-jwt",
+    "name": "jsonwebtoken",
+    "versionInfo": "9.0.2",
+    "licenseConcluded": "MIT"
+   }
+  ],
+  "relationships": []
+ },
+ "advisory-EG-CSAF-2026-0007.json": {
+  "document": {
+   "category": "csaf_security_advisory",
+   "csaf_version": "2.0",
+   "title": "RTU-400 authentication bypass",
+   "publisher": {
+    "category": "vendor",
+    "name": "EnergyGate (illustrative)",
+    "namespace": "https://example.org"
+   },
+   "distribution": {
+    "tlp": {
+     "label": "CLEAR"
+    }
+   },
+   "tracking": {
+    "id": "EG-CSAF-2026-0007",
+    "status": "final",
+    "version": "1",
+    "initial_release_date": "2026-08-20T04:34:39Z",
+    "current_release_date": "2026-08-20T04:34:39Z",
+    "revision_history": [
+     {
+      "date": "2026-08-20T04:34:39Z",
+      "number": "1",
+      "summary": "Initial"
+     }
+    ]
+   }
+  },
+  "product_tree": {
+   "full_product_names": [
+    {
+     "product_id": "RTU400-4.2.0",
+     "name": "RTU-400 firmware 4.2.0"
+    }
+   ]
+  },
+  "vulnerabilities": [
+   {
+    "ids": [{"system_name": "EnergyGate PSIRT (illustrative)", "text": "EG-VULN-2026-0007"}],
+    "notes": [
+     {
+      "category": "description",
+      "text": "Authentication bypass in the maintenance interface."
+     }
+    ],
+    "product_status": {
+     "known_affected": [
+      "RTU400-4.2.0"
+     ]
+    },
+    "scores": [
+     {
+      "products": [
+       "RTU400-4.2.0"
+      ],
+      "cvss_v3": {
+       "version": "3.1",
+       "baseScore": 8.8,
+       "baseSeverity": "HIGH",
+       "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+      }
+     }
+    ],
+    "remediations": [
+     {
+      "category": "vendor_fix",
+      "details": "Update to firmware 4.2.1.",
+      "product_ids": [
+       "RTU400-4.2.0"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "testreport-rtu400.json": {
+  "record_type": "security_test_report",
+  "product": "RTU-400 4.2.1",
+  "scope": [
+   "maintenance interface",
+   "Modbus/TCP gateway",
+   "update client"
+  ],
+  "executed": "2026-04-08T04:34:39Z",
+  "method": "grey-box penetration test, OWASP FSTM aligned",
+  "findings": []
+ },
+ "vex-rtu400-cyclonedx.json": {
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+   "timestamp": "2026-09-01T00:00:00Z",
+   "component": {
+    "bom-ref": "rtu400",
+    "name": "RTU-400",
+    "version": "4.2.1"
+   }
+  },
+  "vulnerabilities": [
+   {
+    "id": "EG-VULN-2026-0007",
+    "analysis": {
+     "state": "exploitable",
+     "response": [
+      "update"
+     ]
+    },
+    "affects": [
+     {
+      "ref": "rtu400"
+     }
+    ]
+   },
+   {
+    "id": "EG-VULN-2024-0112",
+    "analysis": {
+     "state": "not_affected",
+     "justification": "code_not_reachable"
+    },
+    "affects": [
+     {
+      "ref": "rtu400"
+     }
+    ]
+   }
+  ]
+ },
+ "scanner-export.json": {
+  "scan": {
+   "tool": "generic-scanner",
+   "hosts": 14,
+   "issues": 37
+  }
+ }
+}

@@ -1,0 +1,3232 @@
+{
+  "catalog": {
+    "uuid": "7af9213a-a160-4544-b31a-6d69e78e51e6",
+    "metadata": {
+      "title": "CYBER-BRIDGE Requirement Catalogue - NIS2 Article 21(2) (Cybersecurity risk-management measures)",
+      "last-modified": "2026-08-26T00:00:00Z",
+      "version": "0.3.0-draft",
+      "oscal-version": "1.1.2",
+      "props": [
+        {
+          "name": "source-eli",
+          "value": "http://data.europa.eu/eli/dir/2022/2555/oj"
+        },
+        {
+          "name": "applies-from",
+          "value": "2024-10-18"
+        },
+        {
+          "name": "legal-review-status",
+          "value": "PENDING-ENC"
+        },
+        {
+          "name": "authoring-lot",
+          "value": "nis2-art21"
+        }
+      ],
+      "roles": [
+        {
+          "id": "author",
+          "title": "DNSC - T3.1 coordinator"
+        },
+        {
+          "id": "legal-validator",
+          "title": "ELIAS NEOCLEOUS & CO (ENC)"
+        }
+      ]
+    },
+    "groups": [
+      {
+        "id": "nis2-art21",
+        "title": "Article 21(2) - Cybersecurity risk-management measures",
+        "controls": [
+          {
+            "id": "nis2.art21.2.a.1",
+            "title": "Documented policy on the security of network and information systems",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_a"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.a.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have a documented policy on the security of network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.a.2",
+            "title": "Documented policy on risk analysis",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_a"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.a.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall have a documented policy on risk analysis covering the identification, analysis and evaluation of risks to network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.a.3",
+            "title": "All-hazards approach reflected in the policies",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_a"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.a.3_stmt",
+                "name": "statement",
+                "prose": "The policies shall be based on an all-hazards approach that protects network and information systems and the physical environment of those systems from incidents."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.a.4",
+            "title": "Technical, operational and organisational measures addressed",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_a"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.a.4_stmt",
+                "name": "statement",
+                "prose": "The policies shall address technical, operational and organisational measures, and shall not be limited to any one of those categories."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.a.5",
+            "title": "Policies reviewed and kept current",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_a"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.a.5_stmt",
+                "name": "statement",
+                "prose": "The policies shall be reviewed and, where necessary, updated, so that they continue to reflect the risks to which the entity is exposed."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.b.1",
+            "title": "Documented incident handling procedure",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_b"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.24"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.b.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have a documented procedure for handling incidents affecting network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.b.2",
+            "title": "Incident detection and recording",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_b"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.25"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.b.2_stmt",
+                "name": "statement",
+                "prose": "The procedure shall provide for the detection and recording of incidents."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.b.3",
+            "title": "Incident classification and prioritisation",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_b"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.25"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.b.3_stmt",
+                "name": "statement",
+                "prose": "The procedure shall provide for the assessment, classification and prioritisation of incidents."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.b.4",
+            "title": "Incident response and containment",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_b"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.26"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.b.4_stmt",
+                "name": "statement",
+                "prose": "The procedure shall provide for response to and containment of incidents."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.b.5",
+            "title": "Post-incident review and lessons learned",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_b"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.27"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.b.5_stmt",
+                "name": "statement",
+                "prose": "The entity shall review incidents after closure and apply the resulting lessons to its measures."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.1",
+            "title": "Business continuity arrangements",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "plan-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.29"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have business continuity arrangements for the services it provides."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.2",
+            "title": "Backup management",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.13"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall manage backups of data and systems necessary to restore its services."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.3",
+            "title": "Backup restoration tested",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "test-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.13"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.3_stmt",
+                "name": "statement",
+                "prose": "The entity shall test the restoration of backups so that their effectiveness is established rather than assumed."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.4",
+            "title": "Disaster recovery arrangements",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "plan-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.29"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.4_stmt",
+                "name": "statement",
+                "prose": "The entity shall have disaster recovery arrangements enabling the resumption of services after a disruptive event."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.5",
+            "title": "Crisis management arrangements",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "plan-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.29"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.5_stmt",
+                "name": "statement",
+                "prose": "The entity shall have crisis management arrangements, distinct from business continuity, covering decision-making and communication during a crisis."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.c.6",
+            "title": "Continuity and crisis arrangements exercised",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_c"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "exercise-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.30"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.c.6_stmt",
+                "name": "statement",
+                "prose": "The entity shall exercise its continuity, recovery and crisis management arrangements at planned intervals."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.d.1",
+            "title": "Supply chain security measures",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_d"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.19"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.d.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have measures addressing the security of its supply chain."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.d.2",
+            "title": "Security in relationships with direct suppliers",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_d"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "contract-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.20"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.d.2_stmt",
+                "name": "statement",
+                "prose": "The measures shall address the security-related aspects of the relationships between the entity and each of its direct suppliers."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.d.3",
+            "title": "Security in relationships with service providers",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_d"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "contract-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.21"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.d.3_stmt",
+                "name": "statement",
+                "prose": "The measures shall address the security-related aspects of the relationships between the entity and each of its direct service providers."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.d.4",
+            "title": "Supplier vulnerabilities and practices taken into account",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_d"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "assessment-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.19"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.d.4_stmt",
+                "name": "statement",
+                "prose": "The entity shall take into account the vulnerabilities specific to each direct supplier and service provider and the overall quality of their products and cybersecurity practices."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.d.5",
+            "title": "Supply chain measures maintained over the relationship",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_d"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.22"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.d.5_stmt",
+                "name": "statement",
+                "prose": "The entity shall maintain its supply chain security measures over the life of the relationship, not only at the point of procurement."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.1",
+            "title": "Security in the acquisition of network and information systems",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.30"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have security measures governing the acquisition of network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.2",
+            "title": "Security in the development of network and information systems",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.25"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall have security measures governing the development of network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.3",
+            "title": "Security in the maintenance of network and information systems",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.32"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.3_stmt",
+                "name": "statement",
+                "prose": "The entity shall have security measures governing the maintenance of network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.4",
+            "title": "Vulnerability handling",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.8"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.4_stmt",
+                "name": "statement",
+                "prose": "The entity shall have a process for handling vulnerabilities in the network and information systems it uses."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.5",
+            "title": "Vulnerability disclosure",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.5"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.5_stmt",
+                "name": "statement",
+                "prose": "The entity shall have arrangements for the disclosure of vulnerabilities it identifies or receives."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.e.6",
+            "title": "Security testing before entry into service",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_e"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "testing"
+              },
+              {
+                "name": "evidence-type",
+                "value": "test-report"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.29"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.e.6_stmt",
+                "name": "statement",
+                "prose": "The entity shall apply security testing to systems before they enter service and after significant change."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.f.1",
+            "title": "Policy for assessing the effectiveness of measures",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_f"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.35"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.f.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have policies and procedures to assess the effectiveness of its cybersecurity risk-management measures."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.f.2",
+            "title": "Effectiveness assessed at planned intervals",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_f"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.36"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.f.2_stmt",
+                "name": "statement",
+                "prose": "The assessment shall be carried out at planned intervals rather than only in response to an incident."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.f.3",
+            "title": "Assessment results acted upon",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_f"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.36"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.f.3_stmt",
+                "name": "statement",
+                "prose": "The results of the assessment shall be recorded and shall inform changes to the measures."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.g.1",
+            "title": "Basic cyber hygiene practices applied",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_g"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.10"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.g.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall apply basic cyber hygiene practices across its operations."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.g.2",
+            "title": "Cybersecurity training provided",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_g"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "training-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.6.3"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.g.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall provide cybersecurity training to its personnel."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.g.3",
+            "title": "Training adapted to roles",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_g"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "training-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.6.3"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.g.3_stmt",
+                "name": "statement",
+                "prose": "Training shall be adapted to the roles held, so that personnel with elevated access or responsibilities receive correspondingly specific instruction."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.g.4",
+            "title": "Training repeated and recorded",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_g"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "training-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.6.3"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.g.4_stmt",
+                "name": "statement",
+                "prose": "Training shall be repeated at planned intervals and participation shall be recorded."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.h.1",
+            "title": "Policy on the use of cryptography",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_h"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.24"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.h.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have policies and procedures regarding the use of cryptography."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.h.2",
+            "title": "Policy on the use of encryption where appropriate",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_h"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.24"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.h.2_stmt",
+                "name": "statement",
+                "prose": "The policies shall address the use of encryption where appropriate to the risk."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.h.3",
+            "title": "Cryptographic key management",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_h"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.24"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.h.3_stmt",
+                "name": "statement",
+                "prose": "The entity shall manage cryptographic keys over their life cycle, including generation, storage, rotation and destruction."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.h.4",
+            "title": "Cryptographic choices reviewed against the state of the art",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_h"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.24"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.h.4_stmt",
+                "name": "statement",
+                "prose": "The entity shall review its cryptographic choices against the state of the art and adjust them where they no longer provide adequate protection."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.1",
+            "title": "Human resources security",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.6.1"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall have human resources security measures covering personnel before, during and on termination of employment."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.2",
+            "title": "Access control policy",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.15"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall have an access control policy governing access to network and information systems."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.3",
+            "title": "Access rights granted on a least-privilege basis",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.2"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.3_stmt",
+                "name": "statement",
+                "prose": "Access rights shall be granted on the basis of what each role requires, and no more."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.4",
+            "title": "Access rights reviewed",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.18"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.4_stmt",
+                "name": "statement",
+                "prose": "Access rights shall be reviewed at planned intervals and on change of role."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.5",
+            "title": "Access rights withdrawn on termination",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.11"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.5_stmt",
+                "name": "statement",
+                "prose": "Access rights shall be withdrawn without undue delay when the basis for them ends."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.i.6",
+            "title": "Asset management",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_i"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "asset-inventory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.9"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.i.6_stmt",
+                "name": "statement",
+                "prose": "The entity shall maintain an inventory of the assets used to provide its services and shall assign responsibility for each."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.j.1",
+            "title": "Multi-factor or continuous authentication",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_j"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.5"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.j.1_stmt",
+                "name": "statement",
+                "prose": "The entity shall use multi-factor authentication or continuous authentication solutions where appropriate to the risk."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.j.2",
+            "title": "Secured voice communications",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_j"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.20"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.j.2_stmt",
+                "name": "statement",
+                "prose": "The entity shall use secured voice communications within the entity where appropriate to the risk."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.j.3",
+            "title": "Secured video communications",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_j"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.20"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.j.3_stmt",
+                "name": "statement",
+                "prose": "The entity shall use secured video communications within the entity where appropriate to the risk."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.j.4",
+            "title": "Secured text communications",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_j"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.8.20"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.j.4_stmt",
+                "name": "statement",
+                "prose": "The entity shall use secured text communications within the entity where appropriate to the risk."
+              }
+            ]
+          },
+          {
+            "id": "nis2.art21.2.j.5",
+            "title": "Secured emergency communication systems",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/dir/2022/2555/oj#art_21.par_2.pnt_j"
+              },
+              {
+                "name": "regime",
+                "value": "NIS2"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "technical-measure"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "essential_entity;important_entity"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU;national-transposition"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "configuration-evidence"
+              },
+              {
+                "name": "applies_from",
+                "value": "2024-10-18T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "crosswalk-iso27001",
+                "value": "A.5.29"
+              }
+            ],
+            "parts": [
+              {
+                "id": "nis2.art21.2.j.5_stmt",
+                "name": "statement",
+                "prose": "The entity shall use secured emergency communication systems within the entity, available when ordinary channels are unavailable."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -46,6 +46,7 @@ Același nucleu metodologic, dar **scenarii, riscuri, active și obligații dife
 | `docs/quality-checklist.md` | Checklist de validare a output-ului generat | După fiecare rulare, înainte de livrare |
 | `docs/sources.md` | Surse oficiale prioritare și reguli de citare | Pentru verificarea legislației și a statisticilor |
 | `platform/` | **Platforma construită** — Cyber-Bridge Range, bilingvă, toate cele 10 sectoare | Ca să vezi ce produce brieful, nu doar cum se cere |
+| `t31-toolkit/` | **Toolkit CYBER-BRIDGE T3.1** — tracking și monitoring NIS2/CRA pentru cei cinci piloți, pornind de la demonstratorul DNSC | Pentru evaluarea conformității, ceasurile de raportare și monitorizarea schimbărilor legislative |
 
 ---
 

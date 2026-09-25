@@ -1,0 +1,1766 @@
+{
+  "catalog": {
+    "uuid": "4395052b-2c09-4909-ab4e-96ca740c54b1",
+    "metadata": {
+      "title": "CYBER-BRIDGE Requirement Catalogue - CRA Annex I, Part II (Vulnerability handling requirements)",
+      "last-modified": "2026-08-26T00:00:00Z",
+      "version": "0.3.0-draft",
+      "oscal-version": "1.1.2",
+      "props": [
+        {
+          "name": "source-eli",
+          "value": "http://data.europa.eu/eli/reg/2024/2847/oj"
+        },
+        {
+          "name": "applies-from",
+          "value": "2027-12-11"
+        },
+        {
+          "name": "legal-review-status",
+          "value": "PENDING-ENC"
+        },
+        {
+          "name": "authoring-lot",
+          "value": "cra-anxI-partII"
+        }
+      ],
+      "roles": [
+        {
+          "id": "author",
+          "title": "DNSC - T3.1 coordinator"
+        },
+        {
+          "id": "legal-validator",
+          "title": "ELIAS NEOCLEOUS & CO (ENC)"
+        }
+      ]
+    },
+    "groups": [
+      {
+        "id": "cra-anxI-partII",
+        "title": "Annex I, Part II - Vulnerability handling requirements",
+        "controls": [
+          {
+            "id": "cra.anxI.II.1.1",
+            "title": "Vulnerabilities in the product identified and documented",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_1"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.1.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall identify and document the vulnerabilities contained in the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.1.2",
+            "title": "Components contained in the product identified and documented",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_1"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.1.2_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall identify and document the components contained in the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.1.3",
+            "title": "Software bill of materials drawn up in a machine-readable format",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_1"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "sbom-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "sbom"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "machine_readable_format;components_identified"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.1.3_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall draw up a software bill of materials in a commonly used and machine-readable format."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.1.4",
+            "title": "Software bill of materials covering at least top-level dependencies",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_1"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "sbom-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "sbom"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "top_level_dependencies;kept_current"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.1.4_stmt",
+                "name": "statement",
+                "prose": "The software bill of materials shall cover at the very least the top-level dependencies of the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.2.1",
+            "title": "Vulnerabilities addressed and remediated without delay",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_2"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.2.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall address and remediate vulnerabilities without delay in relation to the risks posed to the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.2.2",
+            "title": "Remediation delivered through security updates",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_2"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.2.2_stmt",
+                "name": "statement",
+                "prose": "Remediation shall be delivered by providing security updates for the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.2.3",
+            "title": "Security updates separated from functionality updates",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_2"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "design-documentation"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.2.3_stmt",
+                "name": "statement",
+                "prose": "Where technically feasible, new security updates shall be provided separately from functionality updates."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.3.1",
+            "title": "Security testing applied to the product",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_3"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "test-report"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "test_report"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "scope_defined;findings_recorded"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.3.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall apply tests of the security of the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.3.2",
+            "title": "Security reviews applied to the product",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_3"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "review-record"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.3.2_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall apply reviews of the security of the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.3.3",
+            "title": "Testing and review carried out regularly",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_3"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "test-report"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "test_report"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "executed_within_review_period"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.3.3_stmt",
+                "name": "statement",
+                "prose": "Tests and reviews shall be carried out regularly rather than only once before placing on the market."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.4.1",
+            "title": "Information about fixed vulnerabilities publicly disclosed",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_4"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "csaf-advisory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "advisory"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "publicly_disclosed"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.4.1_stmt",
+                "name": "statement",
+                "prose": "Once a security update has been made available, manufacturers shall share and publicly disclose information about the fixed vulnerability."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.4.2",
+            "title": "Description of the vulnerability provided",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_4"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "csaf-advisory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "advisory"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "vulnerability_description"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.4.2_stmt",
+                "name": "statement",
+                "prose": "The disclosure shall include a description of the vulnerability."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.4.3",
+            "title": "Affected product identifiable by users",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_4"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "csaf-advisory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "advisory"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "affected_products_identified"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.4.3_stmt",
+                "name": "statement",
+                "prose": "The disclosure shall include information allowing users to identify the product with digital elements affected."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.4.4",
+            "title": "Impact and severity stated",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_4"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "csaf-advisory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "advisory"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "severity_stated"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.4.4_stmt",
+                "name": "statement",
+                "prose": "The disclosure shall state the impacts and severity of the vulnerability."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.4.5",
+            "title": "Remediation information provided to users",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_4"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "documentation"
+              },
+              {
+                "name": "check_type",
+                "value": "artifact"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "automated-check"
+              },
+              {
+                "name": "evidence-type",
+                "value": "csaf-advisory"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              },
+              {
+                "name": "artifact_type",
+                "value": "advisory"
+              },
+              {
+                "name": "artifact_properties",
+                "value": "remediation_stated"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.4.5_stmt",
+                "name": "statement",
+                "prose": "The disclosure shall include clear and accessible information helping users to remediate the vulnerability."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.5.1",
+            "title": "Coordinated vulnerability disclosure policy in place",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_5"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.5.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall put in place a policy on coordinated vulnerability disclosure."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.5.2",
+            "title": "Coordinated vulnerability disclosure policy enforced",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_5"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.5.2_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall enforce the policy on coordinated vulnerability disclosure."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.5.3",
+            "title": "Policy accessible to reporters",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_5"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "published-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.5.3_stmt",
+                "name": "statement",
+                "prose": "The policy shall be accessible to persons wishing to report a vulnerability."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.6.1",
+            "title": "Sharing of information about potential vulnerabilities in the product facilitated",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_6"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.6.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall take measures to facilitate the sharing of information about potential vulnerabilities in their product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.6.2",
+            "title": "Sharing of information about third-party component vulnerabilities facilitated",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_6"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.6.2_stmt",
+                "name": "statement",
+                "prose": "The measures shall extend to potential vulnerabilities in third-party components contained in the product."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.6.3",
+            "title": "Contact address for reporting provided",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_6"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "published-contact"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.6.3_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall provide a contact address for the reporting of vulnerabilities discovered in the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.7.1",
+            "title": "Mechanisms for secure distribution of updates",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_7"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "design-documentation"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.7.1_stmt",
+                "name": "statement",
+                "prose": "Manufacturers shall provide for mechanisms to securely distribute updates for the product with digital elements."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.7.2",
+            "title": "Updates delivered in a timely manner",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_7"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.7.2_stmt",
+                "name": "statement",
+                "prose": "The distribution mechanisms shall ensure that vulnerabilities are fixed or mitigated in a timely manner."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.7.3",
+            "title": "Automated delivery of security updates where applicable",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_7"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "design-documentation"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.7.3_stmt",
+                "name": "statement",
+                "prose": "Where applicable for security updates, the mechanisms shall provide for delivery in an automated manner."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.8.1",
+            "title": "Security updates disseminated without delay",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_8"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "procedure-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.8.1_stmt",
+                "name": "statement",
+                "prose": "Where security updates are available to address identified security issues, manufacturers shall ensure they are disseminated without delay."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.8.2",
+            "title": "Security updates provided free of charge",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_8"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "policy-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.8.2_stmt",
+                "name": "statement",
+                "prose": "Security updates shall be disseminated free of charge, unless otherwise agreed for tailor-made products."
+              }
+            ]
+          },
+          {
+            "id": "cra.anxI.II.8.3",
+            "title": "Advisory messages accompany security updates",
+            "props": [
+              {
+                "name": "source-eli",
+                "value": "http://data.europa.eu/eli/reg/2024/2847/oj#anx_I.part_II.pnt_8"
+              },
+              {
+                "name": "regime",
+                "value": "CRA"
+              },
+              {
+                "name": "deontic-modality",
+                "value": "obligation"
+              },
+              {
+                "name": "obligation-type",
+                "value": "process"
+              },
+              {
+                "name": "check_type",
+                "value": "attestation"
+              },
+              {
+                "name": "requires_roles",
+                "value": "manufacturer"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "EU"
+              },
+              {
+                "name": "verification-method",
+                "value": "document-review"
+              },
+              {
+                "name": "evidence-type",
+                "value": "published-document"
+              },
+              {
+                "name": "applies_from",
+                "value": "2027-12-11T00:00:00Z"
+              },
+              {
+                "name": "text_status",
+                "value": "DRAFT-VERIFY"
+              },
+              {
+                "name": "legal-review-status",
+                "value": "PENDING-ENC"
+              }
+            ],
+            "parts": [
+              {
+                "id": "cra.anxI.II.8.3_stmt",
+                "name": "statement",
+                "prose": "Security updates shall be accompanied by advisory messages providing users with the relevant information, including on potential action to be taken."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
