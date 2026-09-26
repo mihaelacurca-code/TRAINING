@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Avatar Cyber-Bridge Range</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="avatar.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-body);color:var(--tx);background:var(--bg-base)}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
+h2{font-family:var(--font-display);font-size:20px;margin:48px 0 6px}
+h2::after{content:"";display:block;width:var(--rule-w);height:3px;margin-top:8px;background:var(--rule)}
+p.lead{color:var(--tx2);max-width:680px;line-height:1.6;margin:10px 0 0}
+code{font-family:var(--font-mono);font-size:12.5px;background:var(--sunk);padding:2px 6px;border-radius:6px}
+pre{font-family:var(--font-mono);font-size:12.5px;background:var(--sunk);border:1px solid var(--bd);
+  border-radius:var(--r-md);padding:14px 16px;overflow-x:auto;line-height:1.6}
+
+/* ---- hero, în spiritul afișului: degrade pastel, capul cu căști, liniile verticale ---- */
+.hero{position:relative;overflow:hidden;border-radius:24px;min-height:560px;isolation:isolate;
+  display:grid;grid-template-columns:1.05fr 1fr;align-items:center;padding:48px;
+  background:
+    radial-gradient(60% 55% at 70% 45%,rgba(253,186,116,.55),transparent 70%),
+    radial-gradient(55% 60% at 20% 80%,rgba(240,171,252,.55),transparent 70%),
+    radial-gradient(70% 60% at 85% 10%,rgba(139,92,246,.45),transparent 70%),
+    linear-gradient(160deg,#B7A6FF 0%,#E7B6F2 45%,#F8C6D8 70%,#FBD3B8 100%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
+  background-size:46px 46px;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.hero .txt{color:#fff;position:relative;z-index:2}
+.hero .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;opacity:.9}
+.hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(44px,7vw,88px);line-height:.92;
+  letter-spacing:-.03em;margin:14px 0 6px;text-shadow:0 6px 30px rgba(120,60,180,.25)}
+.hero .sub{font-family:var(--font-display);font-weight:300;font-size:clamp(22px,3vw,34px);letter-spacing:.02em;margin:0}
+.hero .tag{margin:34px 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(26px,3.4vw,40px);line-height:1.05}
+.hero .tag span{display:block;font-weight:300;font-size:.62em;margin-top:6px}
+.hero .date{font-family:var(--font-mono);font-size:15px;letter-spacing:.14em;margin-top:26px;
+  display:flex;align-items:center;gap:14px}
+.hero .date::before{content:"";width:1px;height:44px;background:rgba(255,255,255,.85)}
+.hero .cta{display:inline-flex;margin-top:28px;padding:12px 20px;border-radius:999px;background:#fff;color:#4C1D95;
+  font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 10px 30px rgba(76,29,149,.22)}
+.hero .fig{position:relative;display:flex;justify-content:center}
+.hero cb-avatar{width:min(460px,100%);-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding:32px 20px;min-height:0}
+  .hero .fig{order:-1}
+  .hero cb-avatar{width:min(300px,80vw)}
+}
+
+/* ---- stări ---- */
+.states{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:18px}
+.st{background:var(--bg-raised);border:1px solid var(--bd);border-radius:var(--r-lg);padding:16px;text-align:center;box-shadow:var(--elev-1)}
+.st cb-avatar{width:120px}
+.st b{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
+.st small{color:var(--tx3);font-size:12px;line-height:1.45;display:block;margin-top:4px}
+
+/* ---- control interactiv ---- */
+.play{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:center;margin-top:18px;
+  background:var(--bg-raised);border:1px solid var(--bd);border-radius:var(--r-lg);padding:22px;box-shadow:var(--elev-1)}
+.play cb-avatar{width:240px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.btns button{font:inherit;font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--bd-strong);
+  background:var(--bg-base);color:var(--tx2);cursor:pointer}
+.btns button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+#say{width:100%;min-height:70px;font:inherit;font-size:14px;padding:10px 12px;border-radius:var(--r-md);
+  border:1px solid var(--bd-strong);background:var(--bg-base);color:var(--tx)}
+@media (max-width:700px){.play{grid-template-columns:1fr;justify-items:center}}
+
+/* ---- dimensiuni ---- */
+.sizes{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-top:18px}
+.sizes div{text-align:center;font-family:var(--font-mono);font-size:11.5px;color:var(--tx3)}
+.chipdemo{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--sim) 40%,transparent);background:color-mix(in srgb,var(--sim) 13%,transparent);
+  color:var(--sim-tx);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="hero" aria-label="Cyber-Bridge Range">
+  <div class="txt">
+    <div class="eyebrow">Cyber-Bridge · Training</div>
+    <h1>Range</h1>
+    <p class="sub">cyber resilience lab</p>
+    <p class="tag">De la exercițiu<span>la reziliență reală.</span></p>
+    <div class="date">10 SECTOARE · 30 SCENARII</div>
+    <a class="cta" href="index.html">Intră în simulare →</a>
+  </div>
+  <div class="fig">
+    <cb-avatar id="heroAv" palette="aurora" state="idle" track></cb-avatar>
+  </div>
+</section>
+
+<h2>Avatarul dinamic</h2>
+<p class="lead">Un cap stilizat, fără ochi sau gură, cu căști: prezența care ascultă și răspunde. Reacționează la ce face facilitatorul — nu e decor. Degradeul irizat curge continuu, capul respiră și, cu atributul <code>track</code>, se întoarce discret spre cursor.</p>
+
+<div class="states">
+  <div class="st"><cb-avatar state="idle"></cb-avatar><b>idle</b><small>Respiră lent. În așteptare.</small></div>
+  <div class="st"><cb-avatar state="listening"></cb-avatar><b>listening</b><small>Se apleacă spre tine când scrii.</small></div>
+  <div class="st"><cb-avatar state="thinking"></cb-avatar><b>thinking</b><small>Particule pe orbită, degradeul accelerează.</small></div>
+  <div class="st"><cb-avatar state="speaking"></cb-avatar><b>speaking</b><small>Unde de voce, capul marchează ritmul.</small></div>
+  <div class="st"><cb-avatar state="alert"></cb-avatar><b>alert</b><small>Simularea a escaladat: trece pe roșu.</small></div>
+</div>
+
+<h2>Încearcă</h2>
+<div class="play">
+  <cb-avatar id="av" state="idle" track></cb-avatar>
+  <div>
+    <div class="btns" id="btns">
+      <button data-s="idle" aria-pressed="true">idle</button>
+      <button data-s="listening">listening</button>
+      <button data-s="thinking">thinking</button>
+      <button data-s="speaking">speaking</button>
+      <button data-s="alert">alert</button>
+    </div>
+    <div class="btns" id="pals">
+      <button data-p="brand" aria-pressed="true">brand</button>
+      <button data-p="aurora">aurora</button>
+      <button data-p="range">range</button>
+    </div>
+    <textarea id="say">Sunt facilitatorul acestui exercițiu. Nu îți dau răspunsul unui inject înainte să decizi.</textarea>
+    <div class="btns" style="margin-top:10px"><button id="speak">▶ Citește cu voce tare</button></div>
+  </div>
+</div>
+
+<h2>Dimensiuni</h2>
+<div class="sizes">
+  <div><cb-avatar style="width:220px" palette="aurora"></cb-avatar><br>hero</div>
+  <div><cb-avatar style="width:96px"></cb-avatar><br>card</div>
+  <div><cb-avatar style="width:44px"></cb-avatar><br>panou</div>
+  <div><span class="chipdemo"><cb-avatar style="width:26px" state="speaking"></cb-avatar>Întreabă facilitatorul</span><br><br>buton</div>
+</div>
+
+<h2>Folosire pe site</h2>
+<pre>&lt;script src="avatar.js"&gt;&lt;/script&gt;
+&lt;cb-avatar state="idle" palette="brand" track&gt;&lt;/cb-avatar&gt;
+
+// din cod:
+const av = document.querySelector("cb-avatar");
+av.state = "thinking";   // idle | listening | thinking | speaking | alert
+av.pulse(0.8);           // un impuls de voce, ex. la fiecare cuvânt citit</pre>
+
+</div>
+<script>
+const av=document.getElementById("av");
+const press=(box,attr,v)=>box.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset[attr]===v)));
+document.getElementById("btns").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;
+  av.state=b.dataset.s;press(e.currentTarget,"s",b.dataset.s);});
+document.getElementById("pals").addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(!b)return;
+  av.setAttribute("palette",b.dataset.p);press(e.currentTarget,"p",b.dataset.p);});
+document.getElementById("say").addEventListener("input",()=>{av.state="listening";press(btns,"s","listening");});
+document.getElementById("speak").addEventListener("click",()=>{
+  const txt=document.getElementById("say").value;
+  av.state="thinking";press(btns,"s","thinking");
+  setTimeout(()=>{
+    av.state="speaking";press(btns,"s","speaking");
+    const done=()=>{av.state="idle";press(btns,"s","idle");};
+    if(!window.speechSynthesis){setTimeout(done,3000);return;}
+    try{speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(txt);u.lang="ro-RO";
+      u.onboundary=()=>av.pulse(1);u.onend=done;u.onerror=done;
+      speechSynthesis.speak(u);}catch(e){setTimeout(done,3000);}
+  },900);
+});
+// hero-ul trece singur prin stări, ca să arate că avatarul e viu
+const hero=document.getElementById("heroAv"),cyc=["idle","listening","thinking","speaking","idle"];let ci=0;
+setInterval(()=>{ci=(ci+1)%cyc.length;hero.state=cyc[ci];},2600);
+</script>
+</body>
+</html>

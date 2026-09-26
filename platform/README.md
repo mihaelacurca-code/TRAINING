@@ -72,7 +72,14 @@ Implicit rulează în identitatea site-ului. Modul **range**, întunecat, rămâ
 
 Metodologia cere, pentru orice tabletop, un **rol de facilitator**. Platforma avea inject-uri, decizii și consecințe, dar nu avea pe nimeni care să conducă exercițiul — iar varianta self-service pentru IMM-uri spune explicit că trebuie să funcționeze fără trainer. Facilitatorul umple exact acest gol.
 
-**Formă.** Nu un chip animat. Design blueprint-ul interzice mascotele și tonul infantil, iar un cap uman stilizat într-un centru de comandă cade în uncanny valley. Este o **prezență**: un nucleu reactiv cu stări vizibile — inactiv, gândește, vorbește, alertă. În timpul unei simulări escaladate trece pe roșu, odată cu fundalul.
+**Formă.** Un avatar dinamic (`avatar.js`, componenta `<cb-avatar>`): un cap stilizat din profil, cu căști, în degradeuri irizate — **fără ochi și fără gură**. Lipsa trăsăturilor îl ține departe de mască și de uncanny valley: este o prezență care ascultă, nu un personaj. Stările sunt vizibile — `idle` (respiră), `listening` (se apleacă spre tine când scrii), `thinking` (particule pe orbită), `speaking` (unde de voce, sincronizate cu textul și cu citirea cu voce tare), `alert` (trece pe roșu când simularea escaladează, odată cu fundalul). Paleta urmează skin-ul: `brand` pe identitatea site-ului, `range` pe skin-ul dark.
+
+`avatar.html` este pagina de prezentare: un hero în stilul afișelor de eveniment, toate stările, dimensiunile și codul de folosire. Componenta se poate folosi oriunde pe site, independent de platformă:
+
+```html
+<script src="avatar.js"></script>
+<cb-avatar state="idle" palette="aurora" track></cb-avatar>
+```
 
 **Ce știe.** Sectorul, ecranul curent, decalajele reale de maturitate, indicatorii critici, amenințarea selectată, instrumentul deschis și ce e deja completat în el, momentul din scenariu.
 
